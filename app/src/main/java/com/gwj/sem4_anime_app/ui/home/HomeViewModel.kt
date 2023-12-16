@@ -33,7 +33,7 @@ class HomeViewModel @Inject constructor(
         //getAllGenres()
         //getRandomAnime()
         //getDetailAnime(35247) //TODO ask sir,how to put empty num,if string is "",num put 0?
-        getSeonalAnime("2021", "summer")
+        getSeasonAnime("2021", "summer")
     }
 
     private fun getAllAnimes() {
@@ -86,7 +86,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun getSeonalAnime(year: String, season: String) {
+    private fun getSeasonAnime(year: String, season: String) {
         viewModelScope.launch {
             try {
                 AllAnimeRepo.getSeasonalAnime(year, season).let {
