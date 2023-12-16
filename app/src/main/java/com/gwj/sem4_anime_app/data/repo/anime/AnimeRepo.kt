@@ -7,7 +7,7 @@ interface AnimeRepo {
 
     suspend fun getTopAnimeList(): List<AnimeData>
 
-    suspend fun getSeasonalAnime(): List<AnimeData>
+    suspend fun getSeasonalAnime(year: String, season: String): List<AnimeData>
 
     suspend fun getDetailAnime(id: Int): Data
 

@@ -20,7 +20,6 @@ class HomeViewModel @Inject constructor(
     private val AllAnimeRepo: AnimeRepo,
     private val AllGenresRepo: GenresRepo,
     private val RandomAnimeRepo: RandomAnimeRepo,
-
     ) : BaseViewModel() {
     protected val _animes: MutableStateFlow<List<AnimeData>> = MutableStateFlow(emptyList())
     val animes: StateFlow<List<AnimeData>> = _animes
@@ -30,9 +29,11 @@ class HomeViewModel @Inject constructor(
     val randomAnime: StateFlow<List<Data>> = _randomAnime
 
     init {
-        getAllAnimes()
-        getAllGenres()
-        getRandomAnime()
+        //getAllAnimes()
+        //getAllGenres()
+        //getRandomAnime()
+        //getDetailAnime(35247) //TODO ask sir,how to put empty num,if string is "",num put 0?
+        getSeonalAnime("2021", "summer")
     }
 
     private fun getAllAnimes() {
@@ -70,6 +71,30 @@ class HomeViewModel @Inject constructor(
                 _error.emit(e.message ?: "Something went wrong")
             }
 
+        }
+    }
+
+    private fun getDetailAnime(id: Int) {
+        viewModelScope.launch {
+            try {
+                AllAnimeRepo.getDetailAnime(id).let {
+                    _randomAnime.value = listOf(it)
+                }
+            } catch (e: Exception) {
+                _error.emit(e.message ?: "Something went wrong")
+            }
+        }
+    }
+
+    private fun getSeonalAnime(year: String, season: String) {
+        viewModelScope.launch {
+            try {
+                AllAnimeRepo.getSeasonalAnime(year, season).let {
+                    _animes.value = it
+                }
+            } catch (e: Exception) {
+                _error.emit(e.message ?: "Something went wrong")
+            }
         }
     }
 
