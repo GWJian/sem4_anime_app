@@ -25,7 +25,8 @@ interface AnimeApi {
     //    Detail Anime:
     //    https://api.jikan.moe/v4/anime/35247/full <- get by id
     //    https://api.jikan.moe/v4/anime/35247
-
+    @GET("anime/{id}")
+    suspend fun getDetailAnime(@Path("id") id: Int): Data
 
     //    Search anime name:
     //    https://api.jikan.moe/v4/anime?q=
@@ -35,11 +36,14 @@ interface AnimeApi {
 
     //    Random Anime Button:
     //    https://api.jikan.moe/v4/random/anime
+    @GET("random/anime")
+    suspend fun getRandomAnime(): Data
 
     //    Get all genres:
     //    https://api.jikan.moe/v4/genres/anime
     @GET("genres/anime")
     suspend fun getAllGenres(): GenresResp
+
 
     //    Get anime by genre
     //    ???? HOW ????
