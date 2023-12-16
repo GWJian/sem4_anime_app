@@ -5,7 +5,6 @@ import com.gwj.sem4_anime_app.data.model.GenresResp
 import com.gwj.sem4_anime_app.data.model.AnimeResp
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface AnimeApi {
 
@@ -14,7 +13,7 @@ interface AnimeApi {
     //    https://api.jikan.moe/v4/top/anime?limit=1
     //    https://api.jikan.moe/v4/top/anime?limit=25&page=1
     @GET("top/anime?limit=25&page=1")
-    suspend fun getTopAnime(): AnimeResp
+    suspend fun getTopAnime(): AnimeResp //TODO: ASK SIR about this,是使用Path还是怎样,因为要用load more
 
     //    Seasonal Anime List:
     //    https://api.jikan.moe/v4/seasons/{year}/{season}?limit=25
@@ -31,8 +30,8 @@ interface AnimeApi {
     //    Search anime name:
     //    https://api.jikan.moe/v4/anime?q=
     //    https://api.jikan.moe/v4/anime?q=naruto&limit=25&page=1
-    @GET("anime")
-    suspend fun searchAnime(@Query("q") query: String): AnimeResp
+//    @GET("anime")
+//    suspend fun searchAnime(@Query("q") query: String): Data
 
     //    Random Anime Button:
     //    https://api.jikan.moe/v4/random/anime
