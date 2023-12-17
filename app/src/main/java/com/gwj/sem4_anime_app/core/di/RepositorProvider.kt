@@ -8,6 +8,7 @@ import com.gwj.sem4_anime_app.data.repo.anime.AnimeRepoImpl
 import com.gwj.sem4_anime_app.data.repo.random.RandomAnimeRepo
 import com.gwj.sem4_anime_app.data.repo.random.RandomAnimeRepoImpl
 import com.gwj.sem4_anime_app.data.repo.search.SearchRepo
+import com.gwj.sem4_anime_app.data.repo.search.SearchRepoImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,11 +31,11 @@ class RepositoryProvider {
         return GenresRepoImpl(animeApi)
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideSearchRepo(animeApi: AnimeApi): SearchRepo {
-//        return SearchRepoImpl(animeApi)
-//    }
+    @Provides
+    @Singleton
+    fun provideSearchRepo(animeApi: AnimeApi): SearchRepo {
+        return SearchRepoImpl(animeApi)
+    }
 
     @Provides
     @Singleton
