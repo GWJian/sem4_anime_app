@@ -36,9 +36,10 @@ class HomeViewModel @Inject constructor(
         //getAllAnimes()
         //getAllGenres()
         //getRandomAnime()
-        //getDetailAnime(35247) //TODO ask sir,how to put empty num,if string is "",num put 0?
-        //getSeasonAnime("2021", "summer") //TODO change to "" when we want to get user input
-        //searchAnime("pokemon") //TODO change to "" when we want to get user input
+        //getDetailAnime(0) //TODO ask sir,how to put empty num,if string is "",num put 0?
+        //getSeasonAnime("2021", "summer") //TODO change to "" when we want to get user input.
+        //searchAnime("pokemon") //TODO change to "" when we want to get user input.
+        //getAnimeByGenre(listOf()) //TODO ask sir,how to put empty num, just blank?
     }
 
     private fun getAllAnimes() {
@@ -107,6 +108,19 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 SearchRepo.searchAnime(query).let {
+                    _search.value = it
+                }
+            } catch (e: Exception) {
+                _error.emit(e.message ?: "Something went wrong")
+            }
+        }
+    }
+
+    private fun getAnimeByGenre(ids: List<Int>){
+        val query = ids.joinToString(",")
+        viewModelScope.launch {
+            try {
+                SearchRepo.getAnimeByGenre(query).let {
                     _search.value = it
                 }
             } catch (e: Exception) {

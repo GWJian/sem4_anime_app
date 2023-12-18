@@ -31,12 +31,6 @@ interface AnimeApi {
     @GET("anime/{id}")
     suspend fun getDetailAnime(@Path("id") id: Int): Data
 
-    //    Search anime name:
-    //    https://api.jikan.moe/v4/anime?q=
-    //    https://api.jikan.moe/v4/anime?q=naruto&limit=25&page=1
-    @GET("anime")
-    suspend fun searchAnime(@Query("q") query: String): AnimeResp
-
     //    Random Anime Button:
     //    https://api.jikan.moe/v4/random/anime
     @GET("random/anime")
@@ -47,9 +41,18 @@ interface AnimeApi {
     @GET("genres/anime")
     suspend fun getAllGenres(): GenresResp
 
+    //    Search anime name:
+    //    https://api.jikan.moe/v4/anime?q=
+    //    https://api.jikan.moe/v4/anime?q=naruto&limit=25&page=1
+    @GET("anime")
+    suspend fun searchAnime(@Query("q") query: String): AnimeResp
 
     //    Get anime by genre
-    //    ???? HOW ????
+    //    https://api.jikan.moe/v4/anime?genres=1,2
+    @GET("anime")
+    suspend fun getAnimeByGenre(@Query("genres") genres: String): AnimeResp
 
+    // get anime video,pv1,pv2
+    // https://api.jikan.moe/v4/anime/52991/videos
 
 }

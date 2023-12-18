@@ -9,6 +9,9 @@ class SearchRepoImpl(private val animeApi: AnimeApi) : SearchRepo {
     override suspend fun searchAnime(query: String): List<AnimeData> {
         // search anime with query and return list of anime
         return animeApi.searchAnime(query).animeData ?: emptyList()
+    }
 
+    override suspend fun getAnimeByGenre(query: String): List<AnimeData>{
+        return animeApi.getAnimeByGenre(query).animeData ?: emptyList()
     }
 }
