@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     tools:context=".ui.home.HomeFragment">
 
     <TextView
@@ -11,10 +12,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_gravity="center"
         android:text="Hello testing" />
 
     <ImageView
         android:id="@+id/imagetest"
+
         android:src="@drawable/ic_image"
         android:layout_width="300dp"
         android:layout_height="300dp"/>

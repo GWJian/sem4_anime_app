@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">sem4_anime_app</string>
+    <string name="back">Back</string>
+    <string name="logo">Logo</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="register_here">Register Here</string>
+    <string name="not_registered">Not Registered?</string>
+    <string name="already_a_user">Already a User?</string>
+    <string name="log_in_here">Log in Here</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="username">Username</string>
+    <string name="back_btn">Back Btn</string>
+    <string name="content_page">Content Page</string>
+    <string name="content_to_be_displayed">Content To be Displayed</string>
+    <string name="placeholder_title">Placeholder Title</string>
+    <string name="placeholder_desc">Placeholder Desc</string>
+    <string name="trailer">Trailer</string>
+    <string name="pv1">PV1</string>
+    <string name="favorite">Favorite</string>
+
 </resources>

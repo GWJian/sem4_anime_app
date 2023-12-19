@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+
+    android:padding="15dp"
+    tools:context=".ui.content.ContentFragment">
+
+
+    <ImageView
+        android:id="@+id/contentBackBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back_arrow"
+        android:contentDescription="@string/back_btn" />
+
+    <ImageView
+        android:id="@+id/contentImage"
+        android:layout_gravity="center"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src=""
+        android:contentDescription="@string/content_to_be_displayed"
+        android:scaleType="centerCrop" />
+
+
+    <TextView
+        android:id="@+id/contentTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/placeholder_title"
+        android:layout_margin="20dp"
+        android:textStyle="bold"
+        style="@style/TextAppearance.Material3.TitleLarge" />
+
+    <TextView
+        android:id="@+id/contentDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/placeholder_desc"
+        android:layout_margin="20dp"
+        style="@style/TextAppearance.Material3.TitleMedium" />
+    <TextView
+        android:id="@+id/contentTrailerTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/trailer"
+        android:layout_margin="20dp"
+        android:textStyle="italic"
+        style="@style/TextAppearance.Material3.TitleLarge" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/contentTrailerPV1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pv1"
+        android:backgroundTint="@color/blue"
+        app:cornerRadius="4dp"
+        style="@style/ShapeAppearanceOverlay.Material3.Button" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/contentFavoriteBtn"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="180dp"
+        android:layout_gravity="center"
+        style="@style/ShapeAppearanceOverlay.Material3.Button"
+        app:cornerRadius="4dp"
+        android:textSize="20sp"
+        android:backgroundTint="@color/black"
+        android:layout_marginBottom="15dp"
+        android:text="@string/favorite" />
+
+
+</LinearLayout>
