@@ -52,7 +52,7 @@ interface AnimeApi {
     @GET("anime")
     suspend fun getAnimeByGenre(@Query("genres") genres: String): AnimeResp
 
-    // get anime video,pv1,pv2
+    // get anime video,pv1,pv2,maybe no need to use this
     // https://api.jikan.moe/v4/anime/52991/videos
 
 }
