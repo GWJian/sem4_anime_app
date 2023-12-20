@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:src="@drawable/ic_favorite"
+            android:src="@drawable/ic_bookmark_unfavourite"
             android:contentDescription="@string/favorite" />
     </LinearLayout>
 
@@ -137,7 +137,7 @@
         style="@style/ShapeAppearanceOverlay.Material3.Button" />
 
     <ScrollView
-        android:id="contentScroll"
+        android:id="@+id/contentScroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
