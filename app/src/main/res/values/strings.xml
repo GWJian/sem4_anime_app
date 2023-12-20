@@ -19,5 +19,11 @@
     <string name="trailer">Trailer</string>
     <string name="pv1">PV1</string>
     <string name="favorite">Favorite</string>
+    <string name="placeholder_jp">PlaceHolder JP</string>
+    <string name="year">Year :</string>
+    <string name="episodes">Episodes :</string>
+    <string name="status">Status :</string>
+    <string name="duration">Duration :</string>
+    <string name="source">Source :</string>
 
 </resources>
