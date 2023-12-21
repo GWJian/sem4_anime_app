@@ -1,4 +1,6 @@
-package com.gwj.sem4_anime_app.data.model.data
+package com.gwj.sem4_anime_app.data.model
+
+import com.gwj.sem4_anime_app.data.model.data.Items
 
 data class Pagination(
     val current_page: Int,

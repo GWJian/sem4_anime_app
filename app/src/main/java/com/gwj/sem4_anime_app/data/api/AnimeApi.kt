@@ -1,8 +1,8 @@
 package com.gwj.sem4_anime_app.data.api
 
 import com.gwj.sem4_anime_app.data.model.Data
-import com.gwj.sem4_anime_app.data.model.GenresResp
 import com.gwj.sem4_anime_app.data.model.AnimeResp
+import com.gwj.sem4_anime_app.data.model.GenresResp
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -14,7 +14,12 @@ interface AnimeApi {
     //    https://api.jikan.moe/v4/top/anime?limit=1
     //    https://api.jikan.moe/v4/top/anime?limit=25&page=1
     @GET("top/anime?limit=25&page=1")
-    suspend fun getTopAnime(): AnimeResp //TODO: ASK SIR about this,是使用Path还是怎样,因为要用load more
+    suspend fun getTopAnime(): AnimeResp
+
+    //    Season Now anime:
+    //    https://api.jikan.moe/v4/seasons/now?limit=25&page=1
+    @GET("seasons/now?limit=25&page=1")
+    suspend fun getSeasonNowAnime(): AnimeResp //USE QUERY TO CONTROL PAGER
 
     //    Seasonal Anime List:
     //    https://api.jikan.moe/v4/seasons/{year}/{season}?limit=25
