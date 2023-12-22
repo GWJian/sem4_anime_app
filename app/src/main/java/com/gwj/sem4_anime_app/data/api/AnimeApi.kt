@@ -25,13 +25,19 @@ interface AnimeApi {
     //    Season Now anime:
     //    https://api.jikan.moe/v4/seasons/now?limit=25&page=1
     @GET("seasons/now?limit=25")
-    suspend fun getSeasonNowAnime(@Query("page") page: Int): AnimeResp
+    suspend fun getSeasonNowAnime(): AnimeResp
 
     //    Search anime name:
     //    https://api.jikan.moe/v4/anime?q=
-    //    https://api.jikan.moe/v4/anime?q=naruto&limit=25&page=1
+    //    https://api.jikan.moe/v4/anime?q=naruto
+    //    https://api.jikan.moe/v4/anime?q=type=tv&movie
+    //    type = tv, movie
+    //    TODO page,ask sir how to do it
     @GET("anime")
-    suspend fun searchAnime(@Query("q") query: String): AnimeResp
+    suspend fun searchAnime(
+        @Query("q") query: String,
+        @Query("sfw") sfw: Boolean,
+    ): AnimeResp
 
 
     //    Seasonal Anime List:
