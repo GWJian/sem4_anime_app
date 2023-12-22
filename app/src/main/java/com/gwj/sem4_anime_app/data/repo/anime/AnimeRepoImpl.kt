@@ -3,21 +3,29 @@ package com.gwj.sem4_anime_app.data.repo.anime
 import android.util.Log
 import com.gwj.sem4_anime_app.data.api.AnimeApi
 import com.gwj.sem4_anime_app.data.model.Data
-import retrofit2.http.GET
 
 class AnimeRepoImpl(private val animeApi: AnimeApi) : AnimeRepo {
 
-    //use AnimeData cuz need pagination to handle the pagination of the data
     override suspend fun getTopAnimeList(): List<Data> {
         return animeApi.getTopAnime().data ?: emptyList()
     }
-//    override suspend fun getTopAnimeList(): List<Data> {
-//        val response = animeApi.getTopAnime()
-//        Log.d("debugging_AnimeRepoImpl", "Raw API response: $response")
-//        val animeData = response.data
-//        Log.d("debugging_AnimeRepoImpl", "Parsed anime data: $animeData")
-//        return animeData ?: emptyList()
+
+    override suspend fun getDetailAnime(animeId: Int): Data {
+        //return animeApi.getDetailAnime(animeId)
+        val anime = animeApi.getDetailAnime(animeId)
+        Log.d("debugging_AnimeRepoImpl", "getDetailAnime: $anime")
+        return anime
+    }
+
+    override suspend fun searchAnime(query: String): List<Data> {
+        return animeApi.searchAnime(query).data ?: emptyList()
+    }
+
+
+//    override suspend fun getDetailAnime(animeId: Int): Data {
+//        return animeApi.getDetailAnime(animeId).data?.firstOrNull()
 //    }
+
 
 //    override suspend fun getSeasonNowAnime(): List<AnimeData> {
 //        return animeApi.getSeasonNowAnime().data ?: emptyList()

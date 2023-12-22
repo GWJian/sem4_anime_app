@@ -39,20 +39,18 @@ class HorizontalTopAnimeAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(topAnime: Data) {
             binding.run {
-               tvAnimeName.text = topAnime.title_english
-
                 Glide.with(binding.root)
                     .load(topAnime.images.jpg.image_url)
                     .into(ivAnimeImg)
 
                 cvAnime.setOnClickListener {
-                    listener?.onClick()
+                    listener?.onClick(topAnime)
                 }
             }
         }
     }
 
     interface Listener {
-        fun onClick()
+        fun onClick(animeId:Data)
     }
 }

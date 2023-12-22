@@ -16,10 +16,23 @@ interface AnimeApi {
     @GET("top/anime?limit=25&page=1")
     suspend fun getTopAnime(): AnimeResp
 
+    //    Detail Anime:
+    //    https://api.jikan.moe/v4/anime/35247/full <- get by id
+    //    https://api.jikan.moe/v4/anime/35247
+    @GET("anime/{id}")
+    suspend fun getDetailAnime(@Path("id") animeId: Int): Data
+
     //    Season Now anime:
     //    https://api.jikan.moe/v4/seasons/now?limit=25&page=1
-    @GET("seasons/now?limit=25&page=1")
-    suspend fun getSeasonNowAnime(): AnimeResp //USE QUERY TO CONTROL PAGER
+    @GET("seasons/now?limit=25")
+    suspend fun getSeasonNowAnime(@Query("page") page: Int): AnimeResp
+
+    //    Search anime name:
+    //    https://api.jikan.moe/v4/anime?q=
+    //    https://api.jikan.moe/v4/anime?q=naruto&limit=25&page=1
+    @GET("anime")
+    suspend fun searchAnime(@Query("q") query: String): AnimeResp
+
 
     //    Seasonal Anime List:
     //    https://api.jikan.moe/v4/seasons/{year}/{season}?limit=25
@@ -30,12 +43,6 @@ interface AnimeApi {
         @Path("season") season: String
     ): AnimeResp
 
-    //    Detail Anime:
-    //    https://api.jikan.moe/v4/anime/35247/full <- get by id
-    //    https://api.jikan.moe/v4/anime/35247
-    @GET("anime/{id}")
-    suspend fun getDetailAnime(@Path("id") id: Int): Data
-
     //    Random Anime Button:
     //    https://api.jikan.moe/v4/random/anime
     @GET("random/anime")
@@ -45,12 +52,6 @@ interface AnimeApi {
     //    https://api.jikan.moe/v4/genres/anime
     @GET("genres/anime")
     suspend fun getAllGenres(): GenresResp
-
-    //    Search anime name:
-    //    https://api.jikan.moe/v4/anime?q=
-    //    https://api.jikan.moe/v4/anime?q=naruto&limit=25&page=1
-    @GET("anime")
-    suspend fun searchAnime(@Query("q") query: String): AnimeResp
 
     //    Get anime by genre
     //    https://api.jikan.moe/v4/anime?genres=1,2

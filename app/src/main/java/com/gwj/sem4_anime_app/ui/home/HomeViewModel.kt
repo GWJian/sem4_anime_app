@@ -24,14 +24,12 @@ class HomeViewModel @Inject constructor(
 
     private fun getTopAnimes() {
         viewModelScope.launch {
-            try {
+            safeApiCall {
                 AllAnimeRepo.getTopAnimeList().let {
                     _animes.value = it
-                    Log.d("debugging_HomeViewModel", "getTopAnimes: $it")
-                    Log.d("debugging_HomeViewModel", "Number of items: ${_animes.value.size}")
+                    //Log.d("debugging_HomeViewModel", "getTopAnimes: $it")
+                    //Log.d("debugging_HomeViewModel", "Number of items: ${_animes.value.size}")
                 }
-            } catch (e: Exception) {
-                _error.emit(e.message ?: "Something went wrong")
             }
         }
     }

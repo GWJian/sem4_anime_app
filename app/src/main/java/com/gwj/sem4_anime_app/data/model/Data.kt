@@ -12,6 +12,7 @@ import com.gwj.sem4_anime_app.data.model.data.Trailer
 
 //    Top Anime on Home Page:
 //    https://api.jikan.moe/v4/top/anime?limit=1
+//    https://api.jikan.moe/v4/anime/35247
 data class Data(
     val aired: Aired,
     val airing: Boolean,

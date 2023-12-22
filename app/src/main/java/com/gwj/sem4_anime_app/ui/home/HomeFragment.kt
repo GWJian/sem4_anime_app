@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gwj.recipesapp.ui.base.BaseFragment
+import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.databinding.FragmentHomeBinding
 import com.gwj.sem4_anime_app.ui.adapter.HorizontalTopAnimeAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,11 +34,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun setupTopAnimeAdapter() {
         HorizontalTopAnimeAdapter = HorizontalTopAnimeAdapter(emptyList())
-//        HorizontalTopAnimeAdapter.listener = object : HorizontalTopAnimeAdapter.Listener {
-//            override fun onClick() {
-//                //TODO onclick function
-//            }
-//        }
+        HorizontalTopAnimeAdapter.listener = object : HorizontalTopAnimeAdapter.Listener {
+            override fun onClick(animeId: Data) {
+                val action =
+                    HomeFragmentDirections.homeFragmentToContentFragment(animeId.mal_id.toString())
+                navController.navigate(action)
+            }
+        }
         val layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.horizontalTopAnimeRecycleView.adapter = HorizontalTopAnimeAdapter

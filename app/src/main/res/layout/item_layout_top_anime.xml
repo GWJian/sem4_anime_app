@@ -5,23 +5,17 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvAnime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_marginHorizontal="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/ivAnimeImg"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:src="@drawable/ic_image"
-            android:scaleType="fitXY"/>
-
-        <TextView
-            android:id="@+id/tvAnimeName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Anime Name"
-            android:textColor="@color/black"
-            android:layout_gravity="bottom|center_horizontal" />
+            android:scaleType="fitXY"
+            android:contentDescription="AnimeImage" />
 
     </com.google.android.material.card.MaterialCardView>
 
