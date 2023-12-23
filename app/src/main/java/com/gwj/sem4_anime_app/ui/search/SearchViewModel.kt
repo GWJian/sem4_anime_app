@@ -21,6 +21,8 @@ class SearchViewModel @Inject constructor(
 
     //Job to stop the search when user is typing too fast
     var searchJob: Job? = null
+    var currentPage = 1
+    var isLoading = false
 
     init {
         getAllAnimes()
@@ -54,5 +56,31 @@ class SearchViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Loads more items when the user scrolls to the end of the list.
+     * Join Two List
+     */
+    fun loadMoreItems() {
+        // check are we loading the data
+        if (!isLoading) {
+            // if true, let the page increment and load new data into the list
+            isLoading = true
+            // page +1
+            currentPage++
+            viewModelScope.launch(Dispatchers.IO) {
+                delay(1000) //delay to control the rate of the request
+                safeApiCall {
+                    Animes.searchAnime("", currentPage).let { newItems ->
+                        // get current anime list
+                        val currentItems = _searchAnimes.value
+                        // add new list to current list => join two list
+                        _searchAnimes.value = currentItems + newItems
+                        // if done loading, set it back to false so it can prevent user from keep scrolling and get 429 RateLimitException error warning
+                        isLoading = false
+                    }
+                }
+            }
+        }
+    }
 
 }

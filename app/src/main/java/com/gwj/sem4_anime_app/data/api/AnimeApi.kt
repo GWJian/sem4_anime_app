@@ -38,6 +38,7 @@ interface AnimeApi {
         @Query("q") query: String,
         @Query("sfw") sfw: Boolean = true,
         @Query("page") page: Int = 1,
+        @Query("limit") limit: Int = 25,
     ): AnimeResp
 
 

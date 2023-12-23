@@ -8,6 +8,7 @@ import android.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.gwj.recipesapp.ui.base.BaseFragment
 import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.databinding.FragmentSearchBinding
@@ -48,6 +49,24 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.searchAnimeRecyclerView.adapter = adapter
         binding.searchAnimeRecyclerView.layoutManager = layoutManager
+
+        // Load more items when the user scrolls to the end of the list.
+        binding.searchAnimeRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            // this will triggered when the user scrolls to the end of the list
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val myLayoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val totalItemCount = myLayoutManager.itemCount
+                val lastVisibleItem = myLayoutManager.findLastVisibleItemPosition()
+
+                // when user reach end of the list(5 items before the end of the list)
+                // load the next page data
+                if (totalItemCount <= lastVisibleItem + 5) {
+                    viewModel.loadMoreItems()
+                }
+            }
+        })
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
