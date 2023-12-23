@@ -39,7 +39,7 @@ class SearchAnimeAdapter(
     inner class SearchAnimeViewHolder(
         private val binding: LayoutSearchItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        @SuppressLint("SetTextI18n")
+        @SuppressLint("SetTextI18n") //Todo Ask sir
         fun bind(data: Data) {
             binding.run {
                 Glide.with(binding.root)
@@ -47,14 +47,13 @@ class SearchAnimeAdapter(
                     .into(ivAnimeImg)
 
                 tvAnimeName.text = data.title
-                tvAnimeEpisodes.text = "Episode: ${data.episodes}" //Todo Ask sir
+                tvAnimeEpisodes.text = "Episode: ${data.episodes}"
                 tvAnimeType.text = data.type
                 tvAnimeYear.text = "Year: ${data.year}"
 
                 searchCV.setOnClickListener {
                     listener?.onClick(data)
                 }
-
             }
         }
     }

@@ -1,5 +1,7 @@
 package com.gwj.sem4_anime_app.data.api
 
+import android.graphics.pdf.PdfDocument.Page
+import com.gwj.sem4_anime_app.data.model.AnimeDetailResp
 import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.data.model.AnimeResp
 import com.gwj.sem4_anime_app.data.model.GenresResp
@@ -20,7 +22,7 @@ interface AnimeApi {
     //    https://api.jikan.moe/v4/anime/35247/full <- get by id
     //    https://api.jikan.moe/v4/anime/35247
     @GET("anime/{id}")
-    suspend fun getDetailAnime(@Path("id") animeId: Int): Data
+    suspend fun getDetailAnime(@Path("id") animeId: Int): AnimeDetailResp
 
     //    Season Now anime:
     //    https://api.jikan.moe/v4/seasons/now?limit=25&page=1
@@ -30,13 +32,14 @@ interface AnimeApi {
     //    Search anime name:
     //    https://api.jikan.moe/v4/anime?q=
     //    https://api.jikan.moe/v4/anime?q=naruto
-    //    https://api.jikan.moe/v4/anime?q=type=tv&movie
+    //    https://api.jikan.moe/v4/anime?q=type=tv&movie&page=1
     //    type = tv, movie
     //    TODO page,ask sir how to do it
     @GET("anime")
     suspend fun searchAnime(
         @Query("q") query: String,
-        @Query("sfw") sfw: Boolean,
+        @Query("sfw") sfw: Boolean = true,
+        @Query("page") page: Int = 1,
     ): AnimeResp
 
 

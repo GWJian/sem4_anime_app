@@ -14,11 +14,11 @@ class AnimeRepoImpl(private val animeApi: AnimeApi) : AnimeRepo {
         //return animeApi.getDetailAnime(animeId)
         val anime = animeApi.getDetailAnime(animeId)
         Log.d("debugging_AnimeRepoImpl", "getDetailAnime: $anime")
-        return anime
+        return anime.data
     }
 
     override suspend fun searchAnime(query: String): List<Data> {
-        return animeApi.searchAnime(query, true).data ?: emptyList()
+        return animeApi.searchAnime(query).data ?: emptyList()
     }
 
 

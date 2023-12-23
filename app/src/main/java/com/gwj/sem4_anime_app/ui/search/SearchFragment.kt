@@ -66,7 +66,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         super.setupViewModelObserver()
 
         lifecycleScope.launch {
-            viewModel.searchAnimes.collect() {
+            viewModel.searchAnimes.collect {
                 adapter.setSearchAnimes(it)
             }
         }
