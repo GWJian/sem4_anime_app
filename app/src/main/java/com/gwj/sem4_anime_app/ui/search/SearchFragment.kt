@@ -12,6 +12,7 @@ import com.gwj.recipesapp.ui.base.BaseFragment
 import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.databinding.FragmentSearchBinding
 import com.gwj.sem4_anime_app.ui.adapter.SearchAnimeAdapter
+import com.gwj.sem4_anime_app.ui.tabContainer.TabContainerFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -39,7 +40,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         adapter.listener = object : SearchAnimeAdapter.Listener {
             override fun onClick(animeId: Data) {
                 val action =
-                    SearchFragmentDirections.actionSearchFragmentToContentFragment(animeId.mal_id.toString())
+                    TabContainerFragmentDirections.actionTabContainerFragmentToContentFragment(animeId.mal_id.toString())
                 navController.navigate(action)
             }
         }

@@ -11,6 +11,8 @@ import com.gwj.recipesapp.ui.base.BaseFragment
 import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.databinding.FragmentHomeBinding
 import com.gwj.sem4_anime_app.ui.adapter.HorizontalTopAnimeAdapter
+import com.gwj.sem4_anime_app.ui.tabContainer.TabContainerFragment
+import com.gwj.sem4_anime_app.ui.tabContainer.TabContainerFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -37,7 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         HorizontalTopAnimeAdapter.listener = object : HorizontalTopAnimeAdapter.Listener {
             override fun onClick(animeId: Data) {
                 val action =
-                    HomeFragmentDirections.homeFragmentToContentFragment(animeId.mal_id.toString())
+                    TabContainerFragmentDirections.actionTabContainerFragmentToContentFragment(animeId.mal_id.toString())
                 navController.navigate(action)
             }
         }
