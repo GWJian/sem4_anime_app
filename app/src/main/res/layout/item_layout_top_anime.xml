@@ -11,8 +11,8 @@
 
         <ImageView
             android:id="@+id/ivAnimeImg"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="145dp"
+            android:layout_height="145dp"
             android:src="@drawable/ic_image"
             android:scaleType="fitXY"
             android:contentDescription="AnimeImage" />
