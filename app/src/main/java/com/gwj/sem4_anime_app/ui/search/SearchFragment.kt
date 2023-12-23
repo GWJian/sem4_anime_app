@@ -68,6 +68,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             }
         })
 
+        // search function
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 viewModel.searchAnime(query)

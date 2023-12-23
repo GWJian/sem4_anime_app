@@ -43,10 +43,10 @@ class SearchViewModel @Inject constructor(
     //target the anime that we want to search
     //we use Job to prevent user from typing too fast and keep searching and cause 429 - Too Many Request
     fun searchAnime(query: String?) {
-        searchJob?.cancel() //stop the previous search if user is typing too fast
+        searchJob?.cancel() //cancel to prevent user from typing too fast
         if (!query.isNullOrBlank()) {
             searchJob = viewModelScope.launch(Dispatchers.IO) {
-                delay(300) //delay some ms to wait for user to finish typing
+                delay(300) //delay use to control the rate of the request if user is typing too fast
                 safeApiCall {
                     Animes.searchAnime(query).let {
                         _searchAnimes.value = it
