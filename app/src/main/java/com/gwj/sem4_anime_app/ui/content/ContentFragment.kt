@@ -1,5 +1,7 @@
 package com.gwj.sem4_anime_app.ui.content
 
+import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -46,18 +48,26 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
         lifecycleScope.launch {
             viewModel.anime.collect { animeDetail ->
                 binding.run {
-                    contentTitle.text = animeDetail?.title  ?: "N/A"
-                    contentTitleJP.text = animeDetail?.title_japanese  ?: "N/A"
+                    contentTitle.text = animeDetail?.title ?: "N/A"
+                    contentTitleJP.text = animeDetail?.title_japanese ?: "N/A"
                     contentEpisodes.text = animeDetail?.episodes.toString()
-                    contentYear.text = animeDetail?.aired?.string  ?: "N/A"
-                    contentStatus.text = animeDetail?.status  ?: "N/A"
-                    contentSource.text = animeDetail?.source  ?: "N/A"
-                    contentDuration.text = animeDetail?.duration  ?: "N/A"
-                    contentDesc.text = animeDetail?.synopsis  ?: "N/A"
+                    contentYear.text = animeDetail?.aired?.string ?: "N/A"
+                    contentStatus.text = animeDetail?.status ?: "N/A"
+                    contentSource.text = animeDetail?.source ?: "N/A"
+                    contentDuration.text = animeDetail?.duration ?: "N/A"
+                    contentDesc.text = animeDetail?.synopsis ?: "N/A"
 
-//                    Glide.with(binding.root)
-//                        .load(animeDetail?.images?.jpg?.image_url)
-//                        .into(contentImage)
+                    contentTrailerPV1.setOnClickListener {
+                        val url = animeDetail?.trailer?.url
+                        if (url != null) {
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                            startActivity(intent)
+                        }
+                    }
+
+                    Glide.with(binding.root)
+                        .load(animeDetail?.images?.jpg?.image_url)
+                        .into(contentImage)
                 }
             }
         }

@@ -33,8 +33,6 @@ interface AnimeApi {
     //    https://api.jikan.moe/v4/anime?q=
     //    https://api.jikan.moe/v4/anime?q=naruto
     //    https://api.jikan.moe/v4/anime?q=type=tv&movie&page=1
-    //    type = tv, movie
-    //    TODO page,ask sir how to do it
     @GET("anime")
     suspend fun searchAnime(
         @Query("q") query: String,
