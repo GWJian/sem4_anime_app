@@ -17,6 +17,7 @@ abstract class BaseViewModel:ViewModel() {
         return try {
             callback()
         } catch (e: Exception) {
+            //throw e
             _error.emit(e.message ?: "Something went wrong")
             null
         }
