@@ -20,6 +20,10 @@ class AnimeRepoImpl(private val animeApi: AnimeApi) : AnimeRepo {
         return animeApi.searchAnime(query, page = page).data ?: emptyList()
     }
 
+    override suspend fun getRandomAnime(): Data {
+        return animeApi.getRandomAnime().data
+    }
+
 
 //    override suspend fun getDetailAnime(animeId: Int): Data {
 //        return animeApi.getDetailAnime(animeId).data?.firstOrNull()
@@ -34,10 +38,6 @@ class AnimeRepoImpl(private val animeApi: AnimeApi) : AnimeRepo {
 //        return animeApi.getSeasonalAnime(year, season).data ?: emptyList()
 //    }
 
-    //use Data cuz no pagination only 1 anime
-//    override suspend fun getDetailAnime(id: Int): Data {
-//        return animeApi.getDetailAnime(id)
-//    }
 
 
 }

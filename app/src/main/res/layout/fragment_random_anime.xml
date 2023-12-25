@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".ui.random.RandomAnimeFragment">
+
+    <LinearLayout
+        android:id="@+id/llRandomItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:id="@+id/ivRandomAnimeImg"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:contentDescription="Anime Img"
+            android:src="@drawable/ic_image" />
+
+        <TextView
+            android:id="@+id/tvRandomAnimeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:drawablePadding="10dp"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:text="Anime name" />
+
+        <TextView
+            android:id="@+id/tvRandomType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:drawablePadding="10dp"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:text="Anime type" />
+
+
+    </LinearLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnClickMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click Me" />
+
+</LinearLayout>

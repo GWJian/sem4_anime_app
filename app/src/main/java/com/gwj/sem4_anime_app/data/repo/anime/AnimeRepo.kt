@@ -10,6 +10,8 @@ interface AnimeRepo {
 
     suspend fun searchAnime(query: String,page:Int = 1): List<Data>
 
+    suspend fun getRandomAnime(): Data?
+
     //suspend fun getSeasonNowAnime(): List<AnimeData>
 
     //suspend fun getSeasonalAnime(year: String, season: String): List<AnimeData>
