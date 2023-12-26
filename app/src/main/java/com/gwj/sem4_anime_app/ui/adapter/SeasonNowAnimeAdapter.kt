@@ -7,34 +7,34 @@ import com.bumptech.glide.Glide
 import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.databinding.ItemLayoutTopAnimeBinding
 
-class VerticalAnimeAdapter(
-    private var topAnimes: List<Data>,
-): RecyclerView.Adapter<VerticalAnimeAdapter.TopAnimeViewHolder>() {
+class SeasonNowAnimeAdapter(
+    private var seasonNowAnimes: List<Data>,
+): RecyclerView.Adapter<SeasonNowAnimeAdapter.SeasonNowAnimeViewHolder>() {
 
     var listener: Listener? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopAnimeViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeasonNowAnimeViewHolder {
         val binding = ItemLayoutTopAnimeBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return TopAnimeViewHolder(binding)
+        return SeasonNowAnimeViewHolder(binding)
     }
 
-    override fun getItemCount() = topAnimes.size
+    override fun getItemCount() = seasonNowAnimes.size
 
-    override fun onBindViewHolder(holder: TopAnimeViewHolder, position: Int) {
-        val item = topAnimes[position]
+    override fun onBindViewHolder(holder: SeasonNowAnimeViewHolder, position: Int) {
+        val item = seasonNowAnimes[position]
         holder.bind(item)
     }
 
     fun setTopAnimes(items: List<Data>) {
-        topAnimes = items
+        seasonNowAnimes = items
         notifyDataSetChanged()
     }
 
-    inner class TopAnimeViewHolder(
+    inner class SeasonNowAnimeViewHolder(
         private val binding: ItemLayoutTopAnimeBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(topAnime: Data) {

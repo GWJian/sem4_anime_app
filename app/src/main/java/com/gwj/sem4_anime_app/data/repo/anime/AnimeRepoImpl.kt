@@ -10,6 +10,10 @@ class AnimeRepoImpl(private val animeApi: AnimeApi) : AnimeRepo {
         return animeApi.getTopAnime().data ?: emptyList()
     }
 
+    override suspend fun getSeasonNowAnime(): List<Data> {
+        return animeApi.getSeasonNowAnime().data ?: emptyList()
+    }
+
     override suspend fun getDetailAnime(animeId: Int): Data {
         val anime = animeApi.getDetailAnime(animeId)
         //Log.d("debugging_AnimeRepoImpl", "getDetailAnime: $anime")
@@ -24,15 +28,6 @@ class AnimeRepoImpl(private val animeApi: AnimeApi) : AnimeRepo {
         return animeApi.getRandomAnime().data
     }
 
-
-//    override suspend fun getDetailAnime(animeId: Int): Data {
-//        return animeApi.getDetailAnime(animeId).data?.firstOrNull()
-//    }
-
-
-//    override suspend fun getSeasonNowAnime(): List<AnimeData> {
-//        return animeApi.getSeasonNowAnime().data ?: emptyList()
-//    }
 
 //    override suspend fun getSeasonalAnime(year: String, season: String): List<AnimeData> {
 //        return animeApi.getSeasonalAnime(year, season).data ?: emptyList()
