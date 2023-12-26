@@ -20,8 +20,7 @@ class RandomAnimeViewModel @Inject constructor(
     protected val _randomAnime: MutableStateFlow<Data?> = MutableStateFlow(null)
     val randomAnime: StateFlow<Data?> = _randomAnime
 
-    val randomAnimeId = Random.nextInt(1, 1000) //just a function to generate random int 1 to 1k
-    val listener: Listener? = null
+    val randomAnimeId = Random.nextInt(1000, 5000) //just a function to generate random int 1 to 1k
 
     init {
         getAnime()
@@ -46,10 +45,6 @@ class RandomAnimeViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    interface Listener {
-        fun onClick(animeId: Data)
     }
 
 }
