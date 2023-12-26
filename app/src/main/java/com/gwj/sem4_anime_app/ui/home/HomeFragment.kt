@@ -12,8 +12,7 @@ import com.gwj.recipesapp.ui.base.BaseFragment
 import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.databinding.FragmentHomeBinding
 import com.gwj.sem4_anime_app.ui.adapter.HorizontalTopAnimeAdapter
-import com.gwj.sem4_anime_app.ui.adapter.VerticalAnimeAdapter
-import com.gwj.sem4_anime_app.ui.tabContainer.TabContainerFragment
+import com.gwj.sem4_anime_app.ui.adapter.SeasonNowAnimeAdapter
 import com.gwj.sem4_anime_app.ui.tabContainer.TabContainerFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -22,7 +21,7 @@ import kotlinx.coroutines.launch
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override val viewModel: HomeViewModel by viewModels()
     private lateinit var HorizontalTopAnimeAdapter: HorizontalTopAnimeAdapter
-    private lateinit var VerticalAnimeAdapter: VerticalAnimeAdapter
+    private lateinit var SeasonNowAnimeAdapter: SeasonNowAnimeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,8 +54,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
 
     private fun setupRecommendedAnimeAdapter() {
-        VerticalAnimeAdapter = VerticalAnimeAdapter(emptyList())
-        VerticalAnimeAdapter.listener = object : VerticalAnimeAdapter.Listener {
+        SeasonNowAnimeAdapter = SeasonNowAnimeAdapter(emptyList())
+        SeasonNowAnimeAdapter.listener = object : SeasonNowAnimeAdapter.Listener {
             override fun onClick(animeId: Data) {
                 val action = TabContainerFragmentDirections.actionTabContainerFragmentToContentFragment(animeId.mal_id.toString())
                 navController.navigate(action)
@@ -64,7 +63,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
 
         val layoutManager = GridLayoutManager(requireContext(), 3)
-        binding.verticalAnimeRecyclerView.adapter = VerticalAnimeAdapter
+        binding.verticalAnimeRecyclerView.adapter = SeasonNowAnimeAdapter
         binding.verticalAnimeRecyclerView.layoutManager = layoutManager
 
     }
@@ -74,15 +73,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         //===================== lifecycleScope animes Start =====================
         lifecycleScope.launch {
-            viewModel.animes.collect() {
+            viewModel.topAnimes.collect() {
                 HorizontalTopAnimeAdapter.setTopAnimes(it)
             }
         }
         //===================== lifecycleScope animes End =====================
 
         lifecycleScope.launch {
-            viewModel.animes.collect() {
-                VerticalAnimeAdapter.setTopAnimes(it)
+            viewModel.seasonNowAnimes.collect() {
+                SeasonNowAnimeAdapter.setTopAnimes(it)
             }
         }
 
