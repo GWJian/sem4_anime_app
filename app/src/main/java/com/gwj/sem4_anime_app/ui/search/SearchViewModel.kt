@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.gwj.recipesapp.ui.base.BaseViewModel
 import com.gwj.sem4_anime_app.data.model.AnimeResp
 import com.gwj.sem4_anime_app.data.model.Data
+import com.gwj.sem4_anime_app.data.model.data.Pagination
 import com.gwj.sem4_anime_app.data.repo.anime.AnimeRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -19,13 +20,12 @@ class SearchViewModel @Inject constructor(
 ) : BaseViewModel() {
     protected val _searchAnimes: MutableStateFlow<List<Data>> = MutableStateFlow(emptyList())
     val searchAnimes: MutableStateFlow<List<Data>> = _searchAnimes
-    protected val _checkNextPage: MutableStateFlow<AnimeResp?> = MutableStateFlow(null)
-    val checkNextPage: MutableStateFlow<AnimeResp?> = _checkNextPage
 
     //Job to stop the search when user is typing too fast
     var searchJob: Job? = null
     var currentPage = 1
     var isLoading = false
+    var pagination: Pagination? = null //TODO NOT COMPLETE YET
 
     init {
         getAllAnimes()
@@ -66,7 +66,7 @@ class SearchViewModel @Inject constructor(
      */
     fun loadMoreItems() {
         // if isLoading is false and has_next_page is true run the code
-        if (!isLoading && _checkNextPage.value?.pagination?.has_next_page == true) {
+        if (!isLoading) {
             // if true, let the page increment and load new data into the list
             isLoading = true
             // page +1.
