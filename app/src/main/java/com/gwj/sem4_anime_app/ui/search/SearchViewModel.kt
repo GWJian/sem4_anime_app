@@ -69,7 +69,7 @@ class SearchViewModel @Inject constructor(
         if (!isLoading && _checkNextPage.value?.pagination?.has_next_page == true) {
             // if true, let the page increment and load new data into the list
             isLoading = true
-            // page +1
+            // page +1.
             currentPage++
             viewModelScope.launch(Dispatchers.IO) {
                 delay(1000) //delay to control the rate of the request
