@@ -25,7 +25,12 @@ class SearchViewModel @Inject constructor(
     var searchJob: Job? = null
     var currentPage = 1
     var isLoading = false
-    var pagination: Pagination? = null //TODO NOT COMPLETE YET
+    /**
+     * we need this,if we pass empty string "", after join two list show search result, then it will back to "" and show all anime again
+     * let say https://api.jikan.moe/v4/anime?q=overlord&sfw=true&page=1&limit=25 {"pagination":{"last_visible_page":1,"has_next_page":false,"current_page":1,"items":{"count":19,"total":19,"per_page":25}}
+     * after we reach the end,it will auto go back https://api.jikan.moe/v4/anime?q=&sfw=true&page=1&limit=25 to show all data agien
+     */
+    var currentQuery: String = ""
 
     init {
         getAllAnimes()
@@ -48,6 +53,7 @@ class SearchViewModel @Inject constructor(
     fun searchAnime(query: String?) {
         searchJob?.cancel() //cancel to prevent user from typing too fast.
         if (!query.isNullOrBlank()) {
+            currentQuery = query // Store the current query
             searchJob = viewModelScope.launch(Dispatchers.IO) {
                 delay(300) //delay use to control the rate of the request if user is typing too fast
                 safeApiCall {
@@ -66,7 +72,7 @@ class SearchViewModel @Inject constructor(
      */
     fun loadMoreItems() {
         // if isLoading is false and has_next_page is true run the code
-        if (!isLoading && pagination?.has_next_page == true) {
+        if (!isLoading) {
             // if true, let the page increment and load new data into the list
             isLoading = true
             // page +1.
@@ -74,7 +80,7 @@ class SearchViewModel @Inject constructor(
             viewModelScope.launch(Dispatchers.IO) {
                 delay(1000) //delay to control the rate of the request
                 safeApiCall {
-                    Animes.searchAnime("", currentPage).let { newItems ->
+                    Animes.searchAnime(currentQuery, currentPage).let { newItems ->
                         // get current loaded list from _searchAnimes
                         val currentItems = _searchAnimes.value
                         // add newItems list to currentItems list => join two list
