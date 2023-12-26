@@ -56,8 +56,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
+                // get the current visible item position in the list
                 val myLayoutManager = recyclerView.layoutManager as LinearLayoutManager
+                // total item count
                 val totalItemCount = myLayoutManager.itemCount
+                // last visible item position
                 val lastVisibleItem = myLayoutManager.findLastVisibleItemPosition()
 
                 // when user reach end of the list(5 items before the end of the list)

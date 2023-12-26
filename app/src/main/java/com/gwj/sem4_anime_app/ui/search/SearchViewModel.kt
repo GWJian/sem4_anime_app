@@ -68,7 +68,6 @@ class SearchViewModel @Inject constructor(
     /**
      * Loads more items when the user scrolls to the end of the list.
      * Join Two List
-     * TODO: if possible, add pagination to control is there any more data to load
      */
     fun loadMoreItems() {
         // if isLoading is false and has_next_page is true run the code
