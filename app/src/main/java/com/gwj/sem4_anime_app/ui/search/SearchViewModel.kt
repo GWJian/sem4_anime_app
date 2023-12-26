@@ -26,9 +26,9 @@ class SearchViewModel @Inject constructor(
     var currentPage = 1
     var isLoading = false
     /**
-     * we need this,if we pass empty string "", after join two list show search result, then it will back to "" and show all anime again
+     * we need this to store the current query,if we pass empty string "", after search result reach end, then it will back to "" and show all anime again
      * let say https://api.jikan.moe/v4/anime?q=overlord&sfw=true&page=1&limit=25 {"pagination":{"last_visible_page":1,"has_next_page":false,"current_page":1,"items":{"count":19,"total":19,"per_page":25}}
-     * after we reach the end,it will auto go back https://api.jikan.moe/v4/anime?q=&sfw=true&page=1&limit=25 to show all data agien
+     * after we reach the end,it will auto go back https://api.jikan.moe/v4/anime?q=&sfw=true&page=1&limit=25 to show all data again
      */
     var currentQuery: String = ""
 
