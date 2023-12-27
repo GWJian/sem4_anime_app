@@ -15,20 +15,35 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val AllAnimeRepo: AnimeRepo,
 ) : BaseViewModel() {
-    protected val _animes: MutableStateFlow<List<Data>> = MutableStateFlow(emptyList())
-    val animes: StateFlow<List<Data>> = _animes
+    protected val _topAnimes: MutableStateFlow<List<Data>> = MutableStateFlow(emptyList())
+    val topAnimes: StateFlow<List<Data>> = _topAnimes
+
+    protected val _seasonNowAnimes: MutableStateFlow<List<Data>> = MutableStateFlow(emptyList())
+    val seasonNowAnimes: StateFlow<List<Data>> = _seasonNowAnimes
+
 
     init {
         getTopAnimes()
+        getSeasonNowAnimes()
     }
 
     private fun getTopAnimes() {
         viewModelScope.launch {
             safeApiCall {
                 AllAnimeRepo.getTopAnimeList().let {
-                    _animes.value = it
+                    _topAnimes.value = it
                     //Log.d("debugging_HomeViewModel", "getTopAnimes: $it")
-                    //Log.d("debugging_HomeViewModel", "Number of items: ${_animes.value.size}")
+                    //Log.d("debugging_HomeViewModel", "Number of items: ${_topAnimes.value.size}")
+                }
+            }
+        }
+    }
+
+    private fun getSeasonNowAnimes() {
+        viewModelScope.launch {
+            safeApiCall {
+                AllAnimeRepo.getSeasonNowAnime().let {
+                    _seasonNowAnimes.value = it
                 }
             }
         }
