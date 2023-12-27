@@ -26,8 +26,12 @@ interface AnimeApi {
 
     //    Season Now anime:
     //    https://api.jikan.moe/v4/seasons/now?limit=25&page=1
-    @GET("seasons/now?limit=25&page=1")
-    suspend fun getSeasonNowAnime(): AnimeResp
+    @GET("seasons/now")
+    suspend fun getSeasonNowAnime(
+        @Query("page") page: Int = 1,
+        @Query("limit") limit: Int = 25,
+        @Query("sfw") sfw: Boolean = true,
+    ): AnimeResp
 
     //    Search anime name:
     //    https://api.jikan.moe/v4/anime?q=

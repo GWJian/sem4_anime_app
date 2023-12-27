@@ -11,8 +11,8 @@ class AnimeRepoImpl(private val animeApi: AnimeApi) : AnimeRepo {
         return animeApi.getTopAnime().data ?: emptyList()
     }
 
-    override suspend fun getSeasonNowAnime(): List<Data> {
-        return animeApi.getSeasonNowAnime().data ?: emptyList()
+    override suspend fun getSeasonNowAnime(page: Int): List<Data> {
+        return animeApi.getSeasonNowAnime(page = page).data ?: emptyList()
     }
 
     override suspend fun getDetailAnime(animeId: Int): Data {
