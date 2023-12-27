@@ -15,6 +15,5 @@ interface AnimeRepo {
 
     suspend fun getRandomAnime(): Data?
 
-
-    //suspend fun getSeasonalAnime(year: String, season: String): List<AnimeData>
+    suspend fun getSeasonalAnime(year: String, season: String): List<Data>
 }

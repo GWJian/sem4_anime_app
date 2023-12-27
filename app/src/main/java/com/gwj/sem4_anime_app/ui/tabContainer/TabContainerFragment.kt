@@ -11,10 +11,11 @@ import com.gwj.sem4_anime_app.ui.adapter.FragmentAdapter
 import com.gwj.sem4_anime_app.ui.home.HomeFragment
 import com.gwj.sem4_anime_app.ui.random.RandomAnimeFragment
 import com.gwj.sem4_anime_app.ui.search.SearchFragment
+import com.gwj.sem4_anime_app.ui.seasonal.SeasonalFragment
 
 class TabContainerFragment : Fragment() {
 
-    private lateinit var binding : FragmentTabContainerBinding
+    private lateinit var binding: FragmentTabContainerBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +31,7 @@ class TabContainerFragment : Fragment() {
 
         binding.vpContainer.adapter = FragmentAdapter(
             this,
-            listOf(HomeFragment(),SearchFragment(),RandomAnimeFragment())
+            listOf(HomeFragment(), SearchFragment(), RandomAnimeFragment(), SeasonalFragment())
         )
 
         TabLayoutMediator(binding.tlTabs, binding.vpContainer) { tab, position ->
@@ -43,8 +44,12 @@ class TabContainerFragment : Fragment() {
                     tab.text = "Search"
                 }
 
-                else ->{
+                2 -> {
                     tab.text = "Random"
+                }
+
+                else -> {
+                    tab.text = "Season"
                 }
             }
         }.attach()

@@ -1,8 +1,6 @@
 package com.gwj.sem4_anime_app.data.repo.anime
 
-import android.util.Log
 import com.gwj.sem4_anime_app.data.api.AnimeApi
-import com.gwj.sem4_anime_app.data.model.AnimeResp
 import com.gwj.sem4_anime_app.data.model.Data
 
 class AnimeRepoImpl(private val animeApi: AnimeApi) : AnimeRepo {
@@ -25,19 +23,13 @@ class AnimeRepoImpl(private val animeApi: AnimeApi) : AnimeRepo {
         return animeApi.searchAnime(query, page = page).data ?: emptyList()
     }
 
-//    override suspend fun searchAnime(query: String, page: Int): AnimeResp {
-//        return animeApi.searchAnime(query, page = page)
-//    }
-
     override suspend fun getRandomAnime(): Data {
         return animeApi.getRandomAnime().data
     }
 
-
-//    override suspend fun getSeasonalAnime(year: String, season: String): List<AnimeData> {
-//        return animeApi.getSeasonalAnime(year, season).data ?: emptyList()
-//    }
-
+    override suspend fun getSeasonalAnime(year: String, season: String): List<Data> {
+        return animeApi.getSeasonalAnime(year, season).data ?: emptyList()
+    }
 
 
 }
