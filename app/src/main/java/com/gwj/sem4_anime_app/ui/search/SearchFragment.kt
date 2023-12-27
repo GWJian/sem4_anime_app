@@ -61,11 +61,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                 // total item count
                 val totalItemCount = myLayoutManager.itemCount
                 // last visible item position
-                val lastVisibleItem = myLayoutManager.findLastVisibleItemPosition()
+                val lastVisibleAnimeItem = myLayoutManager.findLastVisibleItemPosition()
 
                 // when user reach end of the list(5 items before the end of the list)
                 // load the next page data
-                if (totalItemCount <= lastVisibleItem + 5) {
+                if (totalItemCount <= lastVisibleAnimeItem + 5) {
                     viewModel.loadMoreItems()
                 }
             }

@@ -29,7 +29,7 @@ class SeasonNowAnimeAdapter(
         holder.bind(item)
     }
 
-    fun setTopAnimes(items: List<Data>) {
+    fun setSeasonNowAnimes(items: List<Data>) {
         seasonNowAnimes = items
         notifyDataSetChanged()
     }
