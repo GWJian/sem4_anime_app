@@ -15,7 +15,7 @@
             android:id="@+id/ctlAnime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -41,7 +41,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin" />
+                app:layout_collapseMode="pin"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -53,78 +53,6 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <!-- Rest of your content here -->
-
     </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--    xmlns:tools="http://schemas.android.com/tools"-->
-    <!--    android:layout_width="match_parent"-->
-    <!--    android:layout_height="match_parent"-->
-    <!--    android:orientation="vertical"-->
-    <!--    android:padding="16dp"-->
-    <!--    tools:context=".ui.home.HomeFragment">-->
-
-
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:orientation="vertical">-->
-
-    <!--        <com.google.android.material.appbar.CollapsingToolbarLayout-->
-    <!--            android:id="@+id/ctlAnime"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content">-->
-
-    <!--            <LinearLayout-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:orientation="vertical"-->
-    <!--                android:padding="6dp">-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="match_parent"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_marginTop="10dp"-->
-    <!--                    android:layout_marginBottom="15dp"-->
-    <!--                    android:text="Top Anime" />-->
-
-    <!--                <androidx.recyclerview.widget.RecyclerView-->
-    <!--                    android:id="@+id/horizontalTopAnimeRecycleView"-->
-    <!--                    android:layout_width="match_parent"-->
-    <!--                    android:layout_height="150dp"-->
-    <!--                    android:orientation="horizontal" />-->
-
-    <!--            </LinearLayout>-->
-
-    <!--        </com.google.android.material.appbar.CollapsingToolbarLayout>-->
-
-    <!--        <Space-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="0dp"-->
-    <!--            android:layout_weight="0.1" />-->
-
-    <!--        <TextView-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginBottom="16dp"-->
-    <!--            android:text="this is just a separator" />-->
-
-    <!--        <androidx.recyclerview.widget.RecyclerView-->
-    <!--            android:id="@+id/verticalAnimeRecyclerView"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content" />-->
-
-    <!--        <Space-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="0dp"-->
-    <!--            android:layout_weight="1" />-->
-
-    <!--    </LinearLayout>-->
-
-
-    <!--</LinearLayout>-->
