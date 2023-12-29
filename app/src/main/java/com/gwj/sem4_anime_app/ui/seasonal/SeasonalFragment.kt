@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.gwj.recipesapp.ui.base.BaseFragment
 import com.gwj.sem4_anime_app.R
 import com.gwj.sem4_anime_app.data.model.Data
@@ -56,12 +57,32 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
         val layoutManager = GridLayoutManager(requireContext(), 3)
         binding.seasonalAnimeRecycleView.adapter = seasonalAdapter
         binding.seasonalAnimeRecycleView.layoutManager = layoutManager
+
+        binding.seasonalAnimeRecycleView.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val seasonalLayoutManager = recyclerView.layoutManager as GridLayoutManager
+                val totalItemCount = seasonalLayoutManager.itemCount
+                val lastAnime = seasonalLayoutManager.findLastVisibleItemPosition()
+
+                if (totalItemCount <= lastAnime + 2) {
+                    viewModel.loadMoreItems()
+                }
+
+            }
+
+        })
+
     }
 
+    //TODO ASK SIR:why back to seasonal.xml,spinner not working anymore,also ask why home CollapsingToolbarLayout when back from content,it will auto back to top
     private fun setupYearForAutoCompleteTextView() {
         //set array to AutoCompleteTextView
         //{it.toString()} this will convert int to string
-        val years = (2024 downTo 1927).map { it.toString() }.toTypedArray()
+        val years = (2024 downTo 1927).map {it.toString()}.toTypedArray()
         val yearAdapter =
             ArrayAdapter(
                 requireContext(),

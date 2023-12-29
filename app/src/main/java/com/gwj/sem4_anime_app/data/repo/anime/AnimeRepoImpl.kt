@@ -27,8 +27,8 @@ class AnimeRepoImpl(private val animeApi: AnimeApi) : AnimeRepo {
         return animeApi.getRandomAnime().data
     }
 
-    override suspend fun getSeasonalAnime(year: String, season: String): List<Data> {
-        return animeApi.getSeasonalAnime(year, season).data ?: emptyList()
+    override suspend fun getSeasonalAnime(year: String, season: String,page: Int): List<Data> {
+        return animeApi.getSeasonalAnime(year, season, page = page).data ?: emptyList()
     }
 
 
