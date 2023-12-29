@@ -16,16 +16,16 @@
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp">
 
             <AutoCompleteTextView
                 android:id="@+id/ACTVYear"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Year"
-                android:text="2020"
-                android:inputType="text" />
+                android:inputType="none"
+                android:text="2020" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -39,8 +39,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Seasonal"
-                android:text="Spring"
-                android:inputType="none" />
+                android:inputType="none"
+                android:text="Spring" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,6 +51,6 @@
         android:id="@+id/seasonalAnimeRecycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="8dp"/>
+        android:layout_marginHorizontal="8dp" />
 
 </LinearLayout>

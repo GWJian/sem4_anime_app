@@ -70,7 +70,9 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
             )
         binding.ACTVYear.setAdapter(yearAdapter)
         //pass selected data to viewModel
+        //setOnItemClickListener cuz we want to get selected list item
         binding.ACTVYear.setOnItemClickListener { _, _, position, _ ->
+            //position => to get years array position,[0,1,2,...]
             val selectedYear = years[position]
             //selectedYear => user selected year, viewModel.season => get season from viewModel
             viewModel.updateSeasonalAnimes(selectedYear, viewModel.season)
