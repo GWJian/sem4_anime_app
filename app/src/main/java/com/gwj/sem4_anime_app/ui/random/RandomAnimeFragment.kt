@@ -52,7 +52,7 @@ class RandomAnimeFragment : BaseFragment<FragmentRandomAnimeBinding>() {
         animeId?.let {
             val action =
                 TabContainerFragmentDirections.actionTabContainerFragmentToContentFragment(it.toString())
-            findNavController().navigate(action)
+            navController.navigate(action)
         }
     }
 
