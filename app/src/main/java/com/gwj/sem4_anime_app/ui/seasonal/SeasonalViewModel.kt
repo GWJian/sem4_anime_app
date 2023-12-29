@@ -19,17 +19,23 @@ class SeasonalViewModel @Inject constructor(
     protected val _seasonalAnimes: MutableStateFlow<List<Data>> = MutableStateFlow(emptyList())
     val seasonalAnimes: MutableStateFlow<List<Data>> = _seasonalAnimes
 
-    var currentPage = 1
-    var isLoading = false
+    var year = "2020"
+    var season = "spring"
 
     init {
+        getSeasonalAnimes()
+    }
+
+    fun updateSeasonalAnimes(year: String, season: String) {
+        this.year = year
+        this.season = season
         getSeasonalAnimes()
     }
 
     private fun getSeasonalAnimes() {
         viewModelScope.launch(Dispatchers.IO) {
             safeApiCall {
-                SeasonalAnimes.getSeasonalAnime("2020", "spring").let {
+                SeasonalAnimes.getSeasonalAnime(year, season).let {
                     _seasonalAnimes.value = it
                 }
             }

@@ -54,6 +54,7 @@ interface AnimeApi {
         @Path("season") season: String,
         @Query("page") page: Int = 1,
         @Query("limit") limit: Int = 25,
+        @Query("sfw") sfw: Boolean = true,
     ): AnimeResp
 
     //    Random Anime Button:
