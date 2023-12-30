@@ -39,7 +39,11 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
     override fun setupUIComponents() {
         super.setupUIComponents()
         setupSeasonalAdapter()
-        setupYearForAutoCompleteTextView()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setupYearForAutoCompleteTextView() //TODO should i use onResume? if i don't use it,why back to seasonal.xml,spinner not working anymore
         setupSeasonalForAutoCompleteTextView()
     }
 
@@ -78,7 +82,7 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
 
     }
 
-    //TODO ASK SIR:why back to seasonal.xml,spinner not working anymore,also ask why home CollapsingToolbarLayout when back from content,it will auto back to top
+    //TODO ASK SIR:also ask why home CollapsingToolbarLayout when back from content,it will auto back to top
     private fun setupYearForAutoCompleteTextView() {
         //set array to AutoCompleteTextView
         //{it.toString()} this will convert int to string
@@ -93,7 +97,6 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
         //pass selected data to viewModel
         //setOnItemClickListener cuz we want to get selected list item
         binding.ACTVYear.setOnItemClickListener { _, _, position, _ ->
-            //position => to get years array position,[0,1,2,...]
             val selectedYear = years[position]
             //selectedYear => user selected year, viewModel.season => get season from viewModel
             viewModel.updateSeasonalAnimes(selectedYear, viewModel.season)
