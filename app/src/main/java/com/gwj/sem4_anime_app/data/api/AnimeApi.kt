@@ -1,6 +1,5 @@
 package com.gwj.sem4_anime_app.data.api
 
-import android.graphics.pdf.PdfDocument.Page
 import com.gwj.sem4_anime_app.data.model.AnimeDetailResp
 import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.data.model.AnimeResp
@@ -52,7 +51,10 @@ interface AnimeApi {
     @GET("seasons/{year}/{season}")
     suspend fun getSeasonalAnime(
         @Path("year") year: String,
-        @Path("season") season: String
+        @Path("season") season: String,
+        @Query("page") page: Int = 1,
+        @Query("limit") limit: Int = 25,
+        @Query("sfw") sfw: Boolean = true,
     ): AnimeResp
 
     //    Random Anime Button:
