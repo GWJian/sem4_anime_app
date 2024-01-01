@@ -94,4 +94,7 @@ dependencies {
     //glide for image
     implementation("com.github.bumptech.glide:glide:4.16.0")
     ksp("com.github.bumptech.glide:ksp:4.14.2")
+
+    //youtube
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:chromecast-sender:0.28")
 }
