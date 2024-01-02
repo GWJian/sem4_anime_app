@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "701498924069",
+    "project_id": "animeapp-33f54",
+    "storage_bucket": "animeapp-33f54.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:701498924069:android:f284f01d8d48b681d673cc",
+        "android_client_info": {
+          "package_name": "com.gwj.sem4_anime_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcOPBhLoEktfSZ9J1xKOfffW3FYTJwa0g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

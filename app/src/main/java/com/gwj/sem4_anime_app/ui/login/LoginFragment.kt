@@ -2,31 +2,51 @@ package com.gwj.sem4_anime_app.ui.login
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.gwj.recipesapp.ui.base.BaseFragment
+import com.gwj.recipesapp.ui.base.BaseViewModel
 import com.gwj.sem4_anime_app.R
+import com.gwj.sem4_anime_app.databinding.FragmentLoginBinding
+import com.gwj.sem4_anime_app.databinding.FragmentSeasonalBinding
+import com.gwj.sem4_anime_app.ui.register.RegisterFragment
+import com.gwj.sem4_anime_app.ui.register.RegisterFragmentDirections
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
-class LoginFragment : Fragment() {
+@AndroidEntryPoint
+class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
-    companion object {
-        fun newInstance() = LoginFragment()
-    }
-
-    private lateinit var viewModel: LoginViewModel
-
+    override val viewModel: LoginViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
+    ): View {
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+    override fun setupUIComponents() {
+        super.setupUIComponents()
 
+        binding.logBtn.setOnClickListener {
+            val email = binding.loginEmail.text.toString()
+            val password = binding.loginPass.text.toString()
+            viewModel.login(email, password)
+        }
+
+        binding.logToReg.setOnClickListener {
+            val action = RegisterFragmentDirections.loginToRegister()
+            navController.navigate(action)
+
+
+        }
+
+
+    }
 }

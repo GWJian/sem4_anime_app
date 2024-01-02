@@ -6,27 +6,64 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.gwj.recipesapp.ui.base.BaseFragment
+import com.gwj.recipesapp.ui.base.BaseViewModel
+
+
 import com.gwj.sem4_anime_app.R
+import com.gwj.sem4_anime_app.databinding.FragmentRegisterBinding
+import com.gwj.sem4_anime_app.databinding.FragmentSeasonalBinding
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RegisterFragment : Fragment() {
+@AndroidEntryPoint
+class RegisterFragment @Inject constructor(
 
-    companion object {
-        fun newInstance() = RegisterFragment()
-    }
+) : BaseFragment<FragmentRegisterBinding>() {
 
-    private lateinit var viewModel: RegisterViewModel
+    override val viewModel: RegisterViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_register, container, false)
+        binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun setupUIComponents() {
+        super.setupUIComponents()
+
+        binding.run {
+            registerBtn.setOnClickListener {
+                viewModel.signUp(
+                    registerUsername.text.toString(),
+                    registerEmail.text.toString(),
+                    registerPass.text.toString(),
+                    confirmPass.text.toString()
+                )
+            }
+
+            registerToLogin.setOnClickListener {
+                navController.popBackStack()
+            }
+
+        }
+    }
+
+    override fun setupViewModelObserver() {
+        super.setupViewModelObserver()
+        lifecycleScope.launch {
+            viewModel.success.collect {
+                val action = RegisterFragmentDirections.registerToLogin()
+                navController.navigate(action)
+            }
+        }
     }
 
 }

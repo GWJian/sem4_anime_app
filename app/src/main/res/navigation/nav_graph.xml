@@ -5,6 +5,18 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/tabContainerFragment">
 
+    <action
+        android:id="@+id/login_to_register"
+        app:popUpTo="@id/loginFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/registerFragment" />
+
+    <action
+        android:id="@+id/register_to_login"
+        app:popUpTo="@id/registerFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/loginFragment" />
+
     <fragment
         android:id="@+id/contentFragment"
         android:name="com.gwj.sem4_anime_app.ui.content.ContentFragment"

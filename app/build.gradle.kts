@@ -72,6 +72,18 @@ dependencies {
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
+
+    //Firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.4.0"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-database")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-storage")
+
+    //google services
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+
     //lifecycle livedata
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
