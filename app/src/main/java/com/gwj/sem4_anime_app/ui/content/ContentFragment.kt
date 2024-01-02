@@ -57,12 +57,21 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
                     contentDuration.text = animeDetail?.duration ?: "N/A"
                     contentDesc.text = animeDetail?.synopsis ?: "N/A"
 
-                    contentTrailerPV1.setOnClickListener {
-                        val url = animeDetail?.trailer?.url
-                        if (url != null) {
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                            startActivity(intent)
-                        }
+                    //TODO after this button,go to video fragment and show video
+//                    contentTrailer.setOnClickListener {
+//                        val url = animeDetail?.trailer?.url
+//                        if (url != null) {
+//                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+//                            startActivity(intent)
+//                        }
+//                    }
+
+                    contentTrailer.setOnClickListener {
+                        val action =
+                            ContentFragmentDirections.actionContentFragmentToVideoFragment(
+                                animeDetail?.mal_id.toString()
+                            )
+                        navController.navigate(action)
                     }
 
                     Glide.with(binding.root)

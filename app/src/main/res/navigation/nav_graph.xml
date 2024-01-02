@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/videoFragment">
+    app:startDestination="@id/tabContainerFragment">
 
     <fragment
         android:id="@+id/contentFragment"
@@ -13,6 +13,9 @@
         <argument
             android:name="animeId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_contentFragment_to_videoFragment"
+            app:destination="@id/videoFragment" />
     </fragment>
 
     <fragment
@@ -44,6 +47,10 @@
         android:id="@+id/videoFragment"
         tools:layout="@layout/fragment_video"
         android:name="com.gwj.sem4_anime_app.ui.vidview.VideoFragment"
-        android:label="VideoFragment" />
+        android:label="VideoFragment">
+        <argument
+            android:name="animeId"
+            app:argType="string" />
+    </fragment>
 
 </navigation>
