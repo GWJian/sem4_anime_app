@@ -41,7 +41,7 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>() {
 
         lifecycleScope.launch {
             viewModel.animeVideo.collect { animeVideo ->
-//                setupYouTubePlayer(binding.youtubePlayerView, animeVideo.trailer.url)
+//                setupYouTubePlayer(binding.youtubePlayerView, animeVideo.trailer.url) //can't use lol
                 animeVideo?.let {
                     setupYouTubePlayer(binding.youtubePlayerView, it.trailer.url)
                 }
