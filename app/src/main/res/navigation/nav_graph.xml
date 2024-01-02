@@ -3,7 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/tabContainerFragment">
+    app:startDestination="@id/loginFragment">
+
+    <action
+        android:id="@+id/login_to_register"
+        app:popUpTo="@id/loginFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/registerFragment" />
+
+    <action
+        android:id="@+id/register_to_login"
+        app:popUpTo="@id/registerFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/loginFragment" />
+
+    <action
+        android:id="@+id/action_login_to_tabContainer"
+        app:popUpTo="@id/loginFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/tabContainerFragment" />
 
     <fragment
         android:id="@+id/contentFragment"
@@ -23,6 +41,9 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_tabContainerFragment"
+            app:destination="@id/tabContainerFragment" />
     </fragment>
 
     <fragment
