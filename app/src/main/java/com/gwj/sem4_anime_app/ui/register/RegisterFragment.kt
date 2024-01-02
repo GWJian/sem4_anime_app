@@ -10,11 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.gwj.recipesapp.ui.base.BaseFragment
 import com.gwj.recipesapp.ui.base.BaseViewModel
-
-
-import com.gwj.sem4_anime_app.R
 import com.gwj.sem4_anime_app.databinding.FragmentRegisterBinding
-import com.gwj.sem4_anime_app.databinding.FragmentSeasonalBinding
+
+
 import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,9 +20,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class RegisterFragment @Inject constructor(
-
-) : BaseFragment<FragmentRegisterBinding>() {
+class RegisterFragment  : BaseFragment<FragmentRegisterBinding>() {
 
     override val viewModel: RegisterViewModel by viewModels()
 

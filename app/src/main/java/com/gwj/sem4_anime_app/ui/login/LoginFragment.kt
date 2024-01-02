@@ -46,7 +46,33 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
 
         }
+//        lifecycleScope.launch {
+//            viewModel.user.collect {
+//                val action = LoginFragmentDirections.actionLoginToTabContainer()
+//                navController.navigate(action)
+//
+//            }
+//        }
 
 
+
+    }
+
+    override fun setupViewModelObserver() {
+        super.setupViewModelObserver()
+//        lifecycleScope.launch {
+//            viewModel.user.collect {
+//                val action = LoginFragmentDirections.actionLoginToTabContainer()
+//                navController.navigate(action)
+//
+//            }
+//        }
+        lifecycleScope.launch {
+            viewModel.success.collect {
+                val action = LoginFragmentDirections.actionLoginFragmentToTabContainerFragment()
+                navController.navigate(action)
+                viewModel.getCurrentUser()
+            }
+        }
     }
 }

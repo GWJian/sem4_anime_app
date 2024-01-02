@@ -7,10 +7,11 @@ import com.gwj.sem4_anime_app.data.model.Users
 import com.gwj.sem4_anime_app.data.repo.user.UsersRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 @HiltViewModel
-class RegisterViewModel(
+class RegisterViewModel @Inject constructor(
     private val authService: AuthService,
     private val usersRepo: UsersRepo
 ) : BaseViewModel() {
