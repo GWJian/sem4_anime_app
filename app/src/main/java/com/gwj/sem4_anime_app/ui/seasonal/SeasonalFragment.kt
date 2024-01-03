@@ -102,7 +102,7 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
             )
         binding.ACTVYear.setAdapter(yearAdapter)
         //pass selected data to viewModel
-        //setOnItemClickListener cuz we want to get selected list item
+            //setOnItemClickListener cuz using AutoCompleteTextView
         binding.ACTVYear.setOnItemClickListener { _, _, position, _ ->
             val selectedYear = years[position]
             //selectedYear => user selected year, viewModel.season => get season from viewModel
