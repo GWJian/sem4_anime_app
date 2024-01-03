@@ -86,7 +86,7 @@
         style="@style/ShapeAppearanceOverlay.Material3.Button"
         app:cornerRadius="4dp"
         android:backgroundTint="@color/black"
-        android:text="@string/log_in"
+        android:text="@string/register"
         />
 
     <LinearLayout

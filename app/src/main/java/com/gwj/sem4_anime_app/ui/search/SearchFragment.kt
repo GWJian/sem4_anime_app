@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     override val viewModel: SearchViewModel by viewModels()
-    private lateinit var adapter: SearchAnimeAdapter
+    private lateinit var SearchAnimeAdapter: SearchAnimeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,8 +37,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     private fun setupAdapter() {
-        adapter = SearchAnimeAdapter(emptyList())
-        adapter.listener = object : SearchAnimeAdapter.Listener {
+        SearchAnimeAdapter = SearchAnimeAdapter(emptyList())
+        SearchAnimeAdapter.listener = object : SearchAnimeAdapter.Listener {
             override fun onClick(animeId: Data) {
                 val action =
                     TabContainerFragmentDirections.actionTabContainerFragmentToContentFragment(animeId.mal_id.toString())
@@ -47,7 +47,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         }
 
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        binding.searchAnimeRecyclerView.adapter = adapter
+        binding.searchAnimeRecyclerView.adapter = SearchAnimeAdapter
         binding.searchAnimeRecyclerView.layoutManager = layoutManager
 
         // Load more items when the user scrolls to the end of the list.
@@ -91,7 +91,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
         lifecycleScope.launch {
             viewModel.searchAnimes.collect {
-                adapter.setSearchAnimes(it)
+                SearchAnimeAdapter.setSearchAnimes(it)
             }
         }
 

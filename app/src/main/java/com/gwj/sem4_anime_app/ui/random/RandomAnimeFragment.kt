@@ -48,10 +48,11 @@ class RandomAnimeFragment : BaseFragment<FragmentRandomAnimeBinding>() {
     }
 
     private fun toContentFragment(animeId: Int?) {
+        //pass the mal_id to contentFragment argument animeId
         animeId?.let {
             val action =
-                TabContainerFragmentDirections.actionTabContainerFragmentToContentFragment(it.toString()) //TODO ask sir,gpt answer lol
-            findNavController().navigate(action)
+                TabContainerFragmentDirections.actionTabContainerFragmentToContentFragment(it.toString())
+            navController.navigate(action)
         }
     }
 
