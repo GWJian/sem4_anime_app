@@ -49,6 +49,7 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>() {
         }
     }
 
+    //TODO some video will crash the app,find out why
     private fun setupYouTubePlayer(youTubePlayerView: YouTubePlayerView, url: String) {
         val videoId = Uri.parse(url).getQueryParameter("v")
 

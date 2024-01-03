@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +28,18 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
     override val viewModel: SeasonalViewModel by viewModels()
     private lateinit var seasonalAdapter: SeasonalAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(
+                Lifecycle.State.RESUMED
+            ) {
+                setupYearForAutoCompleteTextView()
+                setupSeasonalForAutoCompleteTextView()
+            }
+
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,16 +49,9 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
         return binding.root
     }
 
-
     override fun setupUIComponents() {
         super.setupUIComponents()
         setupSeasonalAdapter()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        setupYearForAutoCompleteTextView() //TODO should i use onResume? if i don't use it,why back to seasonal.xml,spinner not working anymore
-        setupSeasonalForAutoCompleteTextView()
     }
 
     private fun setupSeasonalAdapter() {
@@ -86,7 +93,7 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
     private fun setupYearForAutoCompleteTextView() {
         //set array to AutoCompleteTextView
         //{it.toString()} this will convert int to string
-        val years = (2024 downTo 1927).map {it.toString()}.toTypedArray()
+        val years = (2024 downTo 1927).map { it.toString() }.toTypedArray()
         val yearAdapter =
             ArrayAdapter(
                 requireContext(),
