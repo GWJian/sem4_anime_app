@@ -41,26 +41,24 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>() {
 
         lifecycleScope.launch {
             viewModel.animeVideo.collect { animeVideo ->
-//                setupYouTubePlayer(binding.youtubePlayerView, animeVideo.trailer.url) //can't use lol
+//                setupYouTubePlayer(binding.youtubePlayerView, animeVideo.youtube_id) //can't use lol
                 animeVideo?.let {
-                    setupYouTubePlayer(binding.youtubePlayerView, it.trailer.url)
+                    setupYouTubePlayer(binding.youtubePlayerView, it.trailer.youtube_id)
                 }
             }
         }
     }
 
-    //TODO some video will crash the app,find out why
-    private fun setupYouTubePlayer(youTubePlayerView: YouTubePlayerView, url: String) {
-        val videoId = Uri.parse(url).getQueryParameter("v")
-
+    private fun setupYouTubePlayer(youTubePlayerView: YouTubePlayerView, videoId: String) {
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                if (videoId != null) {
+                if (videoId.isNotEmpty()) {
                     youTubePlayer.loadVideo(videoId, 0f)
                 }
             }
         })
     }
+
 
 
 }
