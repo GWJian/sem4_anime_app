@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class VideoFragment : BaseFragment<FragmentVideoBinding>() {
-
+//TODO:force this page to landscape
     override val viewModel: VideoViewModel by viewModels()
     val args: VideoFragmentArgs by navArgs()
 
@@ -41,7 +41,6 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>() {
 
         lifecycleScope.launch {
             viewModel.animeVideo.collect { animeVideo ->
-//                setupYouTubePlayer(binding.youtubePlayerView, animeVideo.youtube_id) //can't use lol
                 animeVideo?.let {
                     setupYouTubePlayer(binding.youtubePlayerView, it.trailer.youtube_id)
                 }
