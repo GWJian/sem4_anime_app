@@ -9,16 +9,19 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.gwj.recipesapp.ui.base.BaseFragment
+import com.gwj.sem4_anime_app.R
 import com.gwj.sem4_anime_app.databinding.FragmentVideoBinding
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.loadOrCueVideo
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class VideoFragment : BaseFragment<FragmentVideoBinding>() {
-//TODO:force this page to landscape
+    //TODO:force this page to landscape
     override val viewModel: VideoViewModel by viewModels()
     val args: VideoFragmentArgs by navArgs()
 
@@ -47,17 +50,40 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>() {
             }
         }
     }
+//    Youtube ver
+//    private fun setupYouTubePlayer(youTubePlayerView: YouTubePlayerView, videoId: String) {
+//        youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+//            override fun onReady(youTubePlayer: YouTubePlayer) {
+//                if (videoId.isNotEmpty()) {
+//                    youTubePlayer.loadVideo(videoId, 0f)
+//                }
+//            }
+//        })
+//    }
 
+    //Custom UI ver
     private fun setupYouTubePlayer(youTubePlayerView: YouTubePlayerView, videoId: String) {
-        youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+        youTubePlayerView.enableAutomaticInitialization = false
+        lifecycle.addObserver(youTubePlayerView)
+
+        val customPlayerUi: View = youTubePlayerView.inflateCustomPlayerUi(R.layout.custom_controls)
+
+        val listener = object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
+                val customPlayerUiController =
+                    CustomPlayerUiController(customPlayerUi, youTubePlayer)
+                youTubePlayer.addListener(customPlayerUiController)
+
                 if (videoId.isNotEmpty()) {
                     youTubePlayer.loadVideo(videoId, 0f)
                 }
             }
-        })
-    }
+        }
 
+        val options = IFramePlayerOptions.Builder().controls(0).build()
+        youTubePlayerView.initialize(listener, options)
+
+    }
 
 
 }
