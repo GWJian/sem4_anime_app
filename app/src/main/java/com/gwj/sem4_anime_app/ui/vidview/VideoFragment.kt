@@ -50,7 +50,7 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>() {
             }
         }
     }
-//    Youtube ver
+//    WebView ver
 //    private fun setupYouTubePlayer(youTubePlayerView: YouTubePlayerView, videoId: String) {
 //        youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
 //            override fun onReady(youTubePlayer: YouTubePlayer) {
@@ -80,9 +80,9 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>() {
             }
         }
 
+        //to set different options into it
         val options = IFramePlayerOptions.Builder().controls(0).build()
         youTubePlayerView.initialize(listener, options)
-
     }
 
 

@@ -20,9 +20,11 @@ class CustomPlayerUiController(
     private val youTubePlayer: YouTubePlayer,
 ) : AbstractYouTubePlayerListener() {
 
+    // Tracker for the YouTube player.
     private val playerTracker: YouTubePlayerTracker = YouTubePlayerTracker()
 
     init {
+        // Add the tracker as a listener to the YouTube player.
         youTubePlayer.addListener(playerTracker)
         initViews(controlsUi)
     }
@@ -32,14 +34,18 @@ class CustomPlayerUiController(
         val relativeLayout: RelativeLayout = view.findViewById(R.id.root)
         val seekBar: YouTubePlayerSeekBar = view.findViewById(R.id.playerSeekbar)
         val pausePlay: ImageButton = view.findViewById(R.id.pausePlay)
+        // Add the seekBar as a listener to the YouTube player.
         youTubePlayer.addListener(seekBar)
 
+        // Set a listener for the seekBar.
         seekBar.youtubePlayerSeekBarListener = object : YouTubePlayerSeekBarListener {
             override fun seekTo(time: Float) {
+                // Seek to the specified time in the video.
                 youTubePlayer.seekTo(time)
             }
         }
 
+        // Set a click listener for the pause/play button.
         pausePlay.setOnClickListener {
             if (playerTracker.state == PlayerConstants.PlayerState.PLAYING) {
                 pausePlay.setImageResource(R.drawable.ic_play_circle_filled)
@@ -50,11 +56,14 @@ class CustomPlayerUiController(
             }
         }
 
+        // Helper for fading the view.
         val fadeViewHelper = FadeViewHelper(container)
         fadeViewHelper.animationDuration
         fadeViewHelper.fadeOutDelay
+        // Add the fadeViewHelper as a listener to the YouTube player.
         youTubePlayer.addListener(fadeViewHelper)
 
+        // Set click listeners to toggle the visibility of the controls.
         relativeLayout.setOnClickListener { fadeViewHelper.toggleVisibility() }
         container.setOnClickListener { fadeViewHelper.toggleVisibility() }
     }
