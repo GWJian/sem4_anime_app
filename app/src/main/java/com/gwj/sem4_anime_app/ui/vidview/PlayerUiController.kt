@@ -16,7 +16,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.YouTube
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 class CustomPlayerUiController(
-    controlsUi: View,
+    customUI: View,
     private val youTubePlayer: YouTubePlayer,
 ) : AbstractYouTubePlayerListener() {
 
@@ -26,7 +26,7 @@ class CustomPlayerUiController(
     init {
         // Add the tracker as a listener to the YouTube player.
         youTubePlayer.addListener(playerTracker)
-        initViews(controlsUi)
+        initViews(customUI)
     }
 
     private fun initViews(view: View) {
