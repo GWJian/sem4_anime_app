@@ -66,7 +66,8 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>() {
         youTubePlayerView.enableAutomaticInitialization = false
         lifecycle.addObserver(youTubePlayerView)
 
-        val customPlayerUi: View = youTubePlayerView.inflateCustomPlayerUi(R.layout.custom_controls)
+        //val customPlayerUi: View = youTubePlayerView.inflateCustomPlayerUi(R.layout.custom_controls)
+        val customPlayerUi = youTubePlayerView.inflateCustomPlayerUi(R.layout.custom_controls)
 
         val listener = object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
