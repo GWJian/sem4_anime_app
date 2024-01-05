@@ -18,6 +18,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -71,6 +72,14 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
+
+
+    //Firebase
+    implementation("com.google.firebase:firebase-auth:22.3.0")
+    implementation("com.google.firebase:firebase-firestore:24.10.0")
+    implementation("com.google.firebase:firebase-storage:20.3.0")
+    //google services
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
 
     //lifecycle livedata
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
