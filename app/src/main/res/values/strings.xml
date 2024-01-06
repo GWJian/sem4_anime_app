@@ -25,6 +25,10 @@
     <string name="status">Status :</string>
     <string name="duration">Duration :</string>
     <string name="source">Source :</string>
+    <string name="no_trailer_available">No Trailer Available</string>
+    <string name="fullscreenbtn">fullscreenBtn</string>
+    <string name="pause_play">pause play</string>
     <string name="register">Register</string>
+
 
 </resources>

@@ -55,13 +55,20 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
                     contentStatus.text = animeDetail?.status ?: "N/A"
                     contentSource.text = animeDetail?.source ?: "N/A"
                     contentDuration.text = animeDetail?.duration ?: "N/A"
-                    contentDesc.text = animeDetail?.synopsis ?: "N/A"
+                    contentDesc.text = animeDetail?.synopsis ?: "No Description"
 
-                    contentTrailerPV1.setOnClickListener {
-                        val url = animeDetail?.trailer?.url
-                        if (url != null) {
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                            startActivity(intent)
+                    if (animeDetail?.trailer?.youtube_id.isNullOrEmpty()){
+                        contentTrailer.visibility = View.GONE
+                        contentNoTrailer.visibility = View.VISIBLE
+                    } else {
+                        contentTrailer.visibility = View.VISIBLE
+                        contentNoTrailer.visibility = View.GONE
+                        contentTrailer.setOnClickListener {
+                            val action =
+                                ContentFragmentDirections.actionContentFragmentToVideoFragment(
+                                    animeDetail?.mal_id.toString()
+                                )
+                            navController.navigate(action)
                         }
                     }
 

@@ -53,6 +53,8 @@ class TabContainerFragment : Fragment() {
                 }
             }
         }.attach()
-    }
 
+        binding.vpContainer.isUserInputEnabled = false
+
+    }
 }
