@@ -65,12 +65,14 @@ interface AnimeApi {
     //    Get all genres:
     //    https://api.jikan.moe/v4/genres/anime
     @GET("genres/anime")
-    suspend fun getAllGenres(): GenresResp
+    suspend fun getAnimeGenres(): GenresResp
 
     //    TODO Get anime by genre new page
     //    https://api.jikan.moe/v4/anime?genres=1,2
     @GET("anime")
-    suspend fun getAnimeByGenre(@Query("genres") genres: String): AnimeResp
+    suspend fun getAnimeByGenre(
+        @Query("genres") genres: String
+    ): AnimeResp
 
     // TODO get anime video,pv1,pv2,maybe no need to use this content page
     // https://api.jikan.moe/v4/anime/52991/videos

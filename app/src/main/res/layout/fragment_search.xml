@@ -18,18 +18,35 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"/>
+                android:layout_height="?attr/actionBarSize" />
 
-            <SearchView
-                android:id="@+id/searchView"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:background="@drawable/search_bar_bg"
-                android:iconifiedByDefault="false"
-                android:padding="4dp"
-                android:queryBackground="@null"
-                android:queryHint="Search for Anime" />
+                android:orientation="horizontal">
+
+                <SearchView
+                    android:id="@+id/searchView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/search_bar_bg"
+                    android:iconifiedByDefault="false"
+                    android:padding="4dp"
+                    android:queryBackground="@null"
+                    android:queryHint="Search for Anime" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/popUpGenres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:iconGravity="textStart"
+                    app:icon="@drawable/ic_format_list_bulleted" />
+
+
+            </LinearLayout>
+
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -46,38 +63,38 @@
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:orientation="vertical"-->
-<!--    tools:context=".ui.search.SearchFragment">-->
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    android:orientation="vertical"-->
+    <!--    tools:context=".ui.search.SearchFragment">-->
 
-<!--    <SearchView-->
-<!--        android:id="@+id/searchView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="8dp"-->
-<!--        android:background="@drawable/search_bar_bg"-->
-<!--        android:iconifiedByDefault="false"-->
-<!--        android:padding="4dp"-->
-<!--        android:queryBackground="@null"-->
-<!--        android:queryHint="Search for Anime" />-->
+    <!--    <SearchView-->
+    <!--        android:id="@+id/searchView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="8dp"-->
+    <!--        android:background="@drawable/search_bar_bg"-->
+    <!--        android:iconifiedByDefault="false"-->
+    <!--        android:padding="4dp"-->
+    <!--        android:queryBackground="@null"-->
+    <!--        android:queryHint="Search for Anime" />-->
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginHorizontal="10dp"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:orientation="vertical">-->
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginHorizontal="10dp"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:orientation="vertical">-->
 
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/searchAnimeRecyclerView"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:scrollbars="none" />-->
+    <!--        <androidx.recyclerview.widget.RecyclerView-->
+    <!--            android:id="@+id/searchAnimeRecyclerView"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:scrollbars="none" />-->
 
-<!--    </LinearLayout>-->
+    <!--    </LinearLayout>-->
 
-<!--</LinearLayout>-->
+    <!--</LinearLayout>-->

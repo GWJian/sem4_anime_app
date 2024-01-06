@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.gwj.recipesapp.ui.base.BaseViewModel
 import com.gwj.sem4_anime_app.data.model.AnimeResp
 import com.gwj.sem4_anime_app.data.model.Data
+import com.gwj.sem4_anime_app.data.model.DataX
 import com.gwj.sem4_anime_app.data.model.data.Pagination
 import com.gwj.sem4_anime_app.data.repo.anime.AnimeRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,11 +21,14 @@ class SearchViewModel @Inject constructor(
 ) : BaseViewModel() {
     protected val _searchAnimes: MutableStateFlow<List<Data>> = MutableStateFlow(emptyList())
     val searchAnimes: MutableStateFlow<List<Data>> = _searchAnimes
+    protected val _animeGenres: MutableStateFlow<List<DataX>> = MutableStateFlow(emptyList())
+    val animeGenres: MutableStateFlow<List<DataX>> = _animeGenres
 
     //Job to stop the search when user is typing too fast
     var searchJob: Job? = null
     var currentPage = 1
     var isLoading = false
+
     /**
      * we need this to store the current query,if we pass empty string "", after search result reach end, then it will back to "" and show all anime again
      * let say https://api.jikan.moe/v4/anime?q=overlord&sfw=true&page=1&limit=25 {"pagination":{"last_visible_page":1,"has_next_page":false,"current_page":1,"items":{"count":19,"total":19,"per_page":25}}
@@ -35,6 +39,7 @@ class SearchViewModel @Inject constructor(
     init {
         getAllAnimes()
         searchAnime("")
+        getAnimeGenres()
     }
 
     //show anime without searching anything
@@ -43,6 +48,16 @@ class SearchViewModel @Inject constructor(
             safeApiCall {
                 Animes.searchAnime("").let {
                     _searchAnimes.value = it
+                }
+            }
+        }
+    }
+
+    private fun getAnimeGenres() {
+        viewModelScope.launch(Dispatchers.IO) {
+            safeApiCall {
+                Animes.getAnimeGenres().let {
+                    _animeGenres.value = it
                 }
             }
         }

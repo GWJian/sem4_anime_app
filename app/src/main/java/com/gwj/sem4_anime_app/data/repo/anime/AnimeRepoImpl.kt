@@ -2,6 +2,7 @@ package com.gwj.sem4_anime_app.data.repo.anime
 
 import com.gwj.sem4_anime_app.data.api.AnimeApi
 import com.gwj.sem4_anime_app.data.model.Data
+import com.gwj.sem4_anime_app.data.model.DataX
 
 class AnimeRepoImpl(private val animeApi: AnimeApi) : AnimeRepo {
     override suspend fun getTopAnimeList(): List<Data> {
@@ -28,6 +29,10 @@ class AnimeRepoImpl(private val animeApi: AnimeApi) : AnimeRepo {
 
     override suspend fun getSeasonalAnime(year: String, season: String,page: Int): List<Data> {
         return animeApi.getSeasonalAnime(year, season, page).data ?: emptyList()
+    }
+
+    override suspend fun getAnimeGenres(): List<DataX> {
+        return animeApi.getAnimeGenres().data
     }
 
 
