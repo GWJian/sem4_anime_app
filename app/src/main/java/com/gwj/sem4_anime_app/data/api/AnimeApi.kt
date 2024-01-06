@@ -39,8 +39,8 @@ interface AnimeApi {
     @GET("anime")
     suspend fun searchAnime(
         @Query("q") query: String,
-        @Query("sfw") sfw: Boolean = true,
         @Query("page") page: Int = 1,
+        @Query("sfw") sfw: Boolean = true,
         @Query("limit") limit: Int = 25,
     ): AnimeResp
 

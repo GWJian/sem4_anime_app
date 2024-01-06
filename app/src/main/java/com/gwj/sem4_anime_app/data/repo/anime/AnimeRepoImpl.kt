@@ -4,13 +4,12 @@ import com.gwj.sem4_anime_app.data.api.AnimeApi
 import com.gwj.sem4_anime_app.data.model.Data
 
 class AnimeRepoImpl(private val animeApi: AnimeApi) : AnimeRepo {
-
     override suspend fun getTopAnimeList(): List<Data> {
         return animeApi.getTopAnime().data ?: emptyList()
     }
 
     override suspend fun getSeasonNowAnime(page: Int): List<Data> {
-        return animeApi.getSeasonNowAnime(page = page).data ?: emptyList()
+        return animeApi.getSeasonNowAnime(page).data ?: emptyList()
     }
 
     override suspend fun getDetailAnime(animeId: Int): Data {
@@ -20,7 +19,7 @@ class AnimeRepoImpl(private val animeApi: AnimeApi) : AnimeRepo {
     }
 
     override suspend fun searchAnime(query: String, page: Int): List<Data> {
-        return animeApi.searchAnime(query, page = page).data ?: emptyList()
+        return animeApi.searchAnime(query, page).data ?: emptyList()
     }
 
     override suspend fun getRandomAnime(): Data {
@@ -28,7 +27,7 @@ class AnimeRepoImpl(private val animeApi: AnimeApi) : AnimeRepo {
     }
 
     override suspend fun getSeasonalAnime(year: String, season: String,page: Int): List<Data> {
-        return animeApi.getSeasonalAnime(year, season, page = page).data ?: emptyList()
+        return animeApi.getSeasonalAnime(year, season, page).data ?: emptyList()
     }
 
 
