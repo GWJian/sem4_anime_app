@@ -92,7 +92,7 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
     //TODO ASK SIR:also ask why home CollapsingToolbarLayout when back from content,it will auto back to top
     private fun setupYearForAutoCompleteTextView() {
         //set array to AutoCompleteTextView
-        //{it.toString()} this will convert int to string
+        //{it.toString()} this will convert int to string, toTypedArray = toArray
         val years = (2024 downTo 1927).map { it.toString() }.toTypedArray()
         val yearAdapter =
             ArrayAdapter(

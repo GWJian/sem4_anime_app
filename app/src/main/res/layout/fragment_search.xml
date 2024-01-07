@@ -37,16 +37,13 @@
                     android:queryHint="Search for Anime" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/popUpGenres"
+                    android:id="@+id/popUpGenresBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     app:iconGravity="textStart"
                     app:icon="@drawable/ic_format_list_bulleted" />
-
-
             </LinearLayout>
-
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 

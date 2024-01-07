@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,8 +39,8 @@ class SearchViewModel @Inject constructor(
 
     init {
         getAllAnimes()
-        searchAnime("")
         getAnimeGenres()
+        searchAnime("")
     }
 
     //show anime without searching anything
