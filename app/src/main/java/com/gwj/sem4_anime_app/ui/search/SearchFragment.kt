@@ -28,7 +28,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     override val viewModel: SearchViewModel by viewModels()
     private lateinit var SearchAnimeAdapter: SearchAnimeAdapter
-    var selectedGenres = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -84,12 +83,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         // search function
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                viewModel.searchAnime(selectedGenres, query)
+                viewModel.searchAnime("", query)
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.searchAnime(selectedGenres, newText)
+                viewModel.searchAnime("", newText)
                 return true
             }
         })
@@ -107,31 +106,46 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
         lifecycleScope.launch {
             viewModel.animeGenres.collect { animeGenres ->
-
                 // initialise the list items for the alert dialog
                 val listItems = animeGenres.map { it.name }.toTypedArray()
                 val checkedItems = BooleanArray(listItems.size)
                 // copy the items from the main list to the selected item list for the preview
                 // if the item is checked then only the item should be displayed for the user
-                val selectedItems = mutableListOf(*listItems)
+                //val selectedItems = mutableListOf(*listItems)
+                // can use this idea to send animeGenres.id to viewmodel,but how?
+                val selectedGenres = mutableListOf<Int>()
+                val currentQuery = viewModel.currentQuery
 
                 // handle the Open Alert Dialog button
                 binding.popUpGenresBtn.setOnClickListener {
                     // initialise the alert dialog builder
                     val builder = AlertDialog.Builder(requireContext())
+
                     builder.setTitle("Choose Genres")
                         .setMultiChoiceItems(listItems, checkedItems) { _, which, isChecked ->
+                            val genresId = animeGenres[which].mal_id
+                            if (isChecked) {
+                                selectedGenres.add(genresId)
+                            } else {
+                                selectedGenres.remove(genresId)
+                            }
                             // Update the current focused item's checked status
                             checkedItems[which] = isChecked
-                            val currentItem = selectedItems[which]
                         }
                         // if user click yes,pass the checkedItems to viewModel.animeGenres
                         .setPositiveButton("OK") { _, _ ->
                             // Do something when click the positive button
+                            val genresIdString = selectedGenres.joinToString(",")
+                            viewModel.searchAnime(genresIdString, currentQuery)
                         }
+                        // if user click cancel,do ntg
+                        .setNegativeButton("CANCEL") { _, _ -> }
                         // if user click CLEAR ALL,remove all checkedItems
                         .setNeutralButton("CLEAR ALL") { _: DialogInterface?, _: Int ->
                             Arrays.fill(checkedItems, false)
+                            //clear the selectedGenres list and pass the empty list to viewModel.animeGenres
+                            selectedGenres.clear()
+                            viewModel.searchAnime("", currentQuery)
                         }
                         .show()
                 }

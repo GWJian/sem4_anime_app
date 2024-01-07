@@ -1,5 +1,6 @@
 package com.gwj.sem4_anime_app.ui.search
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.gwj.recipesapp.ui.base.BaseViewModel
 import com.gwj.sem4_anime_app.data.model.AnimeResp
@@ -36,7 +37,7 @@ class SearchViewModel @Inject constructor(
      * after we reach the end,it will auto go back https://api.jikan.moe/v4/anime?q=&sfw=true&page=1&limit=25 to show all data again
      */
     var currentQuery: String = ""
-    var currentGenres: String = ""
+    var currentGenresId = ""
 
     init {
         getAllAnimes()
@@ -44,7 +45,7 @@ class SearchViewModel @Inject constructor(
         searchAnime("", "")
     }
 
-    //show anime without searching anything
+    //show default anime setting
     private fun getAllAnimes() {
         viewModelScope.launch(Dispatchers.IO) {
             safeApiCall {
@@ -68,14 +69,27 @@ class SearchViewModel @Inject constructor(
     //target the anime that we want to search
     //we use Job to prevent user from typing too fast and keep searching and cause 429 - Too Many Request
     fun searchAnime(genres: String, query: String?) {
+        Log.d("debugging_SearchViewModel", "Genres ID: $genres, Query: $query")
         searchJob?.cancel() //cancel to prevent user from typing too fast.
-        if (!query.isNullOrBlank()) {
-            currentGenres = genres //Store the current genres
-            currentQuery = query // Store the current query
+//        if (!query.isNullOrBlank()) {
+//            currentGenresId = genres //Store the current genres
+//            currentQuery = query // Store the current query
+//            searchJob = viewModelScope.launch(Dispatchers.IO) {
+//                delay(300) //delay use to control the rate of the request if user is typing too fast
+//                safeApiCall {
+//                    Animes.searchAnime(genres, query).let {
+//                        _searchAnimes.value = it
+//                    }
+//                }
+//            }
+//        }
+        if (genres.isNotBlank() || !query.isNullOrBlank()) {
+            currentGenresId = genres //Store the current genres
+            currentQuery = query ?: "" // Store the current query
             searchJob = viewModelScope.launch(Dispatchers.IO) {
                 delay(300) //delay use to control the rate of the request if user is typing too fast
                 safeApiCall {
-                    Animes.searchAnime(genres, query).let {
+                    Animes.searchAnime(genres, query ?: "").let {
                         _searchAnimes.value = it
                     }
                 }
@@ -97,7 +111,7 @@ class SearchViewModel @Inject constructor(
             viewModelScope.launch(Dispatchers.IO) {
                 delay(1000) //delay to control the rate of the request
                 safeApiCall {
-                    Animes.searchAnime(currentGenres, currentQuery, currentPage).let { newItems ->
+                    Animes.searchAnime(currentGenresId, currentQuery, currentPage).let { newItems ->
                         // get current loaded list from _searchAnimes
                         val currentItems = _searchAnimes.value
                         // add newItems list to currentItems list => join two list

@@ -36,7 +36,7 @@ interface AnimeApi {
     //    https://api.jikan.moe/v4/anime?q=
     //    https://api.jikan.moe/v4/anime?q=naruto
     //    https://api.jikan.moe/v4/anime?q=type=tv&movie&page=1
-    //    https://api.jikan.moe/v4/anime?genres=1&q=fullmetal&page=1
+    //    https://api.jikan.moe/v4/anime?genres=1,2&q=fullmetal&page=1
     @GET("anime")
     suspend fun searchAnime(
         @Query("genres") genres: String,
@@ -68,13 +68,6 @@ interface AnimeApi {
     //    https://api.jikan.moe/v4/genres/anime
     @GET("genres/anime")
     suspend fun getAnimeGenres(): GenresResp
-
-//    //    TODO Get anime by genre new page
-//    //    https://api.jikan.moe/v4/anime?genres=1,2
-//    @GET("anime")
-//    suspend fun getAnimeByGenre(
-//        @Query("genres") genres: String
-//    ): AnimeResp
 
     // TODO get anime video,pv1,pv2,maybe no need to use this content page
     // https://api.jikan.moe/v4/anime/52991/videos
