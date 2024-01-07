@@ -36,7 +36,7 @@ class SearchViewModel @Inject constructor(
      * let say https://api.jikan.moe/v4/anime?q=overlord&sfw=true&page=1&limit=25 {"pagination":{"last_visible_page":1,"has_next_page":false,"current_page":1,"items":{"count":19,"total":19,"per_page":25}}
      * after we reach the end,it will auto go back https://api.jikan.moe/v4/anime?q=&sfw=true&page=1&limit=25 to show all data again
      */
-    var currentQuery: String = ""
+    var currentQuery = ""
     var currentGenresId = ""
 
     init {
@@ -71,7 +71,7 @@ class SearchViewModel @Inject constructor(
     fun searchAnime(genres: String, query: String?) {
         Log.d("debugging_SearchViewModel", "Genres ID: $genres, Query: $query")
         searchJob?.cancel() //cancel to prevent user from typing too fast.
-//        if (!query.isNullOrBlank()) {
+//        if (!query.isNullOrBlank()) { //if query is not null or blank then run the code
 //            currentGenresId = genres //Store the current genres
 //            currentQuery = query // Store the current query
 //            searchJob = viewModelScope.launch(Dispatchers.IO) {
@@ -83,18 +83,20 @@ class SearchViewModel @Inject constructor(
 //                }
 //            }
 //        }
-        if (genres.isNotBlank() || !query.isNullOrBlank()) {
+
+        if (!query.isNullOrBlank() || genres.isNotBlank()){
             currentGenresId = genres //Store the current genres
-            currentQuery = query ?: "" // Store the current query
+            currentQuery = query!! // Store the current query
             searchJob = viewModelScope.launch(Dispatchers.IO) {
                 delay(300) //delay use to control the rate of the request if user is typing too fast
                 safeApiCall {
-                    Animes.searchAnime(genres, query ?: "").let {
+                    Animes.searchAnime(genres, query).let {
                         _searchAnimes.value = it
                     }
                 }
             }
         }
+
     }
 
     /**

@@ -28,6 +28,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     override val viewModel: SearchViewModel by viewModels()
     private lateinit var SearchAnimeAdapter: SearchAnimeAdapter
+    private var genresIdString = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,12 +84,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         // search function
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                viewModel.searchAnime("", query)
+                viewModel.searchAnime(genresIdString, query)
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.searchAnime("", newText)
+                viewModel.searchAnime(genresIdString, newText)
                 return true
             }
         })
@@ -109,10 +110,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                 // initialise the list items for the alert dialog
                 val listItems = animeGenres.map { it.name }.toTypedArray()
                 val checkedItems = BooleanArray(listItems.size)
+
                 // copy the items from the main list to the selected item list for the preview
-                // if the item is checked then only the item should be displayed for the user
-                //val selectedItems = mutableListOf(*listItems)
-                // can use this idea to send animeGenres.id to viewmodel,but how?
                 val selectedGenres = mutableListOf<Int>()
                 val currentQuery = viewModel.currentQuery
 
@@ -135,7 +134,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                         // if user click yes,pass the checkedItems to viewModel.animeGenres
                         .setPositiveButton("OK") { _, _ ->
                             // Do something when click the positive button
-                            val genresIdString = selectedGenres.joinToString(",")
+                            genresIdString = selectedGenres.joinToString(",")
                             viewModel.searchAnime(genresIdString, currentQuery)
                         }
                         // if user click cancel,do ntg
