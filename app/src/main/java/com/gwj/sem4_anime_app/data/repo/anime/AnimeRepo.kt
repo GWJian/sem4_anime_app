@@ -8,15 +8,15 @@ interface AnimeRepo {
 
     suspend fun getTopAnimeList(): List<Data>
 
-    suspend fun getSeasonNowAnime(page:Int = 1): List<Data>
+    suspend fun getSeasonNowAnime(page: Int = 1): List<Data>
 
     suspend fun getDetailAnime(animeId: Int): Data?
 
-    suspend fun searchAnime(query: String,page:Int = 1): List<Data>
+    suspend fun searchAnime(genres: String, query: String, page: Int = 1): List<Data>
 
     suspend fun getRandomAnime(): Data?
 
-    suspend fun getSeasonalAnime(year: String, season: String,page:Int = 1): List<Data>
+    suspend fun getSeasonalAnime(year: String, season: String, page: Int = 1): List<Data>
 
     suspend fun getAnimeGenres(): List<DataX>
 }

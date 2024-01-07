@@ -28,6 +28,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     override val viewModel: SearchViewModel by viewModels()
     private lateinit var SearchAnimeAdapter: SearchAnimeAdapter
+    var selectedGenres = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,12 +84,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         // search function
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                viewModel.searchAnime(query)
+                viewModel.searchAnime(selectedGenres, query)
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.searchAnime(newText)
+                viewModel.searchAnime(selectedGenres, newText)
                 return true
             }
         })
