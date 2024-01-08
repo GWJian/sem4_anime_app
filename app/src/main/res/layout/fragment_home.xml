@@ -37,12 +37,44 @@
                     android:layout_height="150dp"
                     android:orientation="horizontal" />
 
+                <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
+                    android:id="@+id/toggleGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:justifyContent="flex_end">
+
+                    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                        android:id="@+id/toggleBtn1"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:toggle_btnCornerRadius="50dp"
+                        app:toggle_borderWidth="5dp"
+                        app:toggle_borderColor="#C6C6C6"
+                        app:toggle_selectedBorderColor="#5e6fed"
+                        app:toggle_icon="@drawable/ic_grid_view"
+                        app:toggle_backgroundColor="@android:color/white"
+                        app:toggle_iconPadding="30dp" />
+
+                    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                        android:id="@+id/toggleBtn2"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:toggle_btnCornerRadius="50dp"
+                        app:toggle_borderWidth="5dp"
+                        app:toggle_borderColor="#C6C6C6"
+                        app:toggle_selectedBorderColor="#5e6fed"
+                        app:toggle_icon="@drawable/ic_view_headline"
+                        app:toggle_backgroundColor="@android:color/white"
+                        app:toggle_iconPadding="30dp" />
+                </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+
+
             </LinearLayout>
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"/>
+                app:layout_collapseMode="pin" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 

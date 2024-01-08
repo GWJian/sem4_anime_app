@@ -57,7 +57,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
 
     private fun setupRecommendedAnimeAdapter() {
-        //create button and check
+        //create toggle button and check user choose grid or LinearLayout button
         SeasonNowAnimeAdapter = SeasonNowAnimeAdapter(emptyList())
         SeasonNowAnimeAdapter.listener = object : SeasonNowAnimeAdapter.Listener {
             override fun onClick(animeId: Data) {
@@ -103,12 +103,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
         //===================== lifecycleScope topanimes End =====================
 
-        //====================== lifecycleScope SeasonNow
+        //====================== lifecycleScope SeasonNow Start ==================
         lifecycleScope.launch {
             viewModel.seasonNowAnimes.collect() {
                 SeasonNowAnimeAdapter.setSeasonNowAnimes(it)
             }
         }
+        //====================== lifecycleScope SeasonNow End ==================
 
     }
 }
