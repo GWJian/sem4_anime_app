@@ -3,4 +3,14 @@
     <style name="TabLayout" parent="Widget.MaterialComponents.TabLayout">
         <item name="tabBackground">@color/gray</item>
     </style>
+
+    <style name="MaterialAlertDialog_Rounded" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="shapeAppearanceOverlay">@style/DialogCorner</item>
+    </style>
+
+    <style name="DialogCorner">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
 </resources>
