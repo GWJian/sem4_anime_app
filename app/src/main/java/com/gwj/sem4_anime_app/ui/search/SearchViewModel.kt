@@ -84,7 +84,7 @@ class SearchViewModel @Inject constructor(
 //            }
 //        }
 
-        if (!query.isNullOrBlank() || genres.isNotBlank()){
+        if (!query.isNullOrBlank() || genres.isNotBlank() || genres.isBlank()){
             currentGenresId = genres //Store the current genres
             currentQuery = query!! // Store the current query
             searchJob = viewModelScope.launch(Dispatchers.IO) {

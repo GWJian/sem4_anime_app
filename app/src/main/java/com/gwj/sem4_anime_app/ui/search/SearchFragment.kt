@@ -17,9 +17,6 @@ import com.gwj.sem4_anime_app.databinding.FragmentSearchBinding
 import com.gwj.sem4_anime_app.ui.adapter.SearchAnimeAdapter
 import com.gwj.sem4_anime_app.ui.tabContainer.TabContainerFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import java.util.Arrays
 
@@ -28,7 +25,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     override val viewModel: SearchViewModel by viewModels()
     private lateinit var SearchAnimeAdapter: SearchAnimeAdapter
-    private var genresIdString = ""
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +41,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     private fun setupAdapter() {
+        val currentGenresId = viewModel.currentGenresId
+
         SearchAnimeAdapter = SearchAnimeAdapter(emptyList())
         SearchAnimeAdapter.listener = object : SearchAnimeAdapter.Listener {
             override fun onClick(animeId: Data) {
@@ -84,12 +83,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         // search function
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                viewModel.searchAnime(genresIdString, query)
+                viewModel.searchAnime(viewModel.currentGenresId, query)
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.searchAnime(genresIdString, newText)
+                viewModel.searchAnime(viewModel.currentGenresId, newText)
                 return true
             }
         })
@@ -113,7 +112,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
                 // copy the items from the main list to the selected item list for the preview
                 val selectedGenres = mutableListOf<Int>()
-                val currentQuery = viewModel.currentQuery
 
                 // handle the Open Alert Dialog button
                 binding.popUpGenresBtn.setOnClickListener {
@@ -134,8 +132,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                         // if user click yes,pass the checkedItems to viewModel.animeGenres
                         .setPositiveButton("OK") { _, _ ->
                             // Do something when click the positive button
-                            genresIdString = selectedGenres.joinToString(",")
-                            viewModel.searchAnime(genresIdString, currentQuery)
+                            val genresIdString = selectedGenres.joinToString(",")
+                            viewModel.searchAnime(genresIdString, viewModel.currentQuery)
                         }
                         // if user click cancel,do ntg
                         .setNegativeButton("CANCEL") { _, _ -> }
@@ -144,7 +142,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                             Arrays.fill(checkedItems, false)
                             //clear the selectedGenres list and pass the empty list to viewModel.animeGenres
                             selectedGenres.clear()
-                            viewModel.searchAnime("", currentQuery)
+                            viewModel.searchAnime("", viewModel.currentQuery)
                         }
                         .show()
                 }
