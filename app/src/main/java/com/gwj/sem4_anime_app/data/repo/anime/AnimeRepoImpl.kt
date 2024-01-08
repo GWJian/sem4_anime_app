@@ -2,15 +2,15 @@ package com.gwj.sem4_anime_app.data.repo.anime
 
 import com.gwj.sem4_anime_app.data.api.AnimeApi
 import com.gwj.sem4_anime_app.data.model.Data
+import com.gwj.sem4_anime_app.data.model.DataX
 
 class AnimeRepoImpl(private val animeApi: AnimeApi) : AnimeRepo {
-
     override suspend fun getTopAnimeList(): List<Data> {
         return animeApi.getTopAnime().data ?: emptyList()
     }
 
     override suspend fun getSeasonNowAnime(page: Int): List<Data> {
-        return animeApi.getSeasonNowAnime(page = page).data ?: emptyList()
+        return animeApi.getSeasonNowAnime(page).data ?: emptyList()
     }
 
     override suspend fun getDetailAnime(animeId: Int): Data {
@@ -19,16 +19,20 @@ class AnimeRepoImpl(private val animeApi: AnimeApi) : AnimeRepo {
         return anime.data
     }
 
-    override suspend fun searchAnime(query: String, page: Int): List<Data> {
-        return animeApi.searchAnime(query, page = page).data ?: emptyList()
+    override suspend fun searchAnime(genres: String, query: String, page: Int): List<Data> {
+        return animeApi.searchAnime(genres, query, page).data ?: emptyList()
     }
 
     override suspend fun getRandomAnime(): Data {
         return animeApi.getRandomAnime().data
     }
 
-    override suspend fun getSeasonalAnime(year: String, season: String,page: Int): List<Data> {
-        return animeApi.getSeasonalAnime(year, season, page = page).data ?: emptyList()
+    override suspend fun getSeasonalAnime(year: String, season: String, page: Int): List<Data> {
+        return animeApi.getSeasonalAnime(year, season, page).data ?: emptyList()
+    }
+
+    override suspend fun getAnimeGenres(): List<DataX> {
+        return animeApi.getAnimeGenres().data
     }
 
 
