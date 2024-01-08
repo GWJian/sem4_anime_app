@@ -26,7 +26,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     override val viewModel: SearchViewModel by viewModels()
     private lateinit var SearchAnimeAdapter: SearchAnimeAdapter
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,8 +40,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     private fun setupAdapter() {
-        val currentGenresId = viewModel.currentGenresId
-
         SearchAnimeAdapter = SearchAnimeAdapter(emptyList())
         SearchAnimeAdapter.listener = object : SearchAnimeAdapter.Listener {
             override fun onClick(animeId: Data) {

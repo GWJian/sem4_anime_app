@@ -23,6 +23,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
                 <SearchView
@@ -36,13 +37,15 @@
                     android:queryBackground="@null"
                     android:queryHint="Search for Anime" />
 
-                <com.google.android.material.button.MaterialButton
+                <ImageView
                     android:id="@+id/popUpGenresBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    app:iconGravity="textStart"
-                    app:icon="@drawable/ic_format_list_bulleted" />
+                    android:background="@drawable/ic_format_list_bulleted"
+                    android:contentDescription="popUpGenresBtn"
+                    app:iconGravity="textStart" />
+
             </LinearLayout>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

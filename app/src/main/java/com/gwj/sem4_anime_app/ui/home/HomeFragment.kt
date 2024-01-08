@@ -57,6 +57,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
 
     private fun setupRecommendedAnimeAdapter() {
+        //create button and check
         SeasonNowAnimeAdapter = SeasonNowAnimeAdapter(emptyList())
         SeasonNowAnimeAdapter.listener = object : SeasonNowAnimeAdapter.Listener {
             override fun onClick(animeId: Data) {

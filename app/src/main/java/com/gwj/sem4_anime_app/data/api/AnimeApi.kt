@@ -62,7 +62,10 @@ interface AnimeApi {
     //    Random Anime Button:
     //    https://api.jikan.moe/v4/random/anime
     @GET("random/anime")
-    suspend fun getRandomAnime(): AnimeDetailResp
+    suspend fun getRandomAnime(
+        @Query("sfw") sfw: Boolean = true,
+    ): AnimeDetailResp
+
 
     //    Get all genres:
     //    https://api.jikan.moe/v4/genres/anime
