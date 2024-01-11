@@ -17,6 +17,7 @@ import com.gwj.sem4_anime_app.databinding.FragmentSearchBinding
 import com.gwj.sem4_anime_app.ui.adapter.SearchAnimeAdapter
 import com.gwj.sem4_anime_app.ui.tabContainer.TabContainerFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.Arrays
 
@@ -90,17 +91,38 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             }
         })
 
+//        lifecycleScope.launch{
+//            viewModel.searchAnimes.collect{
+//                SearchAnimeAdapter.setSearchAnimes(it)
+//            }
+//        }
+
     }
 
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()
 
+        //========================== Search Anime =============================
         lifecycleScope.launch {
             viewModel.searchAnimes.collect {
                 SearchAnimeAdapter.setSearchAnimes(it)
             }
         }
 
+        lifecycleScope.launch {
+            // Observe the isLoading LiveData from the ViewModel and show/hide the progress bar when it changes
+            viewModel.isLoadingMoreItems.collect{
+                if (it){
+                    binding.progressBar.visibility = View.VISIBLE
+                } else{
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
+        }
+        //========================== Search Anime =============================
+
+
+        //========================== Anime Genres =============================
         lifecycleScope.launch {
             viewModel.animeGenres.collect { animeGenres ->
                 // initialise the list items for the alert dialog
@@ -145,7 +167,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                 }
             }
         }
-
+        //========================== Anime Genres =============================
     }
 
 

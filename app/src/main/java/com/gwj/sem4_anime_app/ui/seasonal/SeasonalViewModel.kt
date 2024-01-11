@@ -37,9 +37,12 @@ class SeasonalViewModel @Inject constructor(
 
     private fun getSeasonalAnimes() {
         viewModelScope.launch(Dispatchers.IO) {
+            delay(2000)
+            _isLoadingMoreItems.emit(true)
             safeApiCall {
                 SeasonalAnimes.getSeasonalAnime(year, season).let {
                     _seasonalAnimes.value = it
+                    _isLoadingMoreItems.emit(false)
                 }
             }
         }

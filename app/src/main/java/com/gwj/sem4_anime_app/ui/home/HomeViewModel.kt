@@ -24,6 +24,10 @@ class HomeViewModel @Inject constructor(
     protected val _seasonNowAnimes: MutableStateFlow<List<Data>> = MutableStateFlow(emptyList())
     val seasonNowAnimes: StateFlow<List<Data>> = _seasonNowAnimes
 
+    protected val _toggleIsGridOrLinear: MutableStateFlow<Pair<Boolean, List<Data>>> =
+        MutableStateFlow(Pair(true, emptyList()))
+    val toggleIsGridOrLinear: StateFlow<Pair<Boolean, List<Data>>> = _toggleIsGridOrLinear
+
     var currentPage = 1
     var isLoading = false
 
@@ -46,9 +50,11 @@ class HomeViewModel @Inject constructor(
 
     private fun getSeasonNowAnimes() {
         viewModelScope.launch {
+            _isLoadingMoreItems.emit(true)
             safeApiCall {
                 Animes.getSeasonNowAnime().let {
                     _seasonNowAnimes.value = it
+                    _isLoadingMoreItems.emit(false)
                 }
             }
         }
@@ -72,6 +78,14 @@ class HomeViewModel @Inject constructor(
             }
 
         }
+    }
+
+    fun setGridView() {
+        _toggleIsGridOrLinear.value = Pair(true,seasonNowAnimes.value)
+    }
+
+    fun setLinearView() {
+        _toggleIsGridOrLinear.value = Pair(false,seasonNowAnimes.value)
     }
 
 }

@@ -9,10 +9,9 @@ import com.gwj.sem4_anime_app.databinding.ItemLayoutTopAnimeBinding
 import com.gwj.sem4_anime_app.databinding.LayoutSearchItemBinding
 
 class SeasonNowAnimeLinearAdapter(
-    private var seasonNowAnimes: List<Data>,
-) : RecyclerView.Adapter<SeasonNowAnimeLinearAdapter.SeasonNowAnimeViewHolder>() {
+    seasonNowAnimes: List<Data>,
+) : BaseSeasonNowAnimeAdapter(seasonNowAnimes) {
 
-    var listener: Listener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeasonNowAnimeViewHolder {
         val binding = LayoutSearchItemBinding.inflate(
@@ -23,11 +22,11 @@ class SeasonNowAnimeLinearAdapter(
         return SeasonNowAnimeViewHolder(binding)
     }
 
-    override fun getItemCount() = seasonNowAnimes.size
-
-    override fun onBindViewHolder(holder: SeasonNowAnimeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = seasonNowAnimes[position]
-        holder.bind(item)
+        if (holder is SeasonNowAnimeViewHolder){
+            holder.bind(item)
+        }
     }
 
     inner class SeasonNowAnimeViewHolder(
@@ -49,10 +48,6 @@ class SeasonNowAnimeLinearAdapter(
                 }
             }
         }
-    }
-
-    interface Listener {
-        fun onClick(animeId: Data)
     }
 
 

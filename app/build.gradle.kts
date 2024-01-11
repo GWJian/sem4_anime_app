@@ -111,4 +111,7 @@ dependencies {
 
     //button
     implementation ("nl.bryanderidder:themed-toggle-button-group:1.4.1")
+
+    //loading
+    implementation ("com.github.hall9zeha:DotsLoadingView:2.0.0")
 }

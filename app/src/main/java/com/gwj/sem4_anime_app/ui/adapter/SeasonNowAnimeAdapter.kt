@@ -1,5 +1,6 @@
 package com.gwj.sem4_anime_app.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,10 +9,8 @@ import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.databinding.ItemLayoutTopAnimeBinding
 
 class SeasonNowAnimeAdapter(
-    private var seasonNowAnimes: List<Data>,
-): RecyclerView.Adapter<SeasonNowAnimeAdapter.SeasonNowAnimeViewHolder>() {
-
-    var listener: Listener? = null
+    seasonNowAnimes: List<Data>,
+) : BaseSeasonNowAnimeAdapter(seasonNowAnimes) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeasonNowAnimeViewHolder {
         val binding = ItemLayoutTopAnimeBinding.inflate(
@@ -22,16 +21,12 @@ class SeasonNowAnimeAdapter(
         return SeasonNowAnimeViewHolder(binding)
     }
 
-    override fun getItemCount() = seasonNowAnimes.size
-
-    override fun onBindViewHolder(holder: SeasonNowAnimeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        Log.d("debugging_seasonnow", seasonNowAnimes.toString())
         val item = seasonNowAnimes[position]
-        holder.bind(item)
-    }
-
-    fun setSeasonNowAnimes(items: List<Data>) {
-        seasonNowAnimes = items
-        notifyDataSetChanged()
+        if (holder is SeasonNowAnimeViewHolder) {
+            holder.bind(item)
+        }
     }
 
     inner class SeasonNowAnimeViewHolder(
@@ -50,8 +45,5 @@ class SeasonNowAnimeAdapter(
         }
     }
 
-    interface Listener {
-        fun onClick(animeId:Data)
-    }
 
 }

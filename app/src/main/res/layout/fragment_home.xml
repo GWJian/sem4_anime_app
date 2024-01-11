@@ -37,6 +37,12 @@
                     android:layout_height="150dp"
                     android:orientation="horizontal" />
 
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center" />
+
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
                     android:id="@+id/toggleGroup"
                     android:layout_width="match_parent"
@@ -44,7 +50,7 @@
                     app:justifyContent="flex_end">
 
                     <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                        android:id="@+id/toggleBtn1"
+                        android:id="@+id/toggleBtnGrid"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         app:toggle_btnCornerRadius="50dp"
@@ -56,7 +62,7 @@
                         app:toggle_iconPadding="30dp" />
 
                     <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                        android:id="@+id/toggleBtn2"
+                        android:id="@+id/toggleBtnLinear"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         app:toggle_btnCornerRadius="50dp"
@@ -83,9 +89,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/verticalAnimeRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
     </androidx.recyclerview.widget.RecyclerView>
+
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

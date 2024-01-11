@@ -87,6 +87,12 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
 
         })
 
+//        lifecycleScope.launch {
+//            viewModel.seasonalAnimes.collect{
+//                seasonalAdapter.setSeasonalAnimes(it)
+//            }
+//        }
+
     }
 
     //TODO ASK SIR:also ask why home CollapsingToolbarLayout when back from content,it will auto back to top
@@ -135,6 +141,17 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
         lifecycleScope.launch {
             viewModel.seasonalAnimes.collect() {
                 seasonalAdapter.setSeasonalAnimes(it)
+            }
+        }
+
+        lifecycleScope.launch {
+            // Observe the isLoading LiveData from the ViewModel and show/hide the progress bar when it changes
+            viewModel.isLoadingMoreItems.collect{
+                if (it){
+                    binding.progressBar.visibility = View.VISIBLE
+                } else{
+                    binding.progressBar.visibility = View.GONE
+                }
             }
         }
 

@@ -48,9 +48,12 @@ class SearchViewModel @Inject constructor(
     //show default anime setting
     private fun getAllAnimes() {
         viewModelScope.launch(Dispatchers.IO) {
+            delay(1500)
+            _isLoadingMoreItems.emit(true)
             safeApiCall {
                 Animes.searchAnime("", "").let {
                     _searchAnimes.value = it
+                    _isLoadingMoreItems.emit(false)
                 }
             }
         }
@@ -58,6 +61,7 @@ class SearchViewModel @Inject constructor(
 
     private fun getAnimeGenres() {
         viewModelScope.launch(Dispatchers.IO) {
+            delay(1500)
             safeApiCall {
                 Animes.getAnimeGenres().let {
                     _animeGenres.value = it
