@@ -146,7 +146,7 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
 
         lifecycleScope.launch {
             // Observe the isLoading LiveData from the ViewModel and show/hide the progress bar when it changes
-            viewModel.isLoadingMoreItems.collect{
+            viewModel.isFetchingData.collect{
                 if (it){
                     binding.progressBar.visibility = View.VISIBLE
                 } else{

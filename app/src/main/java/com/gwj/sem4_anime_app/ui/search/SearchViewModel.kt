@@ -49,11 +49,11 @@ class SearchViewModel @Inject constructor(
     private fun getAllAnimes() {
         viewModelScope.launch(Dispatchers.IO) {
             delay(1500)
-            _isLoadingMoreItems.emit(true)
+            _isFetchingData.emit(true)
             safeApiCall {
                 Animes.searchAnime("", "").let {
                     _searchAnimes.value = it
-                    _isLoadingMoreItems.emit(false)
+                    _isFetchingData.emit(false)
                 }
             }
         }

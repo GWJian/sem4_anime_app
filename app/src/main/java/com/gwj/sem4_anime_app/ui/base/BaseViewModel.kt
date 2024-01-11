@@ -14,8 +14,8 @@ abstract class BaseViewModel:ViewModel() {
     protected val _success:MutableSharedFlow<String> = MutableSharedFlow()
     val success: SharedFlow<String> = _success
 
-    protected val _isLoadingMoreItems: MutableSharedFlow<Boolean>  = MutableSharedFlow()
-    val isLoadingMoreItems: SharedFlow<Boolean> = _isLoadingMoreItems
+    protected val _isFetchingData: MutableSharedFlow<Boolean>  = MutableSharedFlow()
+    val isFetchingData: SharedFlow<Boolean> = _isFetchingData
 
     open fun onCreate(){}
 
