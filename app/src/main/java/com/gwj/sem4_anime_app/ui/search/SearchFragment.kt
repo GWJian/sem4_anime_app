@@ -105,19 +105,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         //========================== Search Anime =============================
         lifecycleScope.launch {
             viewModel.searchAnimes.collect {
-                SearchAnimeAdapter.setSearchAnimes(it)
+                if (it.isNotEmpty()) {
+                    binding.progressBar.visibility = View.GONE
+                    SearchAnimeAdapter.setSearchAnimes(it)
+                } else {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
             }
         }
-
-//        lifecycleScope.launch {
-//            viewModel.isFetchingData.collect{
-//                if (it){
-//                    binding.progressBar.visibility = View.VISIBLE
-//                } else{
-//                    binding.progressBar.visibility = View.GONE
-//                }
-//            }
-//        }
         //========================== Search Anime =============================
 
 

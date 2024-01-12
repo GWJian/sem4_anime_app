@@ -55,11 +55,11 @@ class HomeViewModel @Inject constructor(
 
     private fun getSeasonNowAnimes() {
         viewModelScope.launch(Dispatchers.IO) {
-            //_isFetchingData.emit(true)
+            _isFetchingData.emit(true)
             safeApiCall {
                 Animes.getSeasonNowAnime().let {
                     _seasonNowAnimes.value = it
-                    //_isFetchingData.emit(false)
+                    _isFetchingData.emit(false)
                 }
             }
         }

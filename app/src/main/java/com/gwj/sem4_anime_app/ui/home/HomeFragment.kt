@@ -142,7 +142,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         //====================== lifecycleScope SeasonNow Start ==================
         lifecycleScope.launch {
             viewModel.seasonNowAnimes.collect {
-                SeasonNowAnimeAdapter.baseSetSeasonNowAnimes(it)
+                if (it.isNotEmpty()){
+                    binding.progressBar.visibility = View.GONE
+                    SeasonNowAnimeAdapter.baseSetSeasonNowAnimes(it)
+                }else{
+                    binding.progressBar.visibility = View.VISIBLE
+                }
             }
         }
 
@@ -151,16 +156,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 setupRecommendedAnimeAdapter(it.first, it.second)
             }
         }
-//
-//        lifecycleScope.launch {
-//            viewModel.isFetchingData.collect {
-//                if (it) {
-//                    binding.progressBar.visibility = View.VISIBLE
-//                } else {
-//                    binding.progressBar.visibility = View.GONE
-//                }
-//            }
-//        }
         //====================== lifecycleScope SeasonNow End ==================
 
     }
