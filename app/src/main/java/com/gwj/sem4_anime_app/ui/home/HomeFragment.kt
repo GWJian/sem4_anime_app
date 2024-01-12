@@ -39,7 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun setupUIComponents() {
         super.setupUIComponents()
         setupTopAnimeAdapter()
-        setupRecommendedAnimeAdapter(false)
+        setupRecommendedAnimeAdapter(true)
 
         //================ toggle button Start ==================
         binding.toggleBtnGrid.setOnClickListener {
@@ -119,13 +119,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 }
             }
         })
-
-//        lifecycleScope.launch {
-//            viewModel.seasonNowAnimes.collect{
-//                SeasonNowAnimeAdapter.baseSetSeasonNowAnimes(it)
-//            }
-//        }
-
     }
 
     override fun setupViewModelObserver() {
@@ -142,7 +135,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         //====================== lifecycleScope SeasonNow Start ==================
         lifecycleScope.launch {
             viewModel.seasonNowAnimes.collect {
-                SeasonNowAnimeAdapter.baseSetSeasonNowAnimes(it)
+                if (it.isNotEmpty()){
+                    binding.progressBar.visibility = View.GONE
+                    SeasonNowAnimeAdapter.baseSetSeasonNowAnimes(it)
+                }else{
+                    binding.progressBar.visibility = View.VISIBLE
+                }
             }
         }
 
@@ -151,16 +149,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 setupRecommendedAnimeAdapter(it.first, it.second)
             }
         }
-//
-//        lifecycleScope.launch {
-//            viewModel.isFetchingData.collect {
-//                if (it) {
-//                    binding.progressBar.visibility = View.VISIBLE
-//                } else {
-//                    binding.progressBar.visibility = View.GONE
-//                }
-//            }
-//        }
+
+        lifecycleScope.launch {
+            viewModel.isLoading.collect { isLoading ->
+                // not() = false
+                if (isLoading.not()) {
+                    binding.myDotLoading.visibility = View.GONE
+                }else{
+                    binding.myDotLoading.visibility = View.VISIBLE
+                }
+            }
+        }
         //====================== lifecycleScope SeasonNow End ==================
 
     }

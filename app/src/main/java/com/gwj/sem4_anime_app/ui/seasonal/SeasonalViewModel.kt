@@ -20,10 +20,13 @@ class SeasonalViewModel @Inject constructor(
     protected val _seasonalAnimes: MutableStateFlow<List<Data>> = MutableStateFlow(emptyList())
     val seasonalAnimes: MutableStateFlow<List<Data>> = _seasonalAnimes
 
+    protected val _isLoading:MutableStateFlow<Boolean> = MutableStateFlow(false)
+    var isLoading:MutableStateFlow<Boolean> = _isLoading
+
     var year = "2020"
     var season = "spring"
     var currentPage = 1
-    var isLoading = false
+    //var isLoading = false
 
     init {
         getSeasonalAnimes()
@@ -48,11 +51,29 @@ class SeasonalViewModel @Inject constructor(
         }
     }
 
+//    fun loadMoreItems() {
+//        if (!isLoading) {
+//
+//            isLoading = true
+//
+//            currentPage++
+//            viewModelScope.launch(Dispatchers.IO) {
+//                delay(1000)
+//                safeApiCall {
+//                    SeasonalAnimes.getSeasonalAnime(year, season, currentPage).let { anime ->
+//                        val currentAnimes = _seasonalAnimes.value
+//                        _seasonalAnimes.value = currentAnimes + anime
+//                        isLoading = false
+//                    }
+//                }
+//            }
+//
+//        }
+//    }
+
     fun loadMoreItems() {
-        if (!isLoading) {
-
-            isLoading = true
-
+        if (!_isLoading.value) {
+            _isLoading.value = true
             currentPage++
             viewModelScope.launch(Dispatchers.IO) {
                 delay(1000)
@@ -60,11 +81,10 @@ class SeasonalViewModel @Inject constructor(
                     SeasonalAnimes.getSeasonalAnime(year, season, currentPage).let { anime ->
                         val currentAnimes = _seasonalAnimes.value
                         _seasonalAnimes.value = currentAnimes + anime
-                        isLoading = false
+                        _isLoading.value = false
                     }
                 }
             }
-
         }
     }
 

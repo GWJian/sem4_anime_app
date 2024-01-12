@@ -114,6 +114,6 @@ dependencies {
 
     //loading
     implementation ("com.github.hall9zeha:DotsLoadingView:2.0.0")
-    implementation ("io.github.rain9155:waveloadingview:1.0.2")
+    implementation ("com.github.Marvel999:Android-Loading-Animation:1.0.0")
 
     }
