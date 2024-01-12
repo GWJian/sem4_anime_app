@@ -39,7 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun setupUIComponents() {
         super.setupUIComponents()
         setupTopAnimeAdapter()
-        setupRecommendedAnimeAdapter(false)
+        setupRecommendedAnimeAdapter(true)
 
         //================ toggle button Start ==================
         binding.toggleBtnGrid.setOnClickListener {
@@ -119,13 +119,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 }
             }
         })
-
-//        lifecycleScope.launch {
-//            viewModel.seasonNowAnimes.collect{
-//                SeasonNowAnimeAdapter.baseSetSeasonNowAnimes(it)
-//            }
-//        }
-
     }
 
     override fun setupViewModelObserver() {
@@ -154,6 +147,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         lifecycleScope.launch {
             viewModel.toggleIsGridOrLinear.collect {
                 setupRecommendedAnimeAdapter(it.first, it.second)
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.isLoading.collect { isLoading ->
+                // not() = false
+                if (isLoading.not()) {
+                    binding.myDotLoading.visibility = View.GONE
+                }else{
+                    binding.myDotLoading.visibility = View.VISIBLE
+                }
             }
         }
         //====================== lifecycleScope SeasonNow End ==================

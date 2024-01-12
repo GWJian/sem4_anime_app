@@ -26,10 +26,13 @@ class SearchViewModel @Inject constructor(
     protected val _animeGenres: MutableStateFlow<List<DataX>> = MutableStateFlow(emptyList())
     val animeGenres: MutableStateFlow<List<DataX>> = _animeGenres
 
+    protected val _isLoading:MutableStateFlow<Boolean> = MutableStateFlow(false)
+    var isLoading:MutableStateFlow<Boolean> = _isLoading
+
     //Job to stop the search when user is typing too fast
     var searchJob: Job? = null
     var currentPage = 1
-    var isLoading = false
+    //var isLoading = false
 
     /**
      * we need this to store the current query,if we pass empty string "", after search result reach end, then it will back to "" and show all anime again
@@ -111,9 +114,9 @@ class SearchViewModel @Inject constructor(
      */
     fun loadMoreItems() {
         // if isLoading is false and has_next_page is true run the code
-        if (!isLoading) {
+        if (!_isLoading.value) {
             // if true, let the page increment and load new data into the list
-            isLoading = true
+            _isLoading.value = true
             // page +1.
             currentPage++
             viewModelScope.launch(Dispatchers.IO) {
@@ -125,7 +128,7 @@ class SearchViewModel @Inject constructor(
                         // add newItems list to currentItems list => join two list
                         _searchAnimes.value = currentItems + newItems
                         // if done loading, set it back to false so it can prevent user from keep scrolling and get 429 RateLimitException error warning
-                        isLoading = false
+                        _isLoading.value = false
                     }
                 }
             }

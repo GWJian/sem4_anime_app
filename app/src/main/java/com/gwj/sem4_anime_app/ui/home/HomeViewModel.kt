@@ -24,6 +24,9 @@ class HomeViewModel @Inject constructor(
     protected val _seasonNowAnimes: MutableStateFlow<List<Data>> = MutableStateFlow(emptyList())
     val seasonNowAnimes: StateFlow<List<Data>> = _seasonNowAnimes
 
+    protected val _isLoading:MutableStateFlow<Boolean> = MutableStateFlow(false)
+    var isLoading:MutableStateFlow<Boolean> = _isLoading
+
     /**
      * This is a pair of boolean and list of data
      * boolean are use for toggle between grid and linear layout
@@ -34,7 +37,7 @@ class HomeViewModel @Inject constructor(
     val toggleIsGridOrLinear: StateFlow<Pair<Boolean, List<Data>>> = _toggleIsGridOrLinear
 
     var currentPage = 1
-    var isLoading = false
+    //var isLoading = false
 
     init {
         getTopAnimes()
@@ -66,9 +69,9 @@ class HomeViewModel @Inject constructor(
     }
 
     fun loadMoreItems() {
-        if (!isLoading) {
+        if (!_isLoading.value) {
 
-            isLoading = true
+            _isLoading.value = true
 
             currentPage++
             viewModelScope.launch(Dispatchers.IO) {
@@ -77,7 +80,7 @@ class HomeViewModel @Inject constructor(
                     Animes.getSeasonNowAnime(currentPage).let { newAnime ->
                         val currentAnimes = _seasonNowAnimes.value
                         _seasonNowAnimes.value = currentAnimes + newAnime
-                        isLoading = false
+                        _isLoading.value = false
                     }
                 }
             }

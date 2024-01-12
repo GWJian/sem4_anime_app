@@ -113,6 +113,17 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                 }
             }
         }
+
+        lifecycleScope.launch {
+            viewModel.isLoading.collect { isLoading ->
+                // not() = false
+                if (isLoading.not()) {
+                    binding.myDotLoading.visibility = View.GONE
+                }else{
+                    binding.myDotLoading.visibility = View.VISIBLE
+                }
+            }
+        }
         //========================== Search Anime =============================
 
 

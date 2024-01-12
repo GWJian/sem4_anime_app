@@ -79,7 +79,7 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
                 val totalItemCount = seasonalLayoutManager.itemCount
                 val lastAnime = seasonalLayoutManager.findLastVisibleItemPosition()
 
-                if (totalItemCount <= lastAnime + 2) {
+                if (totalItemCount <= lastAnime + 1) {
                     viewModel.loadMoreItems()
                 }
 
@@ -138,6 +138,17 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
                     seasonalAdapter.setSeasonalAnimes(it)
                 } else {
                     binding.progressBar.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.isLoading.collect { isLoading ->
+                // not() = false
+                if (isLoading.not()) {
+                    binding.myDotLoading.visibility = View.GONE
+                }else{
+                    binding.myDotLoading.visibility = View.VISIBLE
                 }
             }
         }
