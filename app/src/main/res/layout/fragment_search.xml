@@ -62,11 +62,15 @@
         android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <ProgressBar
+    <com.example.loadinganimation.LoadingAnimation
         android:id="@+id/progressBar"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="10dp"
+        app:barType="@drawable/gear_duo"
+        app:boldText="false"
+        app:enlarge="5"
+        app:textSize="15sp" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
