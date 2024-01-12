@@ -109,16 +109,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             }
         }
 
-        lifecycleScope.launch {
-            // Observe the isLoading LiveData from the ViewModel and show/hide the progress bar when it changes
-            viewModel.isFetchingData.collect{
-                if (it){
-                    binding.progressBar.visibility = View.VISIBLE
-                } else{
-                    binding.progressBar.visibility = View.GONE
-                }
-            }
-        }
+//        lifecycleScope.launch {
+//            viewModel.isFetchingData.collect{
+//                if (it){
+//                    binding.progressBar.visibility = View.VISIBLE
+//                } else{
+//                    binding.progressBar.visibility = View.GONE
+//                }
+//            }
+//        }
         //========================== Search Anime =============================
 
 

@@ -49,11 +49,11 @@ class SearchViewModel @Inject constructor(
     private fun getAllAnimes() {
         viewModelScope.launch(Dispatchers.IO) {
             delay(1500)
-            _isFetchingData.emit(true)
+            //_isFetchingData.emit(true)
             safeApiCall {
                 Animes.searchAnime("", "").let {
                     _searchAnimes.value = it
-                    _isFetchingData.emit(false)
+                    //_isFetchingData.emit(false)
                 }
             }
         }
@@ -62,9 +62,11 @@ class SearchViewModel @Inject constructor(
     private fun getAnimeGenres() {
         viewModelScope.launch(Dispatchers.IO) {
             delay(1500)
+            _isFetchingData.emit(true)
             safeApiCall {
                 Animes.getAnimeGenres().let {
                     _animeGenres.value = it
+                    _isFetchingData.emit(false)
                 }
             }
         }
@@ -73,7 +75,7 @@ class SearchViewModel @Inject constructor(
     //target the anime that we want to search
     //we use Job to prevent user from typing too fast and keep searching and cause 429 - Too Many Request
     fun searchAnime(genres: String, query: String?) {
-        Log.d("debugging_SearchViewModel", "Genres ID: $genres, Query: $query")
+        //Log.d("debugging_SearchViewModel", "Genres ID: $genres, Query: $query")
         searchJob?.cancel() //cancel to prevent user from typing too fast.
 //        if (!query.isNullOrBlank()) { //if query is not null or blank then run the code
 //            currentGenresId = genres //Store the current genres

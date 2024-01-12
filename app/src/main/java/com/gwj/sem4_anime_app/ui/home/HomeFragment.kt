@@ -41,6 +41,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         setupTopAnimeAdapter()
         setupRecommendedAnimeAdapter(false)
 
+        //================ toggle button Start ==================
         binding.toggleBtnGrid.setOnClickListener {
             viewModel.setGridView()
         }
@@ -48,6 +49,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.toggleBtnLinear.setOnClickListener {
             viewModel.setLinearView()
         }
+        //================ toggle button End ==================
     }
 
     private fun setupTopAnimeAdapter() {
@@ -69,6 +71,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
 
     private fun setupRecommendedAnimeAdapter(grid: Boolean, animes: List<Data> = emptyList()) {
+        //if user click on grid button, then change the adapter to grid layout else linear layout
         if (grid) {
             SeasonNowAnimeAdapter = SeasonNowAnimeAdapter(animes)
 
@@ -100,7 +103,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                //try grid,if no throw Linear
+                //try catch to handle both linear and grid layout manager
                 val animeLayoutManager =
                     try {
                         recyclerView.layoutManager as GridLayoutManager
@@ -117,6 +120,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
         })
 
+//        lifecycleScope.launch {
+//            viewModel.seasonNowAnimes.collect{
+//                SeasonNowAnimeAdapter.baseSetSeasonNowAnimes(it)
+//            }
+//        }
+
     }
 
     override fun setupViewModelObserver() {
@@ -124,7 +133,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         //===================== lifecycleScope topanimes Start =====================
         lifecycleScope.launch {
-            viewModel.topAnimes.collect() {
+            viewModel.topAnimes.collect {
                 HorizontalTopAnimeAdapter.setTopAnimes(it)
             }
         }
@@ -142,17 +151,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 setupRecommendedAnimeAdapter(it.first, it.second)
             }
         }
-
-        lifecycleScope.launch {
-            // Observe the isLoading LiveData from the ViewModel and show/hide the progress bar when it changes
-            viewModel.isFetchingData.collect {
-                if (it) {
-                    binding.progressBar.visibility = View.VISIBLE
-                } else {
-                    binding.progressBar.visibility = View.GONE
-                }
-            }
-        }
+//
+//        lifecycleScope.launch {
+//            viewModel.isFetchingData.collect {
+//                if (it) {
+//                    binding.progressBar.visibility = View.VISIBLE
+//                } else {
+//                    binding.progressBar.visibility = View.GONE
+//                }
+//            }
+//        }
         //====================== lifecycleScope SeasonNow End ==================
 
     }

@@ -114,4 +114,6 @@ dependencies {
 
     //loading
     implementation ("com.github.hall9zeha:DotsLoadingView:2.0.0")
-}
+    implementation ("io.github.rain9155:waveloadingview:1.0.2")
+
+    }

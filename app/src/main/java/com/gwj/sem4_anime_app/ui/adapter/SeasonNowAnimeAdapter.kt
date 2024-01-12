@@ -22,7 +22,7 @@ class SeasonNowAnimeAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Log.d("debugging_seasonnow", seasonNowAnimes.toString())
+        //Log.d("debugging_seasonnow", seasonNowAnimes.toString())
         val item = seasonNowAnimes[position]
         if (holder is SeasonNowAnimeViewHolder) {
             holder.bind(item)
