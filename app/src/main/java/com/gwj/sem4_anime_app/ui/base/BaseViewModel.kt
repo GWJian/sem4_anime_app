@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 
 abstract class BaseViewModel:ViewModel() {
@@ -16,6 +17,12 @@ abstract class BaseViewModel:ViewModel() {
 
     protected val _isFetchingData: MutableSharedFlow<Boolean>  = MutableSharedFlow()
     val isFetchingData: SharedFlow<Boolean> = _isFetchingData
+
+    protected val _isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    var isLoading: MutableStateFlow<Boolean> = _isLoading
+
+    protected val _noData: MutableSharedFlow<Boolean> = MutableSharedFlow()
+    var noData: SharedFlow<Boolean> = _noData
 
     open fun onCreate(){}
 

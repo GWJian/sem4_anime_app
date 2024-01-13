@@ -20,9 +20,6 @@ class SeasonalViewModel @Inject constructor(
     protected val _seasonalAnimes: MutableStateFlow<List<Data>> = MutableStateFlow(emptyList())
     val seasonalAnimes: MutableStateFlow<List<Data>> = _seasonalAnimes
 
-    protected val _isLoading:MutableStateFlow<Boolean> = MutableStateFlow(false)
-    var isLoading:MutableStateFlow<Boolean> = _isLoading
-
     var year = "2020"
     var season = "spring"
     var currentPage = 1

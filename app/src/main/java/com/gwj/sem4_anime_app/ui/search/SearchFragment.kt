@@ -17,6 +17,7 @@ import com.gwj.sem4_anime_app.databinding.FragmentSearchBinding
 import com.gwj.sem4_anime_app.ui.adapter.SearchAnimeAdapter
 import com.gwj.sem4_anime_app.ui.tabContainer.TabContainerFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.Arrays
@@ -110,6 +111,18 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                     SearchAnimeAdapter.setSearchAnimes(it)
                 } else {
                     binding.progressBar.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.noData.collect { noData ->
+                if (noData) {
+                    delay(8000)
+                    binding.noDataImage.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+                } else {
+                    binding.noDataImage.visibility = View.GONE
                 }
             }
         }

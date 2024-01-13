@@ -24,9 +24,6 @@ class HomeViewModel @Inject constructor(
     protected val _seasonNowAnimes: MutableStateFlow<List<Data>> = MutableStateFlow(emptyList())
     val seasonNowAnimes: StateFlow<List<Data>> = _seasonNowAnimes
 
-    protected val _isLoading:MutableStateFlow<Boolean> = MutableStateFlow(false)
-    var isLoading:MutableStateFlow<Boolean> = _isLoading
-
     /**
      * This is a pair of boolean and list of data
      * boolean are use for toggle between grid and linear layout

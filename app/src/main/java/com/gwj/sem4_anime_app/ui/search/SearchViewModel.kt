@@ -15,6 +15,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeout
+import kotlinx.coroutines.withTimeoutOrNull
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,9 +27,6 @@ class SearchViewModel @Inject constructor(
     val searchAnimes: MutableStateFlow<List<Data>> = _searchAnimes
     protected val _animeGenres: MutableStateFlow<List<DataX>> = MutableStateFlow(emptyList())
     val animeGenres: MutableStateFlow<List<DataX>> = _animeGenres
-
-    protected val _isLoading:MutableStateFlow<Boolean> = MutableStateFlow(false)
-    var isLoading:MutableStateFlow<Boolean> = _isLoading
 
     //Job to stop the search when user is typing too fast
     var searchJob: Job? = null
@@ -80,20 +79,8 @@ class SearchViewModel @Inject constructor(
     fun searchAnime(genres: String, query: String?) {
         //Log.d("debugging_SearchViewModel", "Genres ID: $genres, Query: $query")
         searchJob?.cancel() //cancel to prevent user from typing too fast.
-//        if (!query.isNullOrBlank()) { //if query is not null or blank then run the code
-//            currentGenresId = genres //Store the current genres
-//            currentQuery = query // Store the current query
-//            searchJob = viewModelScope.launch(Dispatchers.IO) {
-//                delay(300) //delay use to control the rate of the request if user is typing too fast
-//                safeApiCall {
-//                    Animes.searchAnime(genres, query).let {
-//                        _searchAnimes.value = it
-//                    }
-//                }
-//            }
-//        }
 
-        if (!query.isNullOrBlank() || genres.isNotBlank() || genres.isBlank()){
+        if (!query.isNullOrBlank() || genres.isNotBlank() || genres.isBlank()) {
             currentGenresId = genres //Store the current genres
             currentQuery = query!! // Store the current query
             searchJob = viewModelScope.launch(Dispatchers.IO) {
@@ -101,11 +88,17 @@ class SearchViewModel @Inject constructor(
                 safeApiCall {
                     Animes.searchAnime(genres, query).let {
                         _searchAnimes.value = it
+                        if (_searchAnimes.value.isEmpty()) {
+                            _noData.emit(true)
+                            Log.d("debugging_SearchViewModel", "No Data")
+                        } else {
+                            _noData.emit(false)
+                            Log.d("debugging_SearchViewModel", "Have Data")
+                        }
                     }
                 }
             }
         }
-
     }
 
     /**
