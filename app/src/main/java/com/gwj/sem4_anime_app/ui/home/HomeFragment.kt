@@ -135,11 +135,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         //====================== lifecycleScope SeasonNow Start ==================
         lifecycleScope.launch {
             viewModel.seasonNowAnimes.collect {
+                // if list is not empty, hide the progress bar
                 if (it.isNotEmpty()){
                     binding.progressBar.visibility = View.GONE
+                    binding.toggleGroup.visibility = View.VISIBLE
                     SeasonNowAnimeAdapter.baseSetSeasonNowAnimes(it)
                 }else{
                     binding.progressBar.visibility = View.VISIBLE
+                    binding.toggleGroup.visibility = View.GONE
                 }
             }
         }
@@ -152,7 +155,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         lifecycleScope.launch {
             viewModel.isLoading.collect { isLoading ->
-                // not() = false
+                // if isLoading is false mean the data is finish fetching, hide the progress bar
                 if (isLoading.not()) {
                     binding.myDotLoading.visibility = View.GONE
                 }else{
