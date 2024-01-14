@@ -1,6 +1,10 @@
 package com.gwj.sem4_anime_app.core.di
 
+import com.google.firebase.firestore.FirebaseFirestore
 import com.gwj.sem4_anime_app.core.services.AuthService
+import com.gwj.sem4_anime_app.data.model.FavouriteAnime
+import com.gwj.sem4_anime_app.data.repo.favourite.FavouriteAnimeRepo
+import com.gwj.sem4_anime_app.data.repo.favourite.FavouriteAnimeRepoImpl
 import com.gwj.sem4_anime_app.data.repo.user.UsersRepo
 import com.gwj.sem4_anime_app.data.repo.user.UsersRepoImpl
 import dagger.Module
@@ -19,4 +23,11 @@ class RepositoryModule {
     {
         return UsersRepoImpl(authService = authService)
     }
+
+    @Provides
+    @Singleton
+    fun provideFavouriteRepo(authService: AuthService): FavouriteAnimeRepo {
+        return FavouriteAnimeRepoImpl(authService)
+    }
+
 }
