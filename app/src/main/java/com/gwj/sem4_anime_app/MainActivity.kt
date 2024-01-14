@@ -1,11 +1,17 @@
 package com.gwj.sem4_anime_app
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.gwj.sem4_anime_app.core.util.NetworkManager
+import com.gwj.sem4_anime_app.ui.notifications.NotificationBroadcastReceiver
+import com.gwj.sem4_anime_app.ui.notifications.NotificationUtil.createNotificationChannel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        createNotificationChannel(this)
 
         //====================== No Connection Start =====================================
         // Create a new MaterialAlertDialogBuilder with the specified style
@@ -41,5 +48,29 @@ class MainActivity : AppCompatActivity() {
 
         window.statusBarColor = Color.BLACK;
         //====================== No Connection End =====================================
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, NotificationBroadcastReceiver::class.java)
+        intent.putExtra("title", "For annoying user purpose")
+        intent.putExtra("desc","You have been not using Anime App for a while")
+        val pendingIntent =
+            PendingIntent.getBroadcast(this, 123, intent, PendingIntent.FLAG_MUTABLE)
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 15000, pendingIntent)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, NotificationBroadcastReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(this, 123, intent, PendingIntent.FLAG_MUTABLE)
+
+        // Cancel the alarm
+        alarmManager.cancel(pendingIntent)
     }
 }

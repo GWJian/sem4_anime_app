@@ -1,0 +1,15 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="home"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/shortcut_home_short_label"
+        android:shortcutLongLabel="@string/shortcut_home_long_label"
+        android:shortcutDisabledMessage="@string/shortcut_disabled_message">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.gwj.sem4_anime_app"
+            android:targetClass="com.gwj.sem4_anime_app.ui.home.HomeFragment" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+</shortcuts>
