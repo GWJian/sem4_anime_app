@@ -93,13 +93,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                 return true
             }
         })
-
-//        lifecycleScope.launch{
-//            viewModel.searchAnimes.collect{
-//                SearchAnimeAdapter.setSearchAnimes(it)
-//            }
-//        }
-
     }
 
     override fun setupViewModelObserver() {

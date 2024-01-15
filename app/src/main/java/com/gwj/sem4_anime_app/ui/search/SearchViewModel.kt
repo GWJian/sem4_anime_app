@@ -31,7 +31,6 @@ class SearchViewModel @Inject constructor(
     //Job to stop the search when user is typing too fast
     var searchJob: Job? = null
     var currentPage = 1
-    //var isLoading = false
 
     /**
      * we need this to store the current query,if we pass empty string "", after search result reach end, then it will back to "" and show all anime again

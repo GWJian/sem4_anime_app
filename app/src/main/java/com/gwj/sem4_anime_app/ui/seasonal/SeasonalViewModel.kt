@@ -23,7 +23,6 @@ class SeasonalViewModel @Inject constructor(
     var year = "2020"
     var season = "spring"
     var currentPage = 1
-    //var isLoading = false
 
     init {
         getSeasonalAnimes()
@@ -47,26 +46,6 @@ class SeasonalViewModel @Inject constructor(
             }
         }
     }
-
-//    fun loadMoreItems() {
-//        if (!isLoading) {
-//
-//            isLoading = true
-//
-//            currentPage++
-//            viewModelScope.launch(Dispatchers.IO) {
-//                delay(1000)
-//                safeApiCall {
-//                    SeasonalAnimes.getSeasonalAnime(year, season, currentPage).let { anime ->
-//                        val currentAnimes = _seasonalAnimes.value
-//                        _seasonalAnimes.value = currentAnimes + anime
-//                        isLoading = false
-//                    }
-//                }
-//            }
-//
-//        }
-//    }
 
     fun loadMoreItems() {
         if (!_isLoading.value) {

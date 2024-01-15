@@ -34,7 +34,6 @@ class HomeViewModel @Inject constructor(
     val toggleIsGridOrLinear: StateFlow<Pair<Boolean, List<Data>>> = _toggleIsGridOrLinear
 
     var currentPage = 1
-    //var isLoading = false
 
     init {
         getTopAnimes()
