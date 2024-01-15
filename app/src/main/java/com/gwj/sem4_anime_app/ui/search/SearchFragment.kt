@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,8 @@ import com.gwj.sem4_anime_app.databinding.FragmentSearchBinding
 import com.gwj.sem4_anime_app.ui.adapter.SearchAnimeAdapter
 import com.gwj.sem4_anime_app.ui.tabContainer.TabContainerFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.Arrays
 
@@ -35,6 +38,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     override fun setupUIComponents() {
+        ViewCompat.requestApplyInsets(binding.coordinator)
         super.setupUIComponents()
         setupAdapter()
     }
@@ -89,18 +93,49 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                 return true
             }
         })
-
     }
 
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()
 
+        //========================== Search Anime =============================
         lifecycleScope.launch {
             viewModel.searchAnimes.collect {
-                SearchAnimeAdapter.setSearchAnimes(it)
+                if (it.isNotEmpty()) {
+                    binding.progressBar.visibility = View.GONE
+                    SearchAnimeAdapter.setSearchAnimes(it)
+                } else {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
             }
         }
 
+        lifecycleScope.launch {
+            viewModel.noData.collect { noData ->
+                if (noData) {
+                    delay(8000)
+                    binding.noDataImage.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+                } else {
+                    binding.noDataImage.visibility = View.GONE
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.isLoading.collect { isLoading ->
+                // not() = false
+                if (isLoading.not()) {
+                    binding.myDotLoading.visibility = View.GONE
+                }else{
+                    binding.myDotLoading.visibility = View.VISIBLE
+                }
+            }
+        }
+        //========================== Search Anime =============================
+
+
+        //========================== Anime Genres =============================
         lifecycleScope.launch {
             viewModel.animeGenres.collect { animeGenres ->
                 // initialise the list items for the alert dialog
@@ -145,7 +180,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                 }
             }
         }
-
+        //========================== Anime Genres =============================
     }
 
 

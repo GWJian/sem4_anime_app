@@ -18,7 +18,6 @@ class VideoViewModel @Inject constructor(
 ) : BaseViewModel() {
     private val _animeVideo: MutableStateFlow<Data?> = MutableStateFlow(null)
     val animeVideo: StateFlow<Data?> = _animeVideo
-    //TODO after trailer.can try https://api.jikan.moe/v4/anime/52991/videos,this have multiple pv
 
     fun getAnimeVideo(animeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {

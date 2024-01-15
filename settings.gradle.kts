@@ -10,6 +10,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+
+        //When you are using the Kotlin DSL for build.gradle.kts
+        maven {url = uri("https://jitpack.io")}
     }
 }
 
