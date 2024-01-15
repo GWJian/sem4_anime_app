@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -50,6 +51,7 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
     }
 
     override fun setupUIComponents() {
+        ViewCompat.requestApplyInsets(binding.coordinator)
         super.setupUIComponents()
         setupSeasonalAdapter()
     }
@@ -88,7 +90,6 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
         })
     }
 
-    //TODO ASK SIR:also ask why home CollapsingToolbarLayout when back from content,it will auto back to top
     private fun setupYearForAutoCompleteTextView() {
         //set array to AutoCompleteTextView
         //{it.toString()} this will convert int to string, toTypedArray = toArray
