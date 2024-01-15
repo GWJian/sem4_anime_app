@@ -29,6 +29,11 @@
     <string name="fullscreenbtn">fullscreenBtn</string>
     <string name="pause_play">pause play</string>
     <string name="register">Register</string>
+    <string name="placeholder_user">PlaceHolder User</string>
+    <string name="added_on">Added On</string>
+    <string name="content">Content</string>
+    <string name="comment">Comment</string>
+    <string name="delete_button">Delete Button</string>
 
 
 </resources>

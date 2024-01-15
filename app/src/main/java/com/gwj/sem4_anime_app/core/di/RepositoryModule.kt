@@ -1,6 +1,11 @@
 package com.gwj.sem4_anime_app.core.di
 
 import com.gwj.sem4_anime_app.core.services.AuthService
+import com.gwj.sem4_anime_app.data.api.AnimeApi
+import com.gwj.sem4_anime_app.data.repo.anime.AnimeRepo
+import com.gwj.sem4_anime_app.data.repo.anime.AnimeRepoImpl
+import com.gwj.sem4_anime_app.data.repo.comment.CommentRepo
+import com.gwj.sem4_anime_app.data.repo.comment.CommentRepoImpl
 import com.gwj.sem4_anime_app.data.repo.user.UsersRepo
 import com.gwj.sem4_anime_app.data.repo.user.UsersRepoImpl
 import dagger.Module
@@ -19,4 +24,17 @@ class RepositoryModule {
     {
         return UsersRepoImpl(authService = authService)
     }
+
+    @Provides
+    @Singleton
+    fun provideCommentRepo(authService: AuthService): CommentRepo
+    {
+        return CommentRepoImpl(authService = authService)
+    }
+
+//    @Provides
+//    @Singleton
+//    fun provideAnimeRepo(animeApi: AnimeApi): AnimeRepo {
+//        return AnimeRepoImpl(animeApi)
+//    }
 }

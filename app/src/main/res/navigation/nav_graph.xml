@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/tabContainerFragment">
+    app:startDestination="@id/loginFragment">
 
     <action
         android:id="@+id/login_to_register"
@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_contentFragment_to_videoFragment"
             app:destination="@id/videoFragment" />
+        <action
+            android:id="@+id/action_contentFragment_to_commentFragment"
+            app:destination="@id/commentFragment" />
     </fragment>
 
     <fragment
@@ -72,6 +75,17 @@
         <argument
             android:name="animeId"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/commentFragment"
+        android:name="com.gwj.sem4_anime_app.ui.add_comment.CommentFragment"
+        android:label="fragment_comment"
+        tools:layout="@layout/fragment_comment">
+
+        <argument
+            android:name="animeId"
+            app:argType="string" />
+
     </fragment>
 
 </navigation>

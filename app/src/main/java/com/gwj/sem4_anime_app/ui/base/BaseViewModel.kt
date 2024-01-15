@@ -1,5 +1,6 @@
 package com.gwj.recipesapp.ui.base
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +18,9 @@ abstract class BaseViewModel:ViewModel() {
         return try {
             callback()
         } catch (e: Exception) {
-            //throw e
+//            throw e
+            e.printStackTrace()
+            Log.d("testconnect", e.toString())
             _error.emit(e.message ?: "Something went wrong")
             null
         }

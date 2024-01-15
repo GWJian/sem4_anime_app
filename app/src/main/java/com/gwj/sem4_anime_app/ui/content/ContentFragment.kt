@@ -11,11 +11,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.gwj.recipesapp.ui.base.BaseFragment
 import com.gwj.recipesapp.ui.base.BaseViewModel
 import com.gwj.sem4_anime_app.R
 import com.gwj.sem4_anime_app.databinding.FragmentContentBinding
+import com.gwj.sem4_anime_app.ui.adapter.CommentAdapter
+import com.gwj.sem4_anime_app.ui.add_comment.CommentFragmentDirections
+import com.gwj.sem4_anime_app.ui.register.RegisterFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -23,6 +27,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class ContentFragment : BaseFragment<FragmentContentBinding>() {
     override val viewModel: ContentViewModel by viewModels()
+    private lateinit var CommentAdapter: CommentAdapter
     val args: ContentFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -35,15 +40,37 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
 
     override fun setupUIComponents() {
         super.setupUIComponents()
+        setupCommentAdapter()
         viewModel.getAnimeDetail(args.animeId.toInt()) //get anime by id
+
+        viewModel.getAllComments(args.animeId.toInt())
 
         binding.contentBackBtn.setOnClickListener {
             navController.popBackStack()
         }
+        binding.BtnCommentTo.setOnClickListener {
+            val action = ContentFragmentDirections.actionContentFragmentToCommentFragment(args.animeId)
+            navController.navigate(action)
+        }
+    }
+    private fun setupCommentAdapter() {
+        CommentAdapter = CommentAdapter(emptyList())
+//        CommentAdapter.listener = object: CommentAdapter.Listener {
+//
+//        }
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.rvComments.adapter = CommentAdapter
+        binding.rvComments.layoutManager = layoutManager
     }
 
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()
+
+        lifecycleScope.launch {
+            viewModel.comment.collect() {
+                CommentAdapter.setComments(it)
+            }
+        }
 
         lifecycleScope.launch {
             viewModel.anime.collect { animeDetail ->
