@@ -25,8 +25,6 @@ class MainActivity: AppCompatActivity() {
     lateinit var authService: AuthService
     lateinit var navController: NavController
 
-class MainActivity : AppCompatActivity() {
-
     private lateinit var dialog: AlertDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
