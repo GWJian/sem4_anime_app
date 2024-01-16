@@ -3,14 +3,14 @@ package com.gwj.sem4_anime_app.data.model
 data class Users (
     val id: String? = null,
     val username:String,
-    val useremail:String,
-    val userimg:String? ="",
+    val email:String,
+    val profilePicUrl: String? ="",
 ) {
     fun toHashMap(): HashMap<String, String?> {
         return hashMapOf(
             "username" to username,
-            "useremail" to useremail,
-            "userimg" to userimg
+            "email" to email,
+            "profilePicUrl" to profilePicUrl
         )
     }
 
@@ -19,8 +19,8 @@ data class Users (
             return Users(
                 id = hash["id"].toString(),
                 username = hash["username"].toString(),
-                useremail = hash["useremail"].toString(),
-                userimg = hash["userimg"].toString()
+                email = hash["email"].toString(),
+                profilePicUrl = hash["profilePicUrl"].toString()
             )
         }
     }

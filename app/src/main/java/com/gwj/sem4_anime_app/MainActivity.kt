@@ -7,20 +7,37 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import com.gwj.sem4_anime_app.core.services.AuthService
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.gwj.sem4_anime_app.core.util.NetworkManager
 import com.gwj.sem4_anime_app.ui.notifications.NotificationBroadcastReceiver
 import com.gwj.sem4_anime_app.ui.notifications.NotificationUtil.createNotificationChannel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity: AppCompatActivity() {
+
+    @Inject
+    lateinit var authService: AuthService
+    lateinit var navController: NavController
 
     private lateinit var dialog: AlertDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        navController = findNavController(R.id.navHostFragment)
+
+        val currentUser = authService.getCurrentUser()
+
+        if (currentUser != null) {
+            navController.navigate(R.id.tabContainerFragment)
+        }
+
         createNotificationChannel(this)
 
         //====================== No Connection Start =====================================
@@ -73,4 +90,6 @@ class MainActivity : AppCompatActivity() {
         // Cancel the alarm
         alarmManager.cancel(pendingIntent)
     }
+
+
 }

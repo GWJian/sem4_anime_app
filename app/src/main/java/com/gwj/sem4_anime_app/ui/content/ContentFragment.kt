@@ -15,6 +15,8 @@ import com.bumptech.glide.Glide
 import com.gwj.recipesapp.ui.base.BaseFragment
 import com.gwj.recipesapp.ui.base.BaseViewModel
 import com.gwj.sem4_anime_app.R
+import com.gwj.sem4_anime_app.data.model.FavouriteAnime
+import com.gwj.sem4_anime_app.data.repo.favourite.FavouriteAnimeRepo
 import com.gwj.sem4_anime_app.databinding.FragmentContentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -24,6 +26,9 @@ import kotlinx.coroutines.launch
 class ContentFragment : BaseFragment<FragmentContentBinding>() {
     override val viewModel: ContentViewModel by viewModels()
     val args: ContentFragmentArgs by navArgs()
+
+    private var isFavourite = false
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,10 +45,33 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
         binding.contentBackBtn.setOnClickListener {
             navController.popBackStack()
         }
+
+        binding.favoriteBtn.setOnClickListener {
+            if (isFavourite) {
+                viewModel.removeFavourite(args.animeId)
+            } else  {
+                viewModel.addFavourite(args.animeId)
+            }
+
+        }
     }
 
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()
+
+        lifecycleScope.launch {
+            viewModel.favourite.collect {
+                if(it != null) {
+                    isFavourite = true
+                    binding.favoriteBtn.setImageResource(R.drawable.ic_bookmark_favourite)
+                } else {
+                    isFavourite = false
+                    binding.favoriteBtn.setImageResource(R.drawable.ic_bookmark_unfavourite)
+                }
+
+            }
+        }
+
 
         lifecycleScope.launch {
             viewModel.anime.collect { animeDetail ->

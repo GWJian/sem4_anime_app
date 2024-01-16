@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/tabContainerFragment">
+    app:startDestination="@id/loginFragment">
 
     <action
         android:id="@+id/login_to_register"
@@ -22,6 +22,25 @@
         app:popUpTo="@id/loginFragment"
         app:popUpToInclusive="true"
         app:destination="@id/tabContainerFragment" />
+
+    <action
+        android:id="@+id/tabContainer_to_login"
+        app:popUpTo="@id/tabContainerFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/loginFragment" />
+
+    <action
+        android:id="@+id/tabContainer_to_fave"
+        app:popUpTo="@id/tabContainerFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/favouriteFragment" />
+
+    <action
+        android:id="@+id/fave_to_tabContainer"
+        app:popUpTo="@id/favouriteFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/tabContainerFragment" />
+
 
     <fragment
         android:id="@+id/contentFragment"
@@ -55,6 +74,7 @@
         android:label="fragment_register"
         tools:layout="@layout/fragment_register">
     </fragment>
+
     <fragment
         android:id="@+id/tabContainerFragment"
         tools:layout="@layout/fragment_tab_container"
@@ -64,6 +84,17 @@
             android:id="@+id/action_tabContainerFragment_to_contentFragment"
             app:destination="@id/contentFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="com.gwj.sem4_anime_app.ui.favourite.FavouriteFragment"
+        android:label="fragment_favourite"
+        tools:layout="@layout/fragment_favourite" >
+        <action
+            android:id="@+id/favouriteFragment_to_contentFragment"
+            app:destination="@id/contentFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/videoFragment"
         tools:layout="@layout/fragment_video"

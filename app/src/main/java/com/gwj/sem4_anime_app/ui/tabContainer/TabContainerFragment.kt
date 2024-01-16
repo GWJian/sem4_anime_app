@@ -9,6 +9,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.gwj.sem4_anime_app.databinding.FragmentTabContainerBinding
 import com.gwj.sem4_anime_app.ui.adapter.FragmentAdapter
 import com.gwj.sem4_anime_app.ui.home.HomeFragment
+import com.gwj.sem4_anime_app.ui.profile.ProfileFragment
 import com.gwj.sem4_anime_app.ui.random.RandomAnimeFragment
 import com.gwj.sem4_anime_app.ui.search.SearchFragment
 import com.gwj.sem4_anime_app.ui.seasonal.SeasonalFragment
@@ -31,7 +32,7 @@ class TabContainerFragment : Fragment() {
 
         binding.vpContainer.adapter = FragmentAdapter(
             this,
-            listOf(HomeFragment(), SearchFragment(),SeasonalFragment())
+            listOf(HomeFragment(), SearchFragment(), SeasonalFragment(), ProfileFragment() )
         )
 
         TabLayoutMediator(binding.tlTabs, binding.vpContainer) { tab, position ->
@@ -44,9 +45,14 @@ class TabContainerFragment : Fragment() {
                     tab.text = "Search"
                 }
 
-                else -> {
+                2 -> {
                     tab.text = "Season"
                 }
+
+                3 -> {
+                    tab.text = "Profile"
+                }
+
             }
         }.attach()
 
