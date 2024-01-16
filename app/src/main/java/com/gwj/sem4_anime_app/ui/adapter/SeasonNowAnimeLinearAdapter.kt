@@ -1,19 +1,20 @@
 package com.gwj.sem4_anime_app.ui.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.databinding.ItemLayoutTopAnimeBinding
+import com.gwj.sem4_anime_app.databinding.LayoutSearchItemBinding
 
-class SeasonNowAnimeAdapter(
+class SeasonNowAnimeLinearAdapter(
     seasonNowAnimes: List<Data>,
 ) : BaseSeasonNowAnimeAdapter(seasonNowAnimes) {
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeasonNowAnimeViewHolder {
-        val binding = ItemLayoutTopAnimeBinding.inflate(
+        val binding = LayoutSearchItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -22,24 +23,28 @@ class SeasonNowAnimeAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        //Log.d("debugging_seasonnow", seasonNowAnimes.toString())
         val item = seasonNowAnimes[position]
-        if (holder is SeasonNowAnimeViewHolder) {
+        if (holder is SeasonNowAnimeViewHolder){
             holder.bind(item)
         }
     }
 
     inner class SeasonNowAnimeViewHolder(
-        private val binding: ItemLayoutTopAnimeBinding
+        private val binding: LayoutSearchItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(topAnime: Data) {
+        fun bind(data: Data) {
             binding.run {
                 Glide.with(binding.root)
-                    .load(topAnime.images.jpg.image_url)
+                    .load(data.images.jpg.image_url)
                     .into(ivAnimeImg)
 
-                cvAnime.setOnClickListener {
-                    listener?.onClick(topAnime)
+                tvAnimeName.text = data.title
+                tvAnimeEpisodes.text = "Episode: ${data.episodes}" //put this in String file
+                tvAnimeType.text = data.type
+                tvAnimeYear.text = "Year: ${data.year}"
+
+                searchCV.setOnClickListener {
+                    listener?.onClick(data)
                 }
             }
         }

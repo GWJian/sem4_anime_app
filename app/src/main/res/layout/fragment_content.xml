@@ -136,13 +136,23 @@
                 style="@style/TextAppearance.Material3.TitleMedium" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/contentTrailerPV1"
+                android:id="@+id/contentTrailer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/pv1"
+                android:text="@string/trailer"
                 android:backgroundTint="@color/blue"
                 app:cornerRadius="4dp"
                 style="@style/ShapeAppearanceOverlay.Material3.Button" />
+
+        <TextView
+            android:id="@+id/contentNoTrailer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginVertical="10dp"
+            android:textSize="20sp"
+            android:visibility="gone"
+            android:text="@string/no_trailer_available"/>
 
             <LinearLayout
                 android:id="@+id/contentScroll"

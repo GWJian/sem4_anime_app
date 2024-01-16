@@ -39,7 +39,6 @@ class SearchAnimeAdapter(
     inner class SearchAnimeViewHolder(
         private val binding: LayoutSearchItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        @SuppressLint("SetTextI18n") //Todo Ask sir
         fun bind(data: Data) {
             binding.run {
                 Glide.with(binding.root)
@@ -47,7 +46,7 @@ class SearchAnimeAdapter(
                     .into(ivAnimeImg)
 
                 tvAnimeName.text = data.title
-                tvAnimeEpisodes.text = "Episode: ${data.episodes}"
+                tvAnimeEpisodes.text = "Episode: ${data.episodes}" //put this in String file
                 tvAnimeType.text = data.type
                 tvAnimeYear.text = "Year: ${data.year}"
 

@@ -25,7 +25,21 @@
     <string name="status">Status :</string>
     <string name="duration">Duration :</string>
     <string name="source">Source :</string>
+    <string name="no_trailer_available">No Trailer Available</string>
+    <string name="fullscreenbtn">fullscreenBtn</string>
+    <string name="pause_play">pause play</string>
     <string name="register">Register</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+
+    <string name="shortcut_home_short_label">Home</string>
+    <string name="shortcut_home_long_label">Go to Home page</string>
+    <string name="shortcut_disabled_message">This shortcut is disabled</string>
+
+    <string name="shortcut_search_short_label">Search</string>
+    <string name="shortcut_search_long_label">Go to Search page</string>
+
+    <string name="shortcut_seasonal_short_label">Seasonal</string>
+    <string name="shortcut_seasonal_long_label">Go to Seasonal page</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

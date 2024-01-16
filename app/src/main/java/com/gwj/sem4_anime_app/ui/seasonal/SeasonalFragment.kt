@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +29,18 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
     override val viewModel: SeasonalViewModel by viewModels()
     private lateinit var seasonalAdapter: SeasonalAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(
+                Lifecycle.State.RESUMED
+            ) {
+                setupYearForAutoCompleteTextView()
+                setupSeasonalForAutoCompleteTextView()
+            }
+
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,16 +50,10 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
         return binding.root
     }
 
-
     override fun setupUIComponents() {
+        ViewCompat.requestApplyInsets(binding.coordinator)
         super.setupUIComponents()
         setupSeasonalAdapter()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        setupYearForAutoCompleteTextView() //TODO should i use onResume? if i don't use it,why back to seasonal.xml,spinner not working anymore
-        setupSeasonalForAutoCompleteTextView()
     }
 
     private fun setupSeasonalAdapter() {
@@ -72,21 +81,19 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
                 val totalItemCount = seasonalLayoutManager.itemCount
                 val lastAnime = seasonalLayoutManager.findLastVisibleItemPosition()
 
-                if (totalItemCount <= lastAnime + 2) {
+                if (totalItemCount <= lastAnime + 1) {
                     viewModel.loadMoreItems()
                 }
 
             }
 
         })
-
     }
 
-    //TODO ASK SIR:also ask why home CollapsingToolbarLayout when back from content,it will auto back to top
     private fun setupYearForAutoCompleteTextView() {
         //set array to AutoCompleteTextView
-        //{it.toString()} this will convert int to string
-        val years = (2024 downTo 1927).map {it.toString()}.toTypedArray()
+        //{it.toString()} this will convert int to string, toTypedArray = toArray
+        val years = (2024 downTo 1927).map { it.toString() }.toTypedArray()
         val yearAdapter =
             ArrayAdapter(
                 requireContext(),
@@ -95,7 +102,7 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
             )
         binding.ACTVYear.setAdapter(yearAdapter)
         //pass selected data to viewModel
-        //setOnItemClickListener cuz we want to get selected list item
+        //setOnItemClickListener cuz using AutoCompleteTextView
         binding.ACTVYear.setOnItemClickListener { _, _, position, _ ->
             val selectedYear = years[position]
             //selectedYear => user selected year, viewModel.season => get season from viewModel
@@ -126,11 +133,26 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
         super.setupViewModelObserver()
 
         lifecycleScope.launch {
-            viewModel.seasonalAnimes.collect() {
-                seasonalAdapter.setSeasonalAnimes(it)
+            viewModel.seasonalAnimes.collect {
+                if (it.isNotEmpty()) {
+                    binding.progressBar.visibility = View.GONE
+                    seasonalAdapter.setSeasonalAnimes(it)
+                } else {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
             }
         }
 
+        lifecycleScope.launch {
+            viewModel.isLoading.collect { isLoading ->
+                // not() = false
+                if (isLoading.not()) {
+                    binding.myDotLoading.visibility = View.GONE
+                }else{
+                    binding.myDotLoading.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
 

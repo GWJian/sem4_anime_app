@@ -103,4 +103,17 @@ dependencies {
     //glide for image
     implementation("com.github.bumptech.glide:glide:4.16.0")
     ksp("com.github.bumptech.glide:ksp:4.14.2")
-}
+
+    //youtube
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:chromecast-sender:0.28")
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:custom-ui:12.1.0")
+
+    //button
+    implementation ("nl.bryanderidder:themed-toggle-button-group:1.4.1")
+
+    //loading
+    implementation ("com.github.hall9zeha:DotsLoadingView:2.0.0")
+    implementation ("com.github.Marvel999:Android-Loading-Animation:1.0.0")
+
+    }
