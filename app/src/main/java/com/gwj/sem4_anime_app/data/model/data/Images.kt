@@ -5,10 +5,10 @@ data class Images(
     val webp: Webp
 ) {
    companion object {
-       fun fromHashMap(hash: Map<String, Any>): Images {
+       fun fromHashMap(hash: Map<*, *>): Images {
            return Images(
-               jpg = Jpg("", "", ""),
-               webp = Webp("", "", "")
+               jpg = Jpg.fromHashMap(hash["jpg"] as Map<*, *>),
+               webp = Webp.fromHashMap(hash["webp"] as Map<*, *>)
            )
        }
 

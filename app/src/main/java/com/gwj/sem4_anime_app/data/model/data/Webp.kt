@@ -6,7 +6,7 @@ data class Webp(
     val small_image_url: String
 ) {
     companion object {
-        fun fromHashMap(hash: Map<String, Any>): Webp {
+        fun fromHashMap(hash: Map<*, *>): Webp {
             return Webp(
                 image_url = hash["image_url"].toString(),
                 large_image_url = hash["large_image_url"].toString(),

@@ -1,6 +1,7 @@
 package com.gwj.sem4_anime_app.ui.favourite
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.gwj.recipesapp.ui.base.BaseFragment
 import com.gwj.recipesapp.ui.base.BaseViewModel
 import com.gwj.sem4_anime_app.R
 import com.gwj.sem4_anime_app.data.model.Data
+import com.gwj.sem4_anime_app.data.model.FavouriteAnime
 import com.gwj.sem4_anime_app.databinding.FragmentFavouriteBinding
 import com.gwj.sem4_anime_app.ui.adapter.FavouriteAnimeAdapter
 import com.gwj.sem4_anime_app.ui.adapter.HorizontalTopAnimeAdapter
@@ -50,7 +52,7 @@ class FavouriteFragment : BaseFragment<FragmentFavouriteBinding>() {
     private fun setupFavouriteAnimeAdapter() {
         FavouriteAnimeAdapter = FavouriteAnimeAdapter(emptyList())
         FavouriteAnimeAdapter.listener = object: FavouriteAnimeAdapter.Listener {
-            override fun onClick(animeId: Data) {
+            override fun onClick(animeId: FavouriteAnime) {
                 val action =
                     FavouriteFragmentDirections.favouriteFragmentToContentFragment(
                         animeId.mal_id.toString()

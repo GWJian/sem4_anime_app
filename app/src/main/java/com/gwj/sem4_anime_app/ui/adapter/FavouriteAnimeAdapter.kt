@@ -1,5 +1,6 @@
 package com.gwj.sem4_anime_app.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -47,12 +48,10 @@ class FavouriteAnimeAdapter(
             binding.run {
 
                 Glide.with(itemView)
-                    .load(anime.images)
+                    .load(anime.images.jpg.image_url)
                     .into(ivAnimeImg)
 
-                tvAnimeName.text = "Anime name: ${anime.title}"
-                tvAnimeEpisodes.text = "Episodes: ${anime.episodes}"
-                tvAnimeType.text = "Type: ${anime.type}"
+                tvAnimeName.text = "${anime.title}"
 
             }
         }
@@ -60,7 +59,8 @@ class FavouriteAnimeAdapter(
 
 
     interface Listener {
-        fun onClick(animeId: Data)
+        // Click does not send to content fragment
+        fun onClick(animeId: FavouriteAnime)
     }
 
 }

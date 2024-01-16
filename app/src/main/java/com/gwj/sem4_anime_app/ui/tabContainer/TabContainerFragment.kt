@@ -32,7 +32,7 @@ class TabContainerFragment : Fragment() {
 
         binding.vpContainer.adapter = FragmentAdapter(
             this,
-            listOf(HomeFragment(), SearchFragment(), RandomAnimeFragment(), ProfileFragment(), SeasonalFragment())
+            listOf(HomeFragment(), SearchFragment(), SeasonalFragment(), ProfileFragment() )
         )
 
         TabLayoutMediator(binding.tlTabs, binding.vpContainer) { tab, position ->
@@ -46,16 +46,13 @@ class TabContainerFragment : Fragment() {
                 }
 
                 2 -> {
-                    tab.text = "Random"
+                    tab.text = "Season"
                 }
 
                 3 -> {
                     tab.text = "Profile"
                 }
 
-                else -> {
-                    tab.text = "Season"
-                }
             }
         }.attach()
     }

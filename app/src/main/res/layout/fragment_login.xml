@@ -54,13 +54,14 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/logBtn"
         android:layout_gravity="center"
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         style="@style/ShapeAppearanceOverlay.Material3.Button"
         app:cornerRadius="4dp"
         android:backgroundTint="@color/black"
         android:text="@string/log_in"
+        android:paddingHorizontal="130dp"
         />
 
     <LinearLayout

@@ -1,5 +1,6 @@
 package com.gwj.sem4_anime_app.data.model
 
+import android.util.Log
 import com.gwj.sem4_anime_app.data.model.data.Images
 import com.gwj.sem4_anime_app.data.model.data.Jpg
 import com.gwj.sem4_anime_app.data.model.data.Webp
@@ -27,14 +28,13 @@ data class FavouriteAnime(
     companion object {
 
         fun fromHashMap(hash: Map<String, Any?>): FavouriteAnime {
-
             return FavouriteAnime(
                 id = hash["id"].toString(),
                 mal_id = hash["mal_id"].toString().toIntOrNull(),
                 title = hash["title"].toString(),
                 episodes = hash["episodes"].toString().toIntOrNull(),
                 type = hash["type"].toString(),
-                images = Images(Jpg("", "", ""), Webp("","",""))
+                images = Images.fromHashMap(hash["images"] as Map<*, *>)
             )
         }
     }

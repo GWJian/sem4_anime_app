@@ -57,13 +57,13 @@
             android:textAlignment="textStart"
             android:text="Favourites" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnComments"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:icon="@drawable/ic_comment"
-            android:textAlignment="textStart"
-            android:text="Comments" />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnComments"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:icon="@drawable/ic_comment"-->
+<!--            android:textAlignment="textStart"-->
+<!--            android:text="Comments" />-->
 
 
     </LinearLayout>
