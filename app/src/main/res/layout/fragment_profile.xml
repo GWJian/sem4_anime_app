@@ -29,7 +29,7 @@
             android:layout_gravity="bottom|end"
             android:contentDescription="Edit Profile Pic"
             android:src="@drawable/ic_add"
-            app:tint="@color/black" />
+            app:tint="@color/dim" />
 
     </FrameLayout>
 
@@ -55,6 +55,7 @@
             app:icon="@drawable/ic_bookmark_favourite"
             android:layout_marginBottom="20dp"
             android:textAlignment="textStart"
+            android:backgroundTint="@color/dark"
             android:text="Favourites" />
 
 <!--        <com.google.android.material.button.MaterialButton-->
@@ -75,7 +76,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         app:icon="@drawable/ic_logout"
+        app:iconTint="@color/red"
+        android:backgroundTint="@color/gray"
         android:textAlignment="textStart"
+        android:textColor="@color/red"
         android:text="Logout" />
 
 

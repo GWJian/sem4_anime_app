@@ -47,6 +47,10 @@ class FavouriteAnimeAdapter(
         fun bind(anime: FavouriteAnime) {
             binding.run {
 
+                favouriteCV.setOnClickListener {
+                    listener?.onClick(anime)
+                }
+
                 Glide.with(itemView)
                     .load(anime.images.jpg.image_url)
                     .into(ivAnimeImg)

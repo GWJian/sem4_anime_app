@@ -86,6 +86,12 @@
     </fragment>
 
     <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.gwj.sem4_anime_app.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
         android:id="@+id/favouriteFragment"
         android:name="com.gwj.sem4_anime_app.ui.favourite.FavouriteFragment"
         android:label="fragment_favourite"

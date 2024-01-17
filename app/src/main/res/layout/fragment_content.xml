@@ -51,7 +51,7 @@
                     android:id="@+id/contentImage"
                     android:layout_gravity="start"
                     android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_height="170dp"
                     android:src="@drawable/ic_image"
                     android:contentDescription="@string/content_to_be_displayed"
                     android:scaleType="fitXY" />

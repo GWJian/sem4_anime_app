@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -44,6 +45,9 @@ class FavouriteFragment : BaseFragment<FragmentFavouriteBinding>() {
         setupFavouriteAnimeAdapter()
 
         binding.btnBack.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("profile", 3)
+            setFragmentResult("profile", bundle)
             val action = FavouriteFragmentDirections.faveToTabContainer()
             navController.navigate(action)
         }
