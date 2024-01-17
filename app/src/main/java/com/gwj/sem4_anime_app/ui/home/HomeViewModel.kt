@@ -35,7 +35,8 @@ class HomeViewModel @Inject constructor(
 
     var currentPage = 1
 
-    init {
+    override fun onCreate() {
+        super.onCreate()
         getTopAnimes()
         getSeasonNowAnimes()
     }
@@ -58,6 +59,7 @@ class HomeViewModel @Inject constructor(
             safeApiCall {
                 Animes.getSeasonNowAnime().let {
                     _seasonNowAnimes.value = it
+                    _toggleIsGridOrLinear.value = Pair(true, it)
                     _isFetchingData.emit(false)
                 }
             }

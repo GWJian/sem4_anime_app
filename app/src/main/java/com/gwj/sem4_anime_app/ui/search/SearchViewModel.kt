@@ -40,7 +40,8 @@ class SearchViewModel @Inject constructor(
     var currentQuery = ""
     var currentGenresId = ""
 
-    init {
+    override fun onCreate() {
+        super.onCreate()
         getAllAnimes()
         getAnimeGenres()
         searchAnime("", "")

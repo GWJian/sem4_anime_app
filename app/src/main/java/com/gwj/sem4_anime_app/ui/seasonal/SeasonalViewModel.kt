@@ -24,7 +24,8 @@ class SeasonalViewModel @Inject constructor(
     var season = "spring"
     var currentPage = 1
 
-    init {
+    override fun onCreate() {
+        super.onCreate()
         getSeasonalAnimes()
     }
 
