@@ -1,12 +1,15 @@
 package com.gwj.sem4_anime_app.ui.tabContainer
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import com.google.android.material.tabs.TabLayoutMediator
+import com.gwj.sem4_anime_app.R
 import com.gwj.sem4_anime_app.databinding.FragmentTabContainerBinding
 import com.gwj.sem4_anime_app.ui.adapter.FragmentAdapter
 import com.gwj.sem4_anime_app.ui.home.HomeFragment
@@ -18,6 +21,28 @@ import com.gwj.sem4_anime_app.ui.seasonal.SeasonalFragment
 class TabContainerFragment : Fragment() {
 
     private lateinit var binding: FragmentTabContainerBinding
+
+    //======================== Exit App Start ========================================
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val callback = object : OnBackPressedCallback(true /* enabled by default */) {
+            override fun handleOnBackPressed() {
+                // Show dialog to confirm exit app
+                AlertDialog.Builder(requireContext())
+                    .setTitle(getString(R.string.exit_app))
+                    .setMessage(getString(R.string.are_you_sure))
+                    .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                        // Exit the app
+                        activity?.finish()
+                    }
+                    .setNegativeButton(getString(R.string.no), null)
+                    .show()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+    //======================== Exit App End ========================================
 
     override fun onCreateView(
         inflater: LayoutInflater,
