@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import com.google.android.material.tabs.TabLayoutMediator
 import com.gwj.sem4_anime_app.databinding.FragmentTabContainerBinding
 import com.gwj.sem4_anime_app.ui.adapter.FragmentAdapter
@@ -34,6 +35,10 @@ class TabContainerFragment : Fragment() {
             this,
             listOf(HomeFragment(), SearchFragment(), SeasonalFragment(), ProfileFragment() )
         )
+
+        setFragmentResultListener("profile") { _, result ->
+            binding.vpContainer.setCurrentItem(3, false)
+        }
 
         TabLayoutMediator(binding.tlTabs, binding.vpContainer) { tab, position ->
             when (position) {
