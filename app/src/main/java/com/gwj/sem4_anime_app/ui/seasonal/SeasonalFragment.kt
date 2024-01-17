@@ -54,6 +54,32 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
         setupSeasonalAdapter()
     }
 
+    override fun setupViewModelObserver() {
+        super.setupViewModelObserver()
+
+        lifecycleScope.launch {
+            viewModel.seasonalAnimes.collect {
+                if (it.isNotEmpty()) {
+                    binding.progressBar.visibility = View.GONE
+                    seasonalAdapter.setSeasonalAnimes(it)
+                } else {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.isLoading.collect { isLoading ->
+                // not() = false
+                if (isLoading.not()) {
+                    binding.myDotLoading.visibility = View.GONE
+                }else{
+                    binding.myDotLoading.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
     private fun setupSeasonalAdapter() {
         seasonalAdapter = SeasonalAdapter(emptyList())
         seasonalAdapter.listener = object : SeasonalAdapter.Listener {
@@ -124,32 +150,6 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
             val selectedSeason = seasonal[position]
             //viewModel.year => get year from viewModel, selectedSeason => user selected season
             viewModel.updateSeasonalAnimes(viewModel.year, selectedSeason)
-        }
-    }
-
-    override fun setupViewModelObserver() {
-        super.setupViewModelObserver()
-
-        lifecycleScope.launch {
-            viewModel.seasonalAnimes.collect {
-                if (it.isNotEmpty()) {
-                    binding.progressBar.visibility = View.GONE
-                    seasonalAdapter.setSeasonalAnimes(it)
-                } else {
-                    binding.progressBar.visibility = View.VISIBLE
-                }
-            }
-        }
-
-        lifecycleScope.launch {
-            viewModel.isLoading.collect { isLoading ->
-                // not() = false
-                if (isLoading.not()) {
-                    binding.myDotLoading.visibility = View.GONE
-                }else{
-                    binding.myDotLoading.visibility = View.VISIBLE
-                }
-            }
         }
     }
 

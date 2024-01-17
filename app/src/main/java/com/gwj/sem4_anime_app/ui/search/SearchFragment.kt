@@ -43,58 +43,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         setupAdapter()
     }
 
-    private fun setupAdapter() {
-        SearchAnimeAdapter = SearchAnimeAdapter(emptyList())
-        SearchAnimeAdapter.listener = object : SearchAnimeAdapter.Listener {
-            override fun onClick(animeId: Data) {
-                val action =
-                    TabContainerFragmentDirections.actionTabContainerFragmentToContentFragment(
-                        animeId.mal_id.toString()
-                    )
-                navController.navigate(action)
-            }
-        }
-
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        binding.searchAnimeRecyclerView.adapter = SearchAnimeAdapter
-        binding.searchAnimeRecyclerView.layoutManager = layoutManager
-
-        // Load more items when the user scrolls to the end of the list.
-        binding.searchAnimeRecyclerView.addOnScrollListener(object :
-            RecyclerView.OnScrollListener() {
-            // this will triggered when the user scrolls to the end of the list
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                // get the current visible item position in the list
-                val myLayoutManager = recyclerView.layoutManager as LinearLayoutManager
-                // total item count
-                val totalItemCount = myLayoutManager.itemCount
-                // last visible item position
-                val lastVisibleAnimeItem = myLayoutManager.findLastVisibleItemPosition()
-
-                // when user reach end of the list(5 items before the end of the list)
-                // load the next page data
-                if (totalItemCount <= lastVisibleAnimeItem + 5) {
-                    viewModel.loadMoreItems()
-                }
-            }
-        })
-
-        // search function
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                viewModel.searchAnime(viewModel.currentGenresId, query)
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.searchAnime(viewModel.currentGenresId, newText)
-                return true
-            }
-        })
-    }
-
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()
 
@@ -181,6 +129,58 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             }
         }
         //========================== Anime Genres =============================
+    }
+
+    private fun setupAdapter() {
+        SearchAnimeAdapter = SearchAnimeAdapter(emptyList())
+        SearchAnimeAdapter.listener = object : SearchAnimeAdapter.Listener {
+            override fun onClick(animeId: Data) {
+                val action =
+                    TabContainerFragmentDirections.actionTabContainerFragmentToContentFragment(
+                        animeId.mal_id.toString()
+                    )
+                navController.navigate(action)
+            }
+        }
+
+        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.searchAnimeRecyclerView.adapter = SearchAnimeAdapter
+        binding.searchAnimeRecyclerView.layoutManager = layoutManager
+
+        // Load more items when the user scrolls to the end of the list.
+        binding.searchAnimeRecyclerView.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
+            // this will triggered when the user scrolls to the end of the list
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                // get the current visible item position in the list
+                val myLayoutManager = recyclerView.layoutManager as LinearLayoutManager
+                // total item count
+                val totalItemCount = myLayoutManager.itemCount
+                // last visible item position
+                val lastVisibleAnimeItem = myLayoutManager.findLastVisibleItemPosition()
+
+                // when user reach end of the list(5 items before the end of the list)
+                // load the next page data
+                if (totalItemCount <= lastVisibleAnimeItem + 5) {
+                    viewModel.loadMoreItems()
+                }
+            }
+        })
+
+        // search function
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.searchAnime(viewModel.currentGenresId, query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.searchAnime(viewModel.currentGenresId, newText)
+                return true
+            }
+        })
     }
 
 
