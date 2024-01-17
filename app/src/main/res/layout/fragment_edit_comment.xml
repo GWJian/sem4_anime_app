@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-
-    tools:context=".ui.add_comment.CommentFragment">
+    tools:context=".ui.edit_comment.EditCommentFragment">
 
 
 
@@ -18,7 +17,7 @@
         android:padding="15dp"
         android:orientation="horizontal">
         <ImageView
-            android:id="@+id/contentBackBtn"
+            android:id="@+id/editBackBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_back_arrow"
@@ -31,8 +30,10 @@
     </LinearLayout>
 
     <View
-        android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        />
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -42,15 +43,14 @@
         android:padding="10dp"
         style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox.Dense">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tvComment"
-            android:gravity=""
+            android:id="@+id/tvEditComment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/comment"
             />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnComment"
+        android:id="@+id/btnEditComment"
         android:layout_gravity="center"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -58,8 +58,7 @@
         style="@style/ShapeAppearanceOverlay.Material3.Button"
         app:cornerRadius="4dp"
         android:backgroundTint="@color/black"
-        android:text="@string/add"
+        android:text="@string/update"
         />
-
 
 </LinearLayout>

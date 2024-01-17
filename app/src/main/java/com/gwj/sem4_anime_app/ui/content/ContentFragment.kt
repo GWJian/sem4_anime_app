@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.gwj.recipesapp.ui.base.BaseFragment
 import com.gwj.recipesapp.ui.base.BaseViewModel
 import com.gwj.sem4_anime_app.R
+import com.gwj.sem4_anime_app.data.model.Comment
 import com.gwj.sem4_anime_app.databinding.FragmentContentBinding
 import com.gwj.sem4_anime_app.ui.adapter.CommentAdapter
 import com.gwj.sem4_anime_app.ui.add_comment.CommentFragmentDirections
@@ -29,6 +30,7 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
     override val viewModel: ContentViewModel by viewModels()
     private lateinit var CommentAdapter: CommentAdapter
     val args: ContentFragmentArgs by navArgs()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,9 +57,17 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
     }
     private fun setupCommentAdapter() {
         CommentAdapter = CommentAdapter(emptyList())
-//        CommentAdapter.listener = object: CommentAdapter.Listener {
-//
-//        }
+        CommentAdapter.listener = object: CommentAdapter.Listener {
+            override fun onClick(comment: Comment) {
+                val action = ContentFragmentDirections.actionContentFragmentToEditCommentFragment(comment.id)
+                navController.navigate(action)
+            }
+
+            override fun onDelete(comment: Comment) {
+                viewModel.deleteComment(comment)
+            }
+
+        }
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvComments.adapter = CommentAdapter
         binding.rvComments.layoutManager = layoutManager

@@ -43,6 +43,14 @@ class CommentAdapter(
                 commentUser.text = comment.addedBy
                 commentText.text = comment.comment
                 commentAddedOn.text = comment.addedOn
+
+                llComment.setOnClickListener {
+                    listener?.onClick(comment)
+                }
+
+                btnDelete.setOnClickListener {
+                    listener?.onDelete(comment)
+                }
             }
         }
     }

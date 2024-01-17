@@ -24,10 +24,11 @@ class ContentViewModel @Inject constructor(
     val anime: StateFlow<Data?> = _anime
     private val _comment: MutableStateFlow<List<Comment>> = MutableStateFlow(emptyList())
     val comment: StateFlow<List<Comment>> = _comment
+    private val _newComment: MutableStateFlow<Comment> = MutableStateFlow(
+        Comment(comment = "")
+    )
+    val newComment: StateFlow<Comment> = _newComment
 
-//    init {
-//        getAllComments()
-//    }
 
     fun getAnimeDetail(animeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -41,14 +42,18 @@ class ContentViewModel @Inject constructor(
 
     fun getAllComments(animeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            safeApiCall { commentRepo.getAllComments(animeId) }?.let {
+            safeApiCall { commentRepo.getAllComments(animeId) }?.collect { it ->
                 _comment.value = it
             }
         }
     }
 
-//    fun refreshComment() {
-//        getAllComments()
-//    }
+
+
+    fun deleteComment(comment: Comment) {
+        viewModelScope.launch(Dispatchers.IO) {
+            commentRepo.delete(comment.id)
+        }
+    }
 
 }

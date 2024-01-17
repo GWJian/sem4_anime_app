@@ -19,7 +19,7 @@ class CommentViewModel @Inject constructor(
 ) : BaseViewModel() {
 
 
-    fun postComment(animeId: String, text: String) {
+    fun postComment( animeId: String, text: String) {
         val comment = Comment(animeId = animeId, comment = text)
         Log.d("commentId", comment.copy().toHashMap().toString())
         viewModelScope.launch(Dispatchers.IO) {

@@ -5,6 +5,7 @@ data class Comment(
     val animeId: String = "",
     val addedBy: String = "",
     val addedOn: String = "",
+//    val username: String,
     val comment: String
 ) {
     fun toHashMap():HashMap<String, Any>
@@ -14,6 +15,7 @@ data class Comment(
             "animeId" to animeId,
             "addedBy" to addedBy,
             "addedOn" to addedOn,
+//            "username" to username,
             "comment" to comment,
         )
     }
@@ -26,6 +28,7 @@ data class Comment(
                 animeId = hash["animeId"].toString(),
                 addedBy = hash["addedBy"].toString(),
                 addedOn = hash["addedOn"].toString(),
+//                username = hash["username"].toString(),
                 comment = hash["comment"].toString()
             )
         }

@@ -45,12 +45,18 @@ class RegisterFragment  : BaseFragment<FragmentRegisterBinding>() {
                 )
             }
 
-            registerToLogin.setOnClickListener {
-                navController.popBackStack()
-            }
+
+//            registerToLogin.setOnClickListener {
+//                navController.popBackStack()
+//            }
 
         }
+        binding.registerToLogin.setOnClickListener {
+            val action = RegisterFragmentDirections.registerToLogin()
+            navController.navigate(action)
+        }
     }
+
 
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()

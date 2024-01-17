@@ -24,15 +24,15 @@ class LoginViewModel @Inject constructor(
 //    private val _navToTab = MutableSharedFlow<Unit>()
 //    val navToTab: SharedFlow<Unit> get() = _navToTab
 
-    private val _user = MutableStateFlow(Users(username = "Unknown", useremail = "Unknown"))
+    private val _user = MutableStateFlow(Users(username = "Unknown", email = "Unknown"))
     val user: StateFlow<Users> = _user
 
 
 
-     fun login(useremail:String, password:String) {
+     fun login(email:String, password:String) {
         viewModelScope.launch(Dispatchers.IO) {
             val res = safeApiCall {
-                authService.login(useremail,password)
+                authService.login(email,password)
             }
             if(res != null) {
                 _success.emit("Login Success")

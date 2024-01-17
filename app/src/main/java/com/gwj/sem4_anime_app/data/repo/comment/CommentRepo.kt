@@ -5,7 +5,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface CommentRepo {
 
-    suspend fun getAllComments(animeId: Int): List<Comment>
+    suspend fun getAllComments(animeId: Int): Flow<List<Comment>>
+//    suspend fun getAllComments(animeId: Int): List<Comment>
 
     suspend fun postComment(comment: Comment)
 
