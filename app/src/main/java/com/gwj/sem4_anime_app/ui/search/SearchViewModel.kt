@@ -90,10 +90,10 @@ class SearchViewModel @Inject constructor(
                         _searchAnimes.value = it
                         if (_searchAnimes.value.isEmpty()) {
                             _noData.emit(true)
-                            Log.d("debugging_SearchViewModel", "No Data")
+                            //Log.d("debugging_SearchViewModel", "No Data")
                         } else {
                             _noData.emit(false)
-                            Log.d("debugging_SearchViewModel", "Have Data")
+                            //Log.d("debugging_SearchViewModel", "Have Data")
                         }
                     }
                 }
