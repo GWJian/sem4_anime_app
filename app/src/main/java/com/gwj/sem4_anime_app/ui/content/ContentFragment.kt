@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.gwj.recipesapp.ui.base.BaseFragment
+import com.gwj.sem4_anime_app.ui.base.BaseFragment
 import com.gwj.sem4_anime_app.R
 import com.gwj.sem4_anime_app.databinding.FragmentContentBinding
 import dagger.hilt.android.AndroidEntryPoint

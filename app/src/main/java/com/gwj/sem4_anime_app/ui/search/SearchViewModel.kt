@@ -1,31 +1,25 @@
 package com.gwj.sem4_anime_app.ui.search
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.gwj.recipesapp.ui.base.BaseViewModel
-import com.gwj.sem4_anime_app.data.model.AnimeResp
+import com.gwj.sem4_anime_app.ui.base.BaseViewModel
 import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.data.model.DataX
-import com.gwj.sem4_anime_app.data.model.data.Pagination
 import com.gwj.sem4_anime_app.data.repo.anime.AnimeRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withTimeout
-import kotlinx.coroutines.withTimeoutOrNull
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val Animes: AnimeRepo,
 ) : BaseViewModel() {
-    protected val _searchAnimes: MutableStateFlow<List<Data>> = MutableStateFlow(emptyList())
+    private val _searchAnimes: MutableStateFlow<List<Data>> = MutableStateFlow(emptyList())
     val searchAnimes: MutableStateFlow<List<Data>> = _searchAnimes
-    protected val _animeGenres: MutableStateFlow<List<DataX>> = MutableStateFlow(emptyList())
+    private val _animeGenres: MutableStateFlow<List<DataX>> = MutableStateFlow(emptyList())
     val animeGenres: MutableStateFlow<List<DataX>> = _animeGenres
 
     //Job to stop the search when user is typing too fast
