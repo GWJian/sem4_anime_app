@@ -29,13 +29,15 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="1"/>
+
                 <ImageView
                     android:id="@+id/favoriteBtn"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="end"
-                    android:src="@drawable/ic_bookmark_unfavourite"
-                    android:contentDescription="@string/favorite" />
+                    android:contentDescription="@string/favorite"
+                    android:src="@drawable/ic_bookmark_unfavourite" />
+
             </LinearLayout>
 
 
@@ -49,7 +51,7 @@
                     android:id="@+id/contentImage"
                     android:layout_gravity="start"
                     android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_height="170dp"
                     android:src="@drawable/ic_image"
                     android:contentDescription="@string/content_to_be_displayed"
                     android:scaleType="fitXY" />

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -50,6 +51,7 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
     }
 
     override fun setupUIComponents() {
+        ViewCompat.requestApplyInsets(binding.coordinator)
         super.setupUIComponents()
         setupSeasonalAdapter()
     }
@@ -79,17 +81,15 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
                 val totalItemCount = seasonalLayoutManager.itemCount
                 val lastAnime = seasonalLayoutManager.findLastVisibleItemPosition()
 
-                if (totalItemCount <= lastAnime + 2) {
+                if (totalItemCount <= lastAnime + 1) {
                     viewModel.loadMoreItems()
                 }
 
             }
 
         })
-
     }
 
-    //TODO ASK SIR:also ask why home CollapsingToolbarLayout when back from content,it will auto back to top
     private fun setupYearForAutoCompleteTextView() {
         //set array to AutoCompleteTextView
         //{it.toString()} this will convert int to string, toTypedArray = toArray
@@ -102,7 +102,7 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
             )
         binding.ACTVYear.setAdapter(yearAdapter)
         //pass selected data to viewModel
-            //setOnItemClickListener cuz using AutoCompleteTextView
+        //setOnItemClickListener cuz using AutoCompleteTextView
         binding.ACTVYear.setOnItemClickListener { _, _, position, _ ->
             val selectedYear = years[position]
             //selectedYear => user selected year, viewModel.season => get season from viewModel
@@ -133,11 +133,26 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
         super.setupViewModelObserver()
 
         lifecycleScope.launch {
-            viewModel.seasonalAnimes.collect() {
-                seasonalAdapter.setSeasonalAnimes(it)
+            viewModel.seasonalAnimes.collect {
+                if (it.isNotEmpty()) {
+                    binding.progressBar.visibility = View.GONE
+                    seasonalAdapter.setSeasonalAnimes(it)
+                } else {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
             }
         }
 
+        lifecycleScope.launch {
+            viewModel.isLoading.collect { isLoading ->
+                // not() = false
+                if (isLoading.not()) {
+                    binding.myDotLoading.visibility = View.GONE
+                }else{
+                    binding.myDotLoading.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
 

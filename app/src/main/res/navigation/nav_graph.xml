@@ -36,16 +36,32 @@
         app:destination="@id/tabContainerFragment" />
 
     <action
+
         android:id="@+id/reset_to_login"
         app:popUpTo="@id/resetPassFragment"
+
         app:popUpToInclusive="true"
         app:destination="@id/loginFragment" />
 
     <action
+
         android:id="@+id/content_to_home"
         app:popUpTo="@id/contentFragment"
         app:popUpToInclusive="true"
         app:destination="@id/tabContainerFragment" />
+
+
+        android:id="@+id/tabContainer_to_fave"
+        app:popUpTo="@id/tabContainerFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/favouriteFragment" />
+
+    <action
+        android:id="@+id/fave_to_tabContainer"
+        app:popUpTo="@id/favouriteFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/tabContainerFragment" />
+
 
     <fragment
         android:id="@+id/contentFragment"
@@ -88,6 +104,7 @@
         android:label="fragment_register"
         tools:layout="@layout/fragment_register">
     </fragment>
+
     <fragment
         android:id="@+id/tabContainerFragment"
         tools:layout="@layout/fragment_tab_container"
@@ -97,6 +114,23 @@
             android:id="@+id/action_tabContainerFragment_to_contentFragment"
             app:destination="@id/contentFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.gwj.sem4_anime_app.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="com.gwj.sem4_anime_app.ui.favourite.FavouriteFragment"
+        android:label="fragment_favourite"
+        tools:layout="@layout/fragment_favourite" >
+        <action
+            android:id="@+id/favouriteFragment_to_contentFragment"
+            app:destination="@id/contentFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/videoFragment"
         tools:layout="@layout/fragment_video"

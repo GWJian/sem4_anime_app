@@ -11,7 +11,14 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.gwj.recipesapp.ui.base.BaseFragment
+
 import com.gwj.sem4_anime_app.data.model.Comment
+
+import com.gwj.recipesapp.ui.base.BaseViewModel
+import com.gwj.sem4_anime_app.R
+import com.gwj.sem4_anime_app.data.model.FavouriteAnime
+import com.gwj.sem4_anime_app.data.repo.favourite.FavouriteAnimeRepo
+
 import com.gwj.sem4_anime_app.databinding.FragmentContentBinding
 import com.gwj.sem4_anime_app.ui.adapter.CommentAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,6 +29,10 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
     override val viewModel: ContentViewModel by viewModels()
     private lateinit var CommentAdapter: CommentAdapter
     val args: ContentFragmentArgs by navArgs()
+
+
+    private var isFavourite = false
+
 
 
     override fun onCreateView(
@@ -61,19 +72,47 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
             }
 
         }
+
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvComments.adapter = CommentAdapter
         binding.rvComments.layoutManager = layoutManager
+
+
+        binding.favoriteBtn.setOnClickListener {
+            if (isFavourite) {
+                viewModel.removeFavourite(args.animeId)
+            } else  {
+                viewModel.addFavourite(args.animeId)
+            }
+
+        }
+
     }
 
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()
 
         lifecycleScope.launch {
+
             viewModel.comment.collect() {
                 CommentAdapter.setComments(it)
             }
         }
+
+
+            viewModel.favourite.collect {
+                if(it != null) {
+                    isFavourite = true
+                    binding.favoriteBtn.setImageResource(R.drawable.ic_bookmark_favourite)
+                } else {
+                    isFavourite = false
+                    binding.favoriteBtn.setImageResource(R.drawable.ic_bookmark_unfavourite)
+                }
+
+            }
+        }
+
+
 
         lifecycleScope.launch {
             viewModel.anime.collect { animeDetail ->

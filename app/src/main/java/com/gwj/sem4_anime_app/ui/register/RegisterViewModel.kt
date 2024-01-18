@@ -17,6 +17,7 @@ class RegisterViewModel @Inject constructor(
     private val usersRepo: UsersRepo
 ) : BaseViewModel() {
     fun signUp(username: String, email: String, password: String, confirmPassword: String) {
+
         viewModelScope.launch(Dispatchers.IO) {
             val user = safeApiCall {
                 authService.register(email, password)

@@ -5,6 +5,7 @@ data class Users (
     val username:String,
     val email:String,
     val profilePicUrl:String? ="",
+
 ) {
     fun toHashMap(): HashMap<String, String?> {
         return hashMapOf(
