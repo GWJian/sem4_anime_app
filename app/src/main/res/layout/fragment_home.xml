@@ -29,7 +29,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="15dp"
-                    android:text="Top Anime" />
+                    android:text="@string/top_anime" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/horizontalTopAnimeRecycleView"

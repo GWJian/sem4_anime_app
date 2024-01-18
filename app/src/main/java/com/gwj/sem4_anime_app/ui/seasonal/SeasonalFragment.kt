@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.gwj.sem4_anime_app.R
 import com.gwj.sem4_anime_app.ui.base.BaseFragment
 import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.databinding.FragmentSeasonalBinding
@@ -72,7 +73,7 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
                 // not() = false
                 if (isLoading.not()) {
                     binding.myDotLoading.visibility = View.GONE
-                }else{
+                } else {
                     binding.myDotLoading.visibility = View.VISIBLE
                 }
             }
@@ -115,7 +116,10 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
 
     private fun setupYearForAutoCompleteTextView() {
         //set array to AutoCompleteTextView
-        //{it.toString()} this will convert int to string, toTypedArray = toArray
+        /**
+         * (2024 downTo 1927).map this will create a list of int from 2024 to 1927
+         * {it.toString()} this will convert int to string, toTypedArray = toArray
+         */
         val years = (2024 downTo 1927).map { it.toString() }.toTypedArray()
         val yearAdapter =
             ArrayAdapter(
@@ -135,7 +139,13 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
 
     private fun setupSeasonalForAutoCompleteTextView() {
         //set array to AutoCompleteTextView
-        val seasonal = arrayOf("Spring", "Summer", "Fall", "Winter")
+        //val seasonal = arrayOf("Spring", "Summer", "Fall", "Winter")
+        val seasonal = arrayOf(
+            getString(R.string.spring),
+            getString(R.string.summer),
+            getString(R.string.fall),
+            getString(R.string.winter)
+        )
         val seasonalAdapter =
             ArrayAdapter(
                 requireContext(),

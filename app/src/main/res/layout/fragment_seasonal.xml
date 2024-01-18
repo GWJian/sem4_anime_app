@@ -41,9 +41,9 @@
                         android:id="@+id/ACTVYear"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="Year"
+                        android:hint="@string/year"
                         android:inputType="none"
-                        android:text="2020" />
+                        android:text="@string/_2020" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -56,9 +56,9 @@
                         android:id="@+id/ACTVseasonal"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="Seasonal"
+                        android:hint="@string/shortcut_seasonal_short_label"
                         android:inputType="none"
-                        android:text="Spring" />
+                        android:text="@string/spring" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

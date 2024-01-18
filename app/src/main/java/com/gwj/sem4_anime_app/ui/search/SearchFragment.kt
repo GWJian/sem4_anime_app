@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.gwj.sem4_anime_app.R
 import com.gwj.sem4_anime_app.ui.base.BaseFragment
 import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.databinding.FragmentSearchBinding
@@ -97,7 +98,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                     // initialise the alert dialog builder
                     val builder = AlertDialog.Builder(requireContext())
 
-                    builder.setTitle("Choose Genres")
+                    builder.setTitle(getString(R.string.choose_Genres))
                         .setMultiChoiceItems(listItems, checkedItems) { _, which, isChecked ->
                             val genresId = animeGenres[which].mal_id
                             if (isChecked) {
@@ -109,15 +110,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                             checkedItems[which] = isChecked
                         }
                         // if user click yes,pass the checkedItems to viewModel.animeGenres
-                        .setPositiveButton("OK") { _, _ ->
+                        .setPositiveButton(getString(R.string.ok)) { _, _ ->
                             // Do something when click the positive button
                             val genresIdString = selectedGenres.joinToString(",")
                             viewModel.searchAnime(genresIdString, viewModel.currentQuery)
                         }
                         // if user click cancel,do ntg
-                        .setNegativeButton("CANCEL") { _, _ -> }
+                        .setNegativeButton(getString(R.string.cancel)) { _, _ -> }
                         // if user click CLEAR ALL,remove all checkedItems
-                        .setNeutralButton("CLEAR ALL") { _: DialogInterface?, _: Int ->
+                        .setNeutralButton(getString(R.string.clear_all)) { _: DialogInterface?, _: Int ->
                             Arrays.fill(checkedItems, false)
                             //clear the selectedGenres list and pass the empty list to viewModel.animeGenres
                             selectedGenres.clear()

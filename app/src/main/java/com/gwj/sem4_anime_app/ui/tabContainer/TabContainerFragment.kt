@@ -58,7 +58,7 @@ class TabContainerFragment : Fragment() {
 
         binding.vpContainer.adapter = FragmentAdapter(
             this,
-            listOf(HomeFragment(), SearchFragment(), SeasonalFragment(), ProfileFragment() )
+            listOf(HomeFragment(), SearchFragment(), SeasonalFragment(), ProfileFragment())
         )
 
         setFragmentResultListener("profile") { _, result ->
@@ -68,19 +68,19 @@ class TabContainerFragment : Fragment() {
         TabLayoutMediator(binding.tlTabs, binding.vpContainer) { tab, position ->
             when (position) {
                 0 -> {
-                    tab.text = "Home"
+                    tab.text = getString(R.string.shortcut_home_short_label)
                 }
 
                 1 -> {
-                    tab.text = "Search"
+                    tab.text = getString(R.string.shortcut_home_short_label)
                 }
 
                 2 -> {
-                    tab.text = "Season"
+                    tab.text = getString(R.string.shortcut_search_short_label)
                 }
 
                 3 -> {
-                    tab.text = "Profile"
+                    tab.text = getString(R.string.profile)
                 }
 
             }

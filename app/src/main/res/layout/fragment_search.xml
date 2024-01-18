@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@drawable/ic_format_list_bulleted"
-                    android:contentDescription="popUpGenresBtn"
+                    android:contentDescription="@string/popupgenresbtn"
                     app:iconGravity="textStart" />
 
             </LinearLayout>
@@ -99,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:contentDescription="No Data"
+            android:contentDescription="@string/no_data"
             android:src="@drawable/no_data_400error"
             android:visibility="gone" />
 

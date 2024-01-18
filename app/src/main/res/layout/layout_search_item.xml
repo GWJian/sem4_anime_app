@@ -22,7 +22,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_image"
-                android:contentDescription="anime Image" />
+                android:contentDescription="@string/anime_image" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:fontFamily="serif"
-                    android:text="Anime Name" />
+                    android:text="@string/anime_name" />
 
                 <TextView
                     android:id="@+id/tvAnimeEpisodes"
@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:fontFamily="serif"
-                    android:text="Anime Episodes" />
+                    android:text="@string/anime_episodes" />
 
                 <TextView
                     android:id="@+id/tvAnimeType"
@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:fontFamily="serif"
-                    android:text="type" />
+                    android:text="@string/type" />
 
                 <TextView
                     android:id="@+id/tvAnimeYear"
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:fontFamily="serif"
-                    android:text="Year" />
+                    android:text="@string/year" />
 
             </LinearLayout>
 

@@ -48,4 +48,24 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
+    <string name="choose_Genres">Choose Genres</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="clear_all">Clear All</string>
+    <string name="profile">Profile</string>
+
+    <string name="spring">Spring</string>
+    <string name="summer">Summer</string>
+    <string name="fall">Fall</string>
+    <string name="winter">Winter</string>
+    <string name="top_anime">Top Anime</string>
+    <string name="popupgenresbtn">popUpGenresBtn</string>
+    <string name="no_data">No Data</string>
+    <string name="_2020">2020</string>
+    <string name="anime_image">anime Image</string>
+    <string name="anime_name">Anime Name</string>
+    <string name="anime_episodes">Anime Episodes</string>
+    <string name="type">type</string>
+    <string name="not_available">N/A</string>
+
 </resources>
