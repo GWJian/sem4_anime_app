@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import com.google.android.material.tabs.TabLayoutMediator
+import com.gwj.sem4_anime_app.R
 import com.gwj.sem4_anime_app.databinding.FragmentTabContainerBinding
 import com.gwj.sem4_anime_app.ui.adapter.FragmentAdapter
 import com.gwj.sem4_anime_app.ui.home.HomeFragment
@@ -44,18 +45,22 @@ class TabContainerFragment : Fragment() {
             when (position) {
                 0 -> {
                     tab.text = "Home"
+                    tab.setIcon(R.drawable.ic_home)
                 }
 
                 1 -> {
                     tab.text = "Search"
+                    tab.setIcon(R.drawable.ic_search)
                 }
 
                 2 -> {
                     tab.text = "Season"
+                    tab.setIcon(R.drawable.ic_season_list)
                 }
 
                 3 -> {
                     tab.text = "Profile"
+                    tab.setIcon(R.drawable.ic_profile)
                 }
 
             }

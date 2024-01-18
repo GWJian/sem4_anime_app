@@ -7,20 +7,32 @@
     android:gravity="center"
     android:padding="22dp"
     android:orientation="vertical"
+    android:background="@drawable/profile_bg"
     tools:context=".ui.profile.ProfileFragment">
+
+
 
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" >
 
-        <ImageView
-            android:id="@+id/ivProfile"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_profile"
-            android:contentDescription="Profile"
-            android:scaleType="centerCrop" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="100dp"
+            android:background="@color/transparent">
+
+            <ImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/ic_profile"
+                android:contentDescription="Profile"
+                android:scaleType="centerCrop" />
+
+        </androidx.cardview.widget.CardView>
+
 
         <ImageView
             android:id="@+id/icEditProfilePic"

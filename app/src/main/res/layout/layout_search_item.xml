@@ -2,13 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/searchCV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp">
+        android:layout_margin="2dp"
+        app:cardCornerRadius="26dp" >
 
         <LinearLayout
             android:id="@+id/llAnime"
@@ -27,6 +30,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/dark"
                 android:orientation="vertical">
 
                 <TextView
@@ -35,7 +39,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:fontFamily="serif"
-                    android:text="Anime Name" />
+                    android:text="Anime Name"
+                    android:textColor="@color/blue" />
 
                 <TextView
                     android:id="@+id/tvAnimeEpisodes"
@@ -43,7 +48,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:fontFamily="serif"
-                    android:text="Anime Episodes" />
+                    android:text="Anime Episodes"
+                    android:textColor="@color/blue" />
 
                 <TextView
                     android:id="@+id/tvAnimeType"
@@ -51,7 +57,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:fontFamily="serif"
-                    android:text="type" />
+                    android:text="Type"
+                    android:textColor="@color/blue" />
 
                 <TextView
                     android:id="@+id/tvAnimeYear"
@@ -59,7 +66,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:fontFamily="serif"
-                    android:text="Year" />
+                    android:text="Year"
+                    android:textColor="@color/blue" />
 
             </LinearLayout>
 

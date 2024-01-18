@@ -5,12 +5,14 @@
     android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/comet"
     tools:context=".ui.home.HomeFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarCollapse"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/transparent">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/ctlAnime"
@@ -29,7 +31,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="15dp"
-                    android:text="Top Anime" />
+                    android:layout_marginLeft="10dp"
+                    android:text="Top Animes"
+                    android:textSize="22sp"
+                    android:textStyle="italic"
+                    android:textColor="@color/cream"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/horizontalTopAnimeRecycleView"
