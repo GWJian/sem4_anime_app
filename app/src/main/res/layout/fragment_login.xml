@@ -10,14 +10,14 @@
     android:gravity="center"
     tools:context=".ui.login.LoginFragment">
 
-    <ImageView
-        android:id="@+id/loginLogo"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_image"
-        android:layout_gravity="center"
-        android:contentDescription="@string/logo" />
+<!--    <ImageView-->
+<!--        android:id="@+id/loginLogo"-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="250dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:src="@drawable/ic_image"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:contentDescription="@string/logo" />-->
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
