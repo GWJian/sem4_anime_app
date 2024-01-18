@@ -146,7 +146,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
         }
 
-        //Join two list
+        /**
+         * Endless Scrolling
+         * OnScrollListener it use for recyclerview, ut are use to monitor the scroll
+         * then we only can use this to trigger the loadMoreItems function
+         * When user reach the last 2 item,will trigger loadMoreItems function
+         */
         binding.verticalAnimeRecyclerView.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
 

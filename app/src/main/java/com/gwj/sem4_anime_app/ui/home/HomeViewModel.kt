@@ -64,17 +64,22 @@ class HomeViewModel @Inject constructor(
     }
 
     fun loadMoreItems() {
+
+        // checking is fetching data or not
         if (!_isLoading.value) {
-
+            // if not fetching data, then set isLoading to true,thn will fire this function
             _isLoading.value = true
-
+            //page +1
             currentPage++
             viewModelScope.launch(Dispatchers.IO) {
                 delay(1000)
                 safeApiCall {
+                    //to get new anime from the next page
                     Animes.getSeasonNowAnime(currentPage).let { newAnime ->
                         val currentAnimes = _seasonNowAnimes.value
+                        //add the new anime into the current anime list,so user can see both data instant replace it
                         _seasonNowAnimes.value = currentAnimes + newAnime
+                        //after everything is done, set isLoading to false
                         _isLoading.value = false
                     }
                 }
