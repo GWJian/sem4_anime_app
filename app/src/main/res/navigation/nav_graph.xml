@@ -35,6 +35,18 @@
         app:popUpToInclusive="true"
         app:destination="@id/tabContainerFragment" />
 
+    <action
+        android:id="@+id/reset_to_login"
+        app:popUpTo="@id/resetPassFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/loginFragment" />
+
+    <action
+        android:id="@+id/content_to_home"
+        app:popUpTo="@id/contentFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/tabContainerFragment" />
+
     <fragment
         android:id="@+id/contentFragment"
         android:name="com.gwj.sem4_anime_app.ui.content.ContentFragment"
@@ -65,6 +77,9 @@
         <action
             android:id="@+id/action_loginFragment_to_tabContainerFragment"
             app:destination="@id/tabContainerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_resetPassFragment"
+            app:destination="@id/resetPassFragment" />
     </fragment>
 
     <fragment
@@ -111,5 +126,10 @@
             android:name="animeId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/resetPassFragment"
+        android:name="com.gwj.sem4_anime_app.ui.reset_password.ResetPassFragment"
+        android:label="fragment_reset_pass"
+        tools:layout="@layout/fragment_reset_pass" />
 
 </navigation>

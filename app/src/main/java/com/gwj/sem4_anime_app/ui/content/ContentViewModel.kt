@@ -1,6 +1,6 @@
 package com.gwj.sem4_anime_app.ui.content
 
-import android.util.Log
+
 import androidx.lifecycle.viewModelScope
 import com.gwj.recipesapp.ui.base.BaseViewModel
 import com.gwj.sem4_anime_app.data.model.Comment
@@ -27,7 +27,6 @@ class ContentViewModel @Inject constructor(
     private val _newComment: MutableStateFlow<Comment> = MutableStateFlow(
         Comment(comment = "")
     )
-    val newComment: StateFlow<Comment> = _newComment
 
 
     fun getAnimeDetail(animeId: Int) {

@@ -6,6 +6,7 @@ import com.gwj.sem4_anime_app.core.services.AuthService
 import com.gwj.sem4_anime_app.data.model.Users
 import com.gwj.sem4_anime_app.data.repo.user.UsersRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,7 +17,7 @@ class RegisterViewModel @Inject constructor(
     private val usersRepo: UsersRepo
 ) : BaseViewModel() {
     fun signUp(username: String, email: String, password: String, confirmPassword: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val user = safeApiCall {
                 authService.register(email, password)
             }

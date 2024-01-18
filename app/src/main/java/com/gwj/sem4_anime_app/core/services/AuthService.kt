@@ -18,4 +18,6 @@ interface AuthService
     fun getCurrentUser(): FirebaseUser?
 
     fun logOut()
+
+    fun resetPass(email: String)
 }

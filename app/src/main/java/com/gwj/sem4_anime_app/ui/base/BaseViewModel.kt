@@ -1,9 +1,7 @@
 package com.gwj.recipesapp.ui.base
 
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 

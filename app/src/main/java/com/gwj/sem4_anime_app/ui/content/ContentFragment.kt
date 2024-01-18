@@ -1,10 +1,7 @@
 package com.gwj.sem4_anime_app.ui.content
 
-import android.content.Intent
-import android.net.Uri
-import androidx.lifecycle.ViewModelProvider
+
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,15 +11,10 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.gwj.recipesapp.ui.base.BaseFragment
-import com.gwj.recipesapp.ui.base.BaseViewModel
-import com.gwj.sem4_anime_app.R
 import com.gwj.sem4_anime_app.data.model.Comment
 import com.gwj.sem4_anime_app.databinding.FragmentContentBinding
 import com.gwj.sem4_anime_app.ui.adapter.CommentAdapter
-import com.gwj.sem4_anime_app.ui.add_comment.CommentFragmentDirections
-import com.gwj.sem4_anime_app.ui.register.RegisterFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -48,7 +40,8 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
         viewModel.getAllComments(args.animeId.toInt())
 
         binding.contentBackBtn.setOnClickListener {
-            navController.popBackStack()
+            val action = ContentFragmentDirections.contentToHome()
+            navController.navigate(action)
         }
         binding.BtnCommentTo.setOnClickListener {
             val action = ContentFragmentDirections.actionContentFragmentToCommentFragment(args.animeId)

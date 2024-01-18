@@ -38,6 +38,11 @@ class EditCommentFragment : BaseFragment<FragmentEditCommentBinding>() {
             val comment = binding.tvEditComment.text.toString()
             viewModel.editComment(comment)
         }
+
+        binding.editBackBtn.setOnClickListener {
+            val action = EditCommentFragmentDirections.editToContent(args.animeId)
+            navController.navigate(action)
+        }
     }
 
     override fun setupViewModelObserver() {

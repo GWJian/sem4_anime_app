@@ -15,6 +15,7 @@ import com.gwj.sem4_anime_app.databinding.FragmentCommentBinding
 import com.gwj.sem4_anime_app.databinding.FragmentLoginBinding
 import com.gwj.sem4_anime_app.ui.content.ContentFragmentArgs
 import com.gwj.sem4_anime_app.ui.content.ContentViewModel
+import com.gwj.sem4_anime_app.ui.edit_comment.EditCommentFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -27,7 +28,7 @@ class CommentFragment : BaseFragment<FragmentCommentBinding>() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCommentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -38,6 +39,11 @@ class CommentFragment : BaseFragment<FragmentCommentBinding>() {
         binding.btnComment.setOnClickListener {
             val comment = binding.tvComment.text.toString()
             viewModel.postComment(args.animeId, comment)
+        }
+
+        binding.contentBackBtn.setOnClickListener {
+            val action = CommentFragmentDirections.editToContent(args.animeId)
+            navController.navigate(action)
         }
 
     }
