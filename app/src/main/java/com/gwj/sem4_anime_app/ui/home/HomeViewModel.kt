@@ -1,13 +1,11 @@
 package com.gwj.sem4_anime_app.ui.home
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.gwj.recipesapp.ui.base.BaseViewModel
+import com.gwj.sem4_anime_app.ui.base.BaseViewModel
 import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.data.repo.anime.AnimeRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,10 +16,10 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val Animes: AnimeRepo,
 ) : BaseViewModel() {
-    protected val _topAnimes: MutableStateFlow<List<Data>> = MutableStateFlow(emptyList())
+    private val _topAnimes: MutableStateFlow<List<Data>> = MutableStateFlow(emptyList())
     val topAnimes: StateFlow<List<Data>> = _topAnimes
 
-    protected val _seasonNowAnimes: MutableStateFlow<List<Data>> = MutableStateFlow(emptyList())
+    private val _seasonNowAnimes: MutableStateFlow<List<Data>> = MutableStateFlow(emptyList())
     val seasonNowAnimes: StateFlow<List<Data>> = _seasonNowAnimes
 
     /**
@@ -35,7 +33,8 @@ class HomeViewModel @Inject constructor(
 
     var currentPage = 1
 
-    init {
+    override fun onCreate() {
+        super.onCreate()
         getTopAnimes()
         getSeasonNowAnimes()
     }
@@ -58,6 +57,7 @@ class HomeViewModel @Inject constructor(
             safeApiCall {
                 Animes.getSeasonNowAnime().let {
                     _seasonNowAnimes.value = it
+                    _toggleIsGridOrLinear.value = Pair(true, it)
                     _isFetchingData.emit(false)
                 }
             }

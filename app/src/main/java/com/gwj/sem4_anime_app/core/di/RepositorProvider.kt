@@ -1,12 +1,8 @@
 package com.gwj.sem4_anime_app.core.di
 
-import com.gwj.sem4_anime_app.core.services.AuthService
 import com.gwj.sem4_anime_app.data.api.AnimeApi
-import com.gwj.sem4_anime_app.data.model.FavouriteAnime
 import com.gwj.sem4_anime_app.data.repo.anime.AnimeRepo
 import com.gwj.sem4_anime_app.data.repo.anime.AnimeRepoImpl
-import com.gwj.sem4_anime_app.data.repo.favourite.FavouriteAnimeRepo
-import com.gwj.sem4_anime_app.data.repo.favourite.FavouriteAnimeRepoImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

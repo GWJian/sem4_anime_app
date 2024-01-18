@@ -1,4 +1,4 @@
-package com.gwj.recipesapp.ui.base
+package com.gwj.sem4_anime_app.ui.base
 
 import android.os.Bundle
 import android.view.View
@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 abstract class BaseFragment<T: ViewBinding> :Fragment() {
     protected lateinit var navController:NavController
     protected lateinit var binding: T
-    protected abstract val viewModel:BaseViewModel
+    protected abstract val viewModel: BaseViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

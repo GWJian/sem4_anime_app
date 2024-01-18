@@ -1,6 +1,5 @@
 package com.gwj.sem4_anime_app.ui.content
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,18 +9,20 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.gwj.recipesapp.ui.base.BaseFragment
 
 import com.gwj.sem4_anime_app.data.model.Comment
-
-import com.gwj.recipesapp.ui.base.BaseViewModel
 import com.gwj.sem4_anime_app.R
 import com.gwj.sem4_anime_app.data.model.FavouriteAnime
 import com.gwj.sem4_anime_app.data.repo.favourite.FavouriteAnimeRepo
+import com.gwj.sem4_anime_app.ui.base.BaseFragment
 
 import com.gwj.sem4_anime_app.databinding.FragmentContentBinding
 import com.gwj.sem4_anime_app.ui.adapter.CommentAdapter
 import dagger.hilt.android.AndroidEntryPoint
+
+
+import kotlinx.coroutines.delay
+
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -81,11 +82,13 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
         binding.favoriteBtn.setOnClickListener {
             if (isFavourite) {
                 viewModel.removeFavourite(args.animeId)
-            } else  {
+            } else {
                 viewModel.addFavourite(args.animeId)
             }
-
         }
+
+
+        binding.progressBar.visibility = View.VISIBLE
 
     }
 
@@ -101,7 +104,7 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
 
 
             viewModel.favourite.collect {
-                if(it != null) {
+                if (it != null) {
                     isFavourite = true
                     binding.favoriteBtn.setImageResource(R.drawable.ic_bookmark_favourite)
                 } else {
@@ -146,6 +149,11 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
                         .into(contentImage)
                 }
             }
+        }
+
+        lifecycleScope.launch {
+            delay(800) // delay 1sec or less
+            binding.progressBar.visibility = View.GONE
         }
 
     }

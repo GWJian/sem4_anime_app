@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.gwj.recipesapp.ui.base.BaseFragment
+import com.gwj.sem4_anime_app.ui.base.BaseFragment
 import com.gwj.sem4_anime_app.R
 import com.gwj.sem4_anime_app.databinding.FragmentVideoBinding
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
@@ -21,7 +21,6 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class VideoFragment : BaseFragment<FragmentVideoBinding>() {
-    //TODO:force this page to landscape
     override val viewModel: VideoViewModel by viewModels()
     val args: VideoFragmentArgs by navArgs()
 
