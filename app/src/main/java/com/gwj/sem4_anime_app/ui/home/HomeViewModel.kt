@@ -33,8 +33,7 @@ class HomeViewModel @Inject constructor(
 
     var currentPage = 1
 
-    override fun onCreate() {
-        super.onCreate()
+    init {
         getTopAnimes()
         getSeasonNowAnimes()
     }
