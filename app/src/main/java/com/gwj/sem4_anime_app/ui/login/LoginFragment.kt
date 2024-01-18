@@ -28,8 +28,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         super.setupUIComponents()
 
         binding.logBtn.setOnClickListener {
-            val email = binding.loginEmail.text.toString()
-            val password = binding.loginPass.text.toString()
+            val email = binding.loginEmail.text.toString().trim()
+            val password = binding.loginPass.text.toString().trim()
             viewModel.login(email, password)
         }
 
