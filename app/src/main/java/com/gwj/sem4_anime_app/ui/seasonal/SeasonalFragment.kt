@@ -118,7 +118,7 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
         //set array to AutoCompleteTextView
         /**
          * (2024 downTo 1927).map this will create a list of int from 2024 to 1927
-         * {it.toString()} this will convert int to string, toTypedArray = toArray
+         * {it.toString()} this will convert int to string, toTypedArray = array containing all of the elements of this collection
          */
         val years = (2024 downTo 1927).map { it.toString() }.toTypedArray()
         val yearAdapter =
