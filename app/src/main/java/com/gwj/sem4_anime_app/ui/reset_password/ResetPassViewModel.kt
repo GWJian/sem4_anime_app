@@ -1,8 +1,8 @@
 package com.gwj.sem4_anime_app.ui.reset_password
 
 import androidx.lifecycle.viewModelScope
-import com.gwj.recipesapp.ui.base.BaseViewModel
 import com.gwj.sem4_anime_app.core.services.AuthService
+import com.gwj.sem4_anime_app.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -1,9 +1,7 @@
 package com.gwj.sem4_anime_app.ui.seasonal
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gwj.recipesapp.ui.base.BaseViewModel
-import com.gwj.sem4_anime_app.data.model.AnimeResp
+import com.gwj.sem4_anime_app.ui.base.BaseViewModel
 import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.data.repo.anime.AnimeRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,15 +15,15 @@ import javax.inject.Inject
 class SeasonalViewModel @Inject constructor(
     private val SeasonalAnimes: AnimeRepo,
 ) : BaseViewModel() {
-    protected val _seasonalAnimes: MutableStateFlow<List<Data>> = MutableStateFlow(emptyList())
+    private val _seasonalAnimes: MutableStateFlow<List<Data>> = MutableStateFlow(emptyList())
     val seasonalAnimes: MutableStateFlow<List<Data>> = _seasonalAnimes
 
     var year = "2020"
     var season = "spring"
     var currentPage = 1
-    var isLoading = false
 
-    init {
+    override fun onCreate() {
+        super.onCreate()
         getSeasonalAnimes()
     }
 
@@ -37,19 +35,20 @@ class SeasonalViewModel @Inject constructor(
 
     private fun getSeasonalAnimes() {
         viewModelScope.launch(Dispatchers.IO) {
+            delay(2000)
+            _isFetchingData.emit(true)
             safeApiCall {
                 SeasonalAnimes.getSeasonalAnime(year, season).let {
                     _seasonalAnimes.value = it
+                    _isFetchingData.emit(false)
                 }
             }
         }
     }
 
     fun loadMoreItems() {
-        if (!isLoading) {
-
-            isLoading = true
-
+        if (!_isLoading.value) {
+            _isLoading.value = true
             currentPage++
             viewModelScope.launch(Dispatchers.IO) {
                 delay(1000)
@@ -57,11 +56,10 @@ class SeasonalViewModel @Inject constructor(
                     SeasonalAnimes.getSeasonalAnime(year, season, currentPage).let { anime ->
                         val currentAnimes = _seasonalAnimes.value
                         _seasonalAnimes.value = currentAnimes + anime
-                        isLoading = false
+                        _isLoading.value = false
                     }
                 }
             }
-
         }
     }
 

@@ -23,6 +23,8 @@ class UsersRepoImpl(
     override suspend fun userAdd(user: Users) {
         dbRefGet().document(uidGet()).set(user.toHashMap()).await()
 
+//        dbRefGet().document(uidGet()).get().await()
+//        dbRefGet().document(uidGet()).set(user.toHashMap()).await()
 
     }
 

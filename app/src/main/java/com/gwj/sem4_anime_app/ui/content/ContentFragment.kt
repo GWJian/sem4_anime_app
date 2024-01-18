@@ -1,6 +1,5 @@
 package com.gwj.sem4_anime_app.ui.content
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +9,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.gwj.recipesapp.ui.base.BaseFragment
 import com.gwj.sem4_anime_app.data.model.Comment
+import com.gwj.sem4_anime_app.ui.base.BaseFragment
+import com.gwj.sem4_anime_app.R
 import com.gwj.sem4_anime_app.databinding.FragmentContentBinding
 import com.gwj.sem4_anime_app.ui.adapter.CommentAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -22,6 +23,8 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
     override val viewModel: ContentViewModel by viewModels()
     private lateinit var CommentAdapter: CommentAdapter
     val args: ContentFragmentArgs by navArgs()
+
+    private var isFavourite = false
 
 
     override fun onCreateView(
@@ -47,6 +50,16 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
             val action = ContentFragmentDirections.actionContentFragmentToCommentFragment(args.animeId)
             navController.navigate(action)
         }
+
+        binding.favoriteBtn.setOnClickListener {
+            if (isFavourite) {
+                viewModel.removeFavourite(args.animeId)
+            } else {
+                viewModel.addFavourite(args.animeId)
+            }
+        }
+
+        binding.progressBar.visibility = View.VISIBLE
     }
     private fun setupCommentAdapter() {
         CommentAdapter = CommentAdapter(emptyList())
@@ -74,6 +87,20 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
                 CommentAdapter.setComments(it)
             }
         }
+
+        lifecycleScope.launch {
+            viewModel.favourite.collect {
+                if (it != null) {
+                    isFavourite = true
+                    binding.favoriteBtn.setImageResource(R.drawable.ic_bookmark_favourite)
+                } else {
+                    isFavourite = false
+                    binding.favoriteBtn.setImageResource(R.drawable.ic_bookmark_unfavourite)
+                }
+
+            }
+        }
+
 
         lifecycleScope.launch {
             viewModel.anime.collect { animeDetail ->
@@ -107,6 +134,11 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
                         .into(contentImage)
                 }
             }
+        }
+
+        lifecycleScope.launch {
+            delay(800) // delay 1sec or less
+            binding.progressBar.visibility = View.GONE
         }
 
     }

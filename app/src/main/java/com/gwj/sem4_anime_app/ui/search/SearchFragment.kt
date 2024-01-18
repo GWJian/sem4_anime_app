@@ -7,16 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.gwj.recipesapp.ui.base.BaseFragment
+import com.gwj.sem4_anime_app.R
+import com.gwj.sem4_anime_app.ui.base.BaseFragment
 import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.databinding.FragmentSearchBinding
 import com.gwj.sem4_anime_app.ui.adapter.SearchAnimeAdapter
 import com.gwj.sem4_anime_app.ui.tabContainer.TabContainerFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Arrays
 
@@ -35,8 +38,97 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     override fun setupUIComponents() {
+        ViewCompat.requestApplyInsets(binding.coordinator)
         super.setupUIComponents()
         setupAdapter()
+    }
+
+    override fun setupViewModelObserver() {
+        super.setupViewModelObserver()
+
+        //========================== Search Anime =============================
+        lifecycleScope.launch {
+            viewModel.searchAnimes.collect {
+                if (it.isNotEmpty()) {
+                    binding.progressBar.visibility = View.GONE
+                    SearchAnimeAdapter.setSearchAnimes(it)
+                } else {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.noData.collect { noData ->
+                if (noData) {
+                    delay(8000)
+                    binding.noDataImage.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+                } else {
+                    binding.noDataImage.visibility = View.GONE
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.isLoading.collect { isLoading ->
+                // not() = false
+                if (isLoading.not()) {
+                    binding.myDotLoading.visibility = View.GONE
+                }else{
+                    binding.myDotLoading.visibility = View.VISIBLE
+                }
+            }
+        }
+        //========================== Search Anime =============================
+
+
+        //========================== Anime Genres =============================
+        lifecycleScope.launch {
+            viewModel.animeGenres.collect { animeGenres ->
+                // initialise the list items for the alert dialog
+                val listItems = animeGenres.map { it.name }.toTypedArray()
+                val checkedItems = BooleanArray(listItems.size)
+
+                // copy the items from the main list to the selected item list for the preview
+                val selectedGenres = mutableListOf<Int>()
+
+                // handle the Open Alert Dialog button
+                binding.popUpGenresBtn.setOnClickListener {
+                    // initialise the alert dialog builder
+                    val builder = AlertDialog.Builder(requireContext())
+
+                    builder.setTitle(getString(R.string.choose_Genres))
+                        .setMultiChoiceItems(listItems, checkedItems) { _, which, isChecked ->
+                            val genresId = animeGenres[which].mal_id
+                            if (isChecked) {
+                                selectedGenres.add(genresId)
+                            } else {
+                                selectedGenres.remove(genresId)
+                            }
+                            // Update the current focused item's checked status
+                            checkedItems[which] = isChecked
+                        }
+                        // if user click yes,pass the checkedItems to viewModel.animeGenres
+                        .setPositiveButton(getString(R.string.ok)) { _, _ ->
+                            // Do something when click the positive button
+                            val genresIdString = selectedGenres.joinToString(",")
+                            viewModel.searchAnime(genresIdString, viewModel.currentQuery)
+                        }
+                        // if user click cancel,do ntg
+                        .setNegativeButton(getString(R.string.cancel)) { _, _ -> }
+                        // if user click CLEAR ALL,remove all checkedItems
+                        .setNeutralButton(getString(R.string.clear_all)) { _: DialogInterface?, _: Int ->
+                            Arrays.fill(checkedItems, false)
+                            //clear the selectedGenres list and pass the empty list to viewModel.animeGenres
+                            selectedGenres.clear()
+                            viewModel.searchAnime("", viewModel.currentQuery)
+                        }
+                        .show()
+                }
+            }
+        }
+        //========================== Anime Genres =============================
     }
 
     private fun setupAdapter() {
@@ -89,63 +181,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                 return true
             }
         })
-
-    }
-
-    override fun setupViewModelObserver() {
-        super.setupViewModelObserver()
-
-        lifecycleScope.launch {
-            viewModel.searchAnimes.collect {
-                SearchAnimeAdapter.setSearchAnimes(it)
-            }
-        }
-
-        lifecycleScope.launch {
-            viewModel.animeGenres.collect { animeGenres ->
-                // initialise the list items for the alert dialog
-                val listItems = animeGenres.map { it.name }.toTypedArray()
-                val checkedItems = BooleanArray(listItems.size)
-
-                // copy the items from the main list to the selected item list for the preview
-                val selectedGenres = mutableListOf<Int>()
-
-                // handle the Open Alert Dialog button
-                binding.popUpGenresBtn.setOnClickListener {
-                    // initialise the alert dialog builder
-                    val builder = AlertDialog.Builder(requireContext())
-
-                    builder.setTitle("Choose Genres")
-                        .setMultiChoiceItems(listItems, checkedItems) { _, which, isChecked ->
-                            val genresId = animeGenres[which].mal_id
-                            if (isChecked) {
-                                selectedGenres.add(genresId)
-                            } else {
-                                selectedGenres.remove(genresId)
-                            }
-                            // Update the current focused item's checked status
-                            checkedItems[which] = isChecked
-                        }
-                        // if user click yes,pass the checkedItems to viewModel.animeGenres
-                        .setPositiveButton("OK") { _, _ ->
-                            // Do something when click the positive button
-                            val genresIdString = selectedGenres.joinToString(",")
-                            viewModel.searchAnime(genresIdString, viewModel.currentQuery)
-                        }
-                        // if user click cancel,do ntg
-                        .setNegativeButton("CANCEL") { _, _ -> }
-                        // if user click CLEAR ALL,remove all checkedItems
-                        .setNeutralButton("CLEAR ALL") { _: DialogInterface?, _: Int ->
-                            Arrays.fill(checkedItems, false)
-                            //clear the selectedGenres list and pass the empty list to viewModel.animeGenres
-                            selectedGenres.clear()
-                            viewModel.searchAnime("", viewModel.currentQuery)
-                        }
-                        .show()
-                }
-            }
-        }
-
     }
 
 

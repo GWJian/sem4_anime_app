@@ -1,6 +1,8 @@
 package com.gwj.sem4_anime_app.core.di
 
 import com.gwj.sem4_anime_app.core.services.AuthService
+import com.gwj.sem4_anime_app.data.repo.favourite.FavouriteAnimeRepo
+import com.gwj.sem4_anime_app.data.repo.favourite.FavouriteAnimeRepoImpl
 import com.gwj.sem4_anime_app.data.api.AnimeApi
 import com.gwj.sem4_anime_app.data.repo.anime.AnimeRepo
 import com.gwj.sem4_anime_app.data.repo.anime.AnimeRepoImpl
@@ -32,9 +34,18 @@ class RepositoryModule {
         return CommentRepoImpl(authService = authService)
     }
 
+
+
 //    @Provides
 //    @Singleton
 //    fun provideAnimeRepo(animeApi: AnimeApi): AnimeRepo {
 //        return AnimeRepoImpl(animeApi)
 //    }
+
+    @Provides
+    @Singleton
+    fun provideFavouriteRepo(authService: AuthService): FavouriteAnimeRepo {
+        return FavouriteAnimeRepoImpl(authService)
+    }
+
 }

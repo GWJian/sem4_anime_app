@@ -1,8 +1,7 @@
 package com.gwj.sem4_anime_app.ui.vidview
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gwj.recipesapp.ui.base.BaseViewModel
+import com.gwj.sem4_anime_app.ui.base.BaseViewModel
 import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.data.repo.anime.AnimeRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +17,6 @@ class VideoViewModel @Inject constructor(
 ) : BaseViewModel() {
     private val _animeVideo: MutableStateFlow<Data?> = MutableStateFlow(null)
     val animeVideo: StateFlow<Data?> = _animeVideo
-    //TODO after trailer.can try https://api.jikan.moe/v4/anime/52991/videos,this have multiple pv
 
     fun getAnimeVideo(animeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {

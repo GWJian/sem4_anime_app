@@ -50,4 +50,15 @@ data class Data(
     val type: String,
     val url: String,
     val year: Int
-)
+) {
+    fun toFavouriteAnime(): FavouriteAnime {
+        return FavouriteAnime(
+            mal_id = mal_id,
+            title = title,
+            episodes = episodes,
+            type = type,
+            images = images,
+        )
+    }
+
+}

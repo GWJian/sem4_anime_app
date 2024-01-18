@@ -1,28 +1,33 @@
 package com.gwj.sem4_anime_app.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.gwj.recipesapp.ui.base.BaseFragment
+import com.gwj.sem4_anime_app.ui.base.BaseFragment
 import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.databinding.FragmentHomeBinding
+import com.gwj.sem4_anime_app.ui.adapter.BaseSeasonNowAnimeAdapter
 import com.gwj.sem4_anime_app.ui.adapter.HorizontalTopAnimeAdapter
 import com.gwj.sem4_anime_app.ui.adapter.SeasonNowAnimeAdapter
+import com.gwj.sem4_anime_app.ui.adapter.SeasonNowAnimeLinearAdapter
 import com.gwj.sem4_anime_app.ui.tabContainer.TabContainerFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override val viewModel: HomeViewModel by viewModels()
     private lateinit var HorizontalTopAnimeAdapter: HorizontalTopAnimeAdapter
-    private lateinit var SeasonNowAnimeAdapter: SeasonNowAnimeAdapter
+    private lateinit var SeasonNowAnimeAdapter: BaseSeasonNowAnimeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,10 +38,70 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun setupUIComponents() {
+        ViewCompat.requestApplyInsets(binding.coordinator)
         super.setupUIComponents()
         setupTopAnimeAdapter()
-        setupRecommendedAnimeAdapter()
+        setupRecommendedAnimeAdapter(true)
+
+        //================ toggle button Start ==================
+        binding.toggleBtnGrid.setOnClickListener {
+            viewModel.setGridView()
+        }
+
+        binding.toggleBtnLinear.setOnClickListener {
+            viewModel.setLinearView()
+        }
+        //================ toggle button End ==================
     }
+
+
+    override fun setupViewModelObserver() {
+        super.setupViewModelObserver()
+
+        //===================== lifecycleScope topanimes Start =====================
+        lifecycleScope.launch {
+            viewModel.topAnimes.collect {
+                HorizontalTopAnimeAdapter.setTopAnimes(it)
+            }
+        }
+        //===================== lifecycleScope topanimes End =====================
+
+        //====================== lifecycleScope SeasonNow Start ==================
+        lifecycleScope.launch {
+            viewModel.seasonNowAnimes.collect {
+                // if list is not empty, hide the progress bar
+                if (it.isNotEmpty()){
+                    binding.progressBar.visibility = View.GONE
+                    binding.toggleGroup.visibility = View.VISIBLE
+                    SeasonNowAnimeAdapter.baseSetSeasonNowAnimes(it)
+                }else{
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.toggleGroup.visibility = View.GONE
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.toggleIsGridOrLinear.collect {
+                setupRecommendedAnimeAdapter(it.first, it.second)
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.isLoading.collect { isLoading ->
+                // if isLoading is false mean the data is finish fetching, hide the progress bar
+                if (isLoading.not()) {
+                    binding.myDotLoading.visibility = View.GONE
+                }else{
+                    binding.myDotLoading.visibility = View.VISIBLE
+                }
+            }
+        }
+        //====================== lifecycleScope SeasonNow End ==================
+
+    }
+
+
 
     private fun setupTopAnimeAdapter() {
         HorizontalTopAnimeAdapter = HorizontalTopAnimeAdapter(emptyList())
@@ -55,11 +120,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.horizontalTopAnimeRecycleView.layoutManager = layoutManager
     }
 
+    private fun setupRecommendedAnimeAdapter(grid: Boolean, animes: List<Data> = emptyList()) {
+        //if user click on grid button, then change the adapter to grid layout else linear layout
+        if (grid) {
+            SeasonNowAnimeAdapter = SeasonNowAnimeAdapter(animes)
 
-    private fun setupRecommendedAnimeAdapter() {
-        //create button and check
-        SeasonNowAnimeAdapter = SeasonNowAnimeAdapter(emptyList())
-        SeasonNowAnimeAdapter.listener = object : SeasonNowAnimeAdapter.Listener {
+            val layoutManager = GridLayoutManager(requireContext(), 3)
+            binding.verticalAnimeRecyclerView.adapter = SeasonNowAnimeAdapter
+            binding.verticalAnimeRecyclerView.layoutManager = layoutManager
+        } else {
+            SeasonNowAnimeAdapter = SeasonNowAnimeLinearAdapter(animes)
+
+            val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            binding.verticalAnimeRecyclerView.adapter = SeasonNowAnimeAdapter
+            binding.verticalAnimeRecyclerView.layoutManager = layoutManager
+        }
+
+        SeasonNowAnimeAdapter.listener = object : BaseSeasonNowAnimeAdapter.Listener {
             override fun onClick(animeId: Data) {
                 val action =
                     TabContainerFragmentDirections.actionTabContainerFragmentToContentFragment(
@@ -69,17 +146,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
         }
 
-        val layoutManager = GridLayoutManager(requireContext(), 3)
-        binding.verticalAnimeRecyclerView.adapter = SeasonNowAnimeAdapter
-        binding.verticalAnimeRecyclerView.layoutManager = layoutManager
-
         //Join two list
-        binding.verticalAnimeRecyclerView.addOnScrollListener(object :RecyclerView.OnScrollListener() {
+        binding.verticalAnimeRecyclerView.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                val animeLayoutManager = recyclerView.layoutManager as GridLayoutManager
+                //try catch to handle both linear and grid layout manager
+                val animeLayoutManager =
+                    try {
+                        recyclerView.layoutManager as GridLayoutManager
+                    } catch (e: Exception) {
+                        recyclerView.layoutManager as LinearLayoutManager
+                    }
+
                 val totalItemCount = animeLayoutManager.itemCount
                 val lastAnimeItem = animeLayoutManager.findLastVisibleItemPosition()
 
@@ -87,28 +168,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     viewModel.loadMoreItems()
                 }
             }
-
         })
-
-    }
-
-    override fun setupViewModelObserver() {
-        super.setupViewModelObserver()
-
-        //===================== lifecycleScope topanimes Start =====================
-        lifecycleScope.launch {
-            viewModel.topAnimes.collect() {
-                HorizontalTopAnimeAdapter.setTopAnimes(it)
-            }
-        }
-        //===================== lifecycleScope topanimes End =====================
-
-        //====================== lifecycleScope SeasonNow
-        lifecycleScope.launch {
-            viewModel.seasonNowAnimes.collect() {
-                SeasonNowAnimeAdapter.setSeasonNowAnimes(it)
-            }
-        }
-
     }
 }

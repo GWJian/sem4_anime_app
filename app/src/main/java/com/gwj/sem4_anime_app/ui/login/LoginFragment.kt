@@ -1,14 +1,14 @@
 package com.gwj.sem4_anime_app.ui.login
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.gwj.recipesapp.ui.base.BaseFragment
+import com.gwj.sem4_anime_app.ui.base.BaseFragment
 import com.gwj.sem4_anime_app.databinding.FragmentLoginBinding
+import com.gwj.sem4_anime_app.ui.register.RegisterFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -28,8 +28,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         super.setupUIComponents()
 
         binding.logBtn.setOnClickListener {
-            val email = binding.loginEmail.text.toString()
-            val password = binding.loginPass.text.toString()
+            val email = binding.loginEmail.text.toString().trim()
+            val password = binding.loginPass.text.toString().trim()
             viewModel.login(email, password)
             val action = LoginFragmentDirections.actionLoginToTabContainer()
             navController.navigate(action)
@@ -44,6 +44,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         binding.forgotPass.setOnClickListener {
             val action = LoginFragmentDirections.actionLoginFragmentToResetPassFragment()
             navController.navigate(action)
+
+
         }
 //        lifecycleScope.launch {
 //            viewModel.user.collect {
