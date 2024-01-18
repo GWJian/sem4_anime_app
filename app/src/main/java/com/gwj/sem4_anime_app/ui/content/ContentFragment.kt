@@ -1,10 +1,6 @@
 package com.gwj.sem4_anime_app.ui.content
 
-import android.content.Intent
-import android.net.Uri
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +8,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.gwj.recipesapp.ui.base.BaseFragment
-import com.gwj.recipesapp.ui.base.BaseViewModel
+import com.gwj.sem4_anime_app.ui.base.BaseFragment
 import com.gwj.sem4_anime_app.R
-import com.gwj.sem4_anime_app.data.model.FavouriteAnime
-import com.gwj.sem4_anime_app.data.repo.favourite.FavouriteAnimeRepo
 import com.gwj.sem4_anime_app.databinding.FragmentContentBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -49,11 +42,12 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
         binding.favoriteBtn.setOnClickListener {
             if (isFavourite) {
                 viewModel.removeFavourite(args.animeId)
-            } else  {
+            } else {
                 viewModel.addFavourite(args.animeId)
             }
-
         }
+
+        binding.progressBar.visibility = View.VISIBLE
     }
 
     override fun setupViewModelObserver() {
@@ -61,7 +55,7 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
 
         lifecycleScope.launch {
             viewModel.favourite.collect {
-                if(it != null) {
+                if (it != null) {
                     isFavourite = true
                     binding.favoriteBtn.setImageResource(R.drawable.ic_bookmark_favourite)
                 } else {
@@ -105,6 +99,11 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
                         .into(contentImage)
                 }
             }
+        }
+
+        lifecycleScope.launch {
+            delay(800) // delay 1sec or less
+            binding.progressBar.visibility = View.GONE
         }
 
     }

@@ -77,7 +77,7 @@ class MainActivity: AppCompatActivity() {
         val pendingIntent =
             PendingIntent.getBroadcast(this, 123, intent, PendingIntent.FLAG_MUTABLE)
 
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 15000, pendingIntent)
+        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 5000, pendingIntent)
     }
 
     override fun onResume() {
