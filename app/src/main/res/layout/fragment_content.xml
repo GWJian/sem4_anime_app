@@ -48,7 +48,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                >
+                android:layout_marginBottom="12dp" >
+
+                <com.example.loadinganimation.LoadingAnimation
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="10dp"
+                    android:visibility="gone"
+                    app:barType="@drawable/gear_duo"
+                    app:boldText="false"
+                    app:enlarge="5"
+                    app:textSize="15sp"
+                    tools:ignore="MissingClass" />
+
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
