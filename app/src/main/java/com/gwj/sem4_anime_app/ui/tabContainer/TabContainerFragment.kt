@@ -72,11 +72,11 @@ class TabContainerFragment : Fragment() {
                 }
 
                 1 -> {
-                    tab.text = getString(R.string.shortcut_home_short_label)
+                    tab.text = getString(R.string.shortcut_search_short_label)
                 }
 
                 2 -> {
-                    tab.text = getString(R.string.shortcut_search_short_label)
+                    tab.text = getString(R.string.shortcut_seasonal_short_label)
                 }
 
                 3 -> {

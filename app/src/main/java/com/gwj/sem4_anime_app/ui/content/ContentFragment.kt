@@ -45,8 +45,9 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
         viewModel.getAllComments(args.animeId.toInt())
 
         binding.contentBackBtn.setOnClickListener {
-            val action = ContentFragmentDirections.contentToHome()
-            navController.navigate(action)
+//            val action = ContentFragmentDirections.contentToHome()
+//            navController.navigate(action)
+            navController.popBackStack()
         }
         binding.BtnCommentTo.setOnClickListener {
             val action = ContentFragmentDirections.actionContentFragmentToCommentFragment(args.animeId)
