@@ -2,7 +2,7 @@ package com.gwj.sem4_anime_app.ui.login
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.gwj.recipesapp.ui.base.BaseViewModel
+import com.gwj.sem4_anime_app.ui.base.BaseViewModel
 import com.gwj.sem4_anime_app.core.services.AuthService
 import com.gwj.sem4_anime_app.data.model.Users
 import com.gwj.sem4_anime_app.data.repo.user.UsersRepo

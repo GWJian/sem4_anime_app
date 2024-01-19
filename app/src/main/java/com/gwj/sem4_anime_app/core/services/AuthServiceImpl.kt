@@ -24,4 +24,8 @@ class AuthServiceImpl(
     override fun logOut() {
         authenticate.signOut()
     }
+
+    override fun resetPass(email: String) {
+        authenticate.sendPasswordResetEmail(email)
+    }
 }

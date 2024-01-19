@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.gwj.recipesapp.ui.base.BaseFragment
+import com.gwj.sem4_anime_app.ui.base.BaseFragment
 import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.databinding.FragmentHomeBinding
 import com.gwj.sem4_anime_app.ui.adapter.BaseSeasonNowAnimeAdapter
@@ -54,6 +54,55 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         //================ toggle button End ==================
     }
 
+
+    override fun setupViewModelObserver() {
+        super.setupViewModelObserver()
+
+        //===================== lifecycleScope topanimes Start =====================
+        lifecycleScope.launch {
+            viewModel.topAnimes.collect {
+                HorizontalTopAnimeAdapter.setTopAnimes(it)
+            }
+        }
+        //===================== lifecycleScope topanimes End =====================
+
+        //====================== lifecycleScope SeasonNow Start ==================
+        lifecycleScope.launch {
+            viewModel.seasonNowAnimes.collect {
+                // if list is not empty, hide the progress bar
+                if (it.isNotEmpty()){
+                    binding.progressBar.visibility = View.GONE
+                    binding.toggleGroup.visibility = View.VISIBLE
+                    SeasonNowAnimeAdapter.baseSetSeasonNowAnimes(it)
+                }else{
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.toggleGroup.visibility = View.GONE
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.toggleIsGridOrLinear.collect {
+                setupRecommendedAnimeAdapter(it.first, it.second)
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.isLoading.collect { isLoading ->
+                // if isLoading is false mean the data is finish fetching, hide the progress bar
+                if (isLoading.not()) {
+                    binding.myDotLoading.visibility = View.GONE
+                }else{
+                    binding.myDotLoading.visibility = View.VISIBLE
+                }
+            }
+        }
+        //====================== lifecycleScope SeasonNow End ==================
+
+    }
+
+
+
     private fun setupTopAnimeAdapter() {
         HorizontalTopAnimeAdapter = HorizontalTopAnimeAdapter(emptyList())
         HorizontalTopAnimeAdapter.listener = object : HorizontalTopAnimeAdapter.Listener {
@@ -70,7 +119,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.horizontalTopAnimeRecycleView.adapter = HorizontalTopAnimeAdapter
         binding.horizontalTopAnimeRecycleView.layoutManager = layoutManager
     }
-
 
     private fun setupRecommendedAnimeAdapter(grid: Boolean, animes: List<Data> = emptyList()) {
         //if user click on grid button, then change the adapter to grid layout else linear layout
@@ -121,51 +169,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 }
             }
         })
-    }
-
-    override fun setupViewModelObserver() {
-        super.setupViewModelObserver()
-
-        //===================== lifecycleScope topanimes Start =====================
-        lifecycleScope.launch {
-            viewModel.topAnimes.collect {
-                HorizontalTopAnimeAdapter.setTopAnimes(it)
-            }
-        }
-        //===================== lifecycleScope topanimes End =====================
-
-        //====================== lifecycleScope SeasonNow Start ==================
-        lifecycleScope.launch {
-            viewModel.seasonNowAnimes.collect {
-                // if list is not empty, hide the progress bar
-                if (it.isNotEmpty()){
-                    binding.progressBar.visibility = View.GONE
-                    binding.toggleGroup.visibility = View.VISIBLE
-                    SeasonNowAnimeAdapter.baseSetSeasonNowAnimes(it)
-                }else{
-                    binding.progressBar.visibility = View.VISIBLE
-                    binding.toggleGroup.visibility = View.GONE
-                }
-            }
-        }
-
-        lifecycleScope.launch {
-            viewModel.toggleIsGridOrLinear.collect {
-                setupRecommendedAnimeAdapter(it.first, it.second)
-            }
-        }
-
-        lifecycleScope.launch {
-            viewModel.isLoading.collect { isLoading ->
-                // if isLoading is false mean the data is finish fetching, hide the progress bar
-                if (isLoading.not()) {
-                    binding.myDotLoading.visibility = View.GONE
-                }else{
-                    binding.myDotLoading.visibility = View.VISIBLE
-                }
-            }
-        }
-        //====================== lifecycleScope SeasonNow End ==================
-
     }
 }

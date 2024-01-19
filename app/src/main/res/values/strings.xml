@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">sem4_anime_app</string>
+    <string name="app_name">Anime App</string>
     <string name="back">Back</string>
     <string name="logo">Logo</string>
     <string name="email">Email</string>
@@ -34,6 +34,16 @@
     <string name="shortcut_home_short_label">Home</string>
     <string name="shortcut_home_long_label">Go to Home page</string>
     <string name="shortcut_disabled_message">This shortcut is disabled</string>
+    <string name="placeholder_user">PlaceHolder User</string>
+    <string name="added_on">Added On</string>
+    <string name="content">Content</string>
+    <string name="comment">Comment</string>
+    <string name="delete_button">Delete Button</string>
+    <string name="add">Add</string>
+    <string name="update">Update</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="reset">Reset</string>
+    <string name="forgot_password">Forgot Password?</string>
 
     <string name="shortcut_search_short_label">Search</string>
     <string name="shortcut_search_long_label">Go to Search page</string>
@@ -42,5 +52,30 @@
     <string name="shortcut_seasonal_long_label">Go to Seasonal page</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="exit_app">Exit App</string>
+    <string name="are_you_sure">Are you sure you want to exit?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="choose_Genres">Choose Genres</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="clear_all">Clear All</string>
+    <string name="profile">Profile</string>
+
+    <string name="spring">Spring</string>
+    <string name="summer">Summer</string>
+    <string name="fall">Fall</string>
+    <string name="winter">Winter</string>
+    <string name="top_anime">Top Anime</string>
+    <string name="popupgenresbtn">popUpGenresBtn</string>
+    <string name="no_data">No Data</string>
+    <string name="_2020">2020</string>
+    <string name="anime_image">anime Image</string>
+    <string name="anime_name">Anime Name</string>
+    <string name="anime_episodes">Anime Episodes</string>
+    <string name="type">type</string>
+    <string name="not_available">N/A</string>
 
 </resources>

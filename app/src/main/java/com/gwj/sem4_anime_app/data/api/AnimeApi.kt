@@ -1,7 +1,6 @@
 package com.gwj.sem4_anime_app.data.api
 
 import com.gwj.sem4_anime_app.data.model.AnimeDetailResp
-import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.data.model.AnimeResp
 import com.gwj.sem4_anime_app.data.model.GenresResp
 import retrofit2.http.GET

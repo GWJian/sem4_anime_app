@@ -25,12 +25,11 @@
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_image"
-                android:contentDescription="anime Image" />
+                android:contentDescription="@string/anime_image" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/gray"
                 android:orientation="vertical">
 
                 <TextView
@@ -39,8 +38,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:fontFamily="serif"
-                    android:text="Anime Name"
-                    android:textColor="@color/purple" />
+                    android:textColor="@color/purple"
+                    android:text="@string/anime_name" />
 
                 <TextView
                     android:id="@+id/tvAnimeEpisodes"
@@ -48,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:fontFamily="serif"
-                    android:text="Anime Episodes"
+                    android:text="@string/anime_episodes"
                     android:textColor="@color/purple" />
 
                 <TextView
@@ -57,8 +56,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:fontFamily="serif"
-                    android:text="Type"
-                    android:textColor="@color/purple" />
+                    android:textColor="@color/purple"
+                    android:text="@string/type" />
 
                 <TextView
                     android:id="@+id/tvAnimeYear"
@@ -66,8 +65,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:fontFamily="serif"
-                    android:text="Year"
-                    android:textColor="@color/purple" />
+                    android:textColor="@color/purple"
+                    android:text="@string/year" />
 
             </LinearLayout>
 

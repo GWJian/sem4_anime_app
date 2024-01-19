@@ -40,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_marginTop="10dp"
             android:hint="@string/email"
+            android:inputType="textEmailAddress"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -53,6 +54,7 @@
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_marginTop="10dp"
+            android:inputType="textPassword"
             android:hint="@string/password"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -69,6 +71,16 @@
         android:backgroundTint="@color/dark"
         android:text="@string/log_in"
         android:paddingHorizontal="130dp"
+        />
+    <TextView
+        android:id="@+id/forgotPass"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.Material3.TitleMedium"
+        android:text="@string/forgot_password"
+        android:textStyle="bold|italic"
+        android:textColor="@color/blue"
         />
 
     <LinearLayout

@@ -1,9 +1,6 @@
-package com.gwj.recipesapp.ui.base
+package com.gwj.sem4_anime_app.ui.base
 
-import android.view.View
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow

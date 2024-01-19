@@ -2,26 +2,30 @@ package com.gwj.sem4_anime_app.ui.content
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.gwj.recipesapp.ui.base.BaseViewModel
+import com.gwj.sem4_anime_app.ui.base.BaseViewModel
 import com.gwj.sem4_anime_app.core.services.AuthService
+import com.gwj.sem4_anime_app.data.model.Comment
 import com.gwj.sem4_anime_app.data.model.Data
 import com.gwj.sem4_anime_app.data.model.FavouriteAnime
 import com.gwj.sem4_anime_app.data.model.Users
 import com.gwj.sem4_anime_app.data.repo.anime.AnimeRepo
+import com.gwj.sem4_anime_app.data.repo.comment.CommentRepo
 import com.gwj.sem4_anime_app.data.repo.favourite.FavouriteAnimeRepo
 import com.gwj.sem4_anime_app.data.repo.user.UsersRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ContentViewModel @Inject constructor(
+    private val animeRepo: AnimeRepo,
+    private val commentRepo: CommentRepo,
     private val authService: AuthService,
     private val userRepo: UsersRepo,
-    private val animeRepo: AnimeRepo,
     private val favouriteAnimeRepo: FavouriteAnimeRepo
 ) : BaseViewModel() {
 
@@ -30,6 +34,12 @@ class ContentViewModel @Inject constructor(
 
     private val _anime: MutableStateFlow<Data?> = MutableStateFlow(null)
     val anime: StateFlow<Data?> = _anime
+    private val _comment: MutableStateFlow<List<Comment>> = MutableStateFlow(emptyList())
+    val comment: StateFlow<List<Comment>> = _comment
+    private val _newComment: MutableStateFlow<Comment> = MutableStateFlow(
+        Comment(comment = "")
+    )
+
 
     private val _favourite: MutableStateFlow<FavouriteAnime?> = MutableStateFlow(null)
     val favourite: StateFlow<FavouriteAnime?> = _favourite
@@ -92,5 +102,30 @@ class ContentViewModel @Inject constructor(
 
 
 
+
+    fun getAllComments(animeId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            safeApiCall { commentRepo.getAllComments(animeId) }?.collect { it ->
+                _comment.value = it
+            }
+        }
+    }
+
+
+
+    fun deleteComment(comment: Comment) {
+        viewModelScope.launch(Dispatchers.IO) {
+            safeApiCall {
+                if (commentRepo.dbUserNameGet() == comment.addedBy) {
+                    _success.emit("Deleted")
+                    commentRepo.delete(comment.id)
+                } else {
+                    _error.emit("Not Authorized")
+                }
+            }
+
+
+        }
+    }
 
 }
