@@ -86,11 +86,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         //========================== Anime Genres =============================
         lifecycleScope.launch {
             viewModel.animeGenres.collect { animeGenres ->
-                // initialise the list items for the alert dialog
+
+                //make it into array,thn get name and map it
                 val listItems = animeGenres.map { it.name }.toTypedArray()
                 val checkedItems = BooleanArray(listItems.size)
 
-                // copy the items from the main list to the selected item list for the preview
+                // get the items int from the main list when user click the item
                 val selectedGenres = mutableListOf<Int>()
 
                 // handle the Open Alert Dialog button
@@ -101,6 +102,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                     builder.setTitle(getString(R.string.choose_Genres))
                         .setMultiChoiceItems(listItems, checkedItems) { _, which, isChecked ->
                             val genresId = animeGenres[which].mal_id
+                            //if the item tick,pass genresId,else remove it
                             if (isChecked) {
                                 selectedGenres.add(genresId)
                             } else {
