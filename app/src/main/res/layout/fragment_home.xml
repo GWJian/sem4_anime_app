@@ -27,8 +27,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="5dp"
                     android:text="@string/top_anime" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -37,8 +38,15 @@
                     android:layout_height="180dp"
                     android:orientation="horizontal" />
 
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/line001"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="1dp" />
+
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
                     android:id="@+id/toggleGroup"
+                    android:layout_marginTop="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:justifyContent="flex_end">
@@ -68,7 +76,6 @@
                         app:toggle_selectedBorderColor="#5e6fed" />
 
                 </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
-
 
             </LinearLayout>
 

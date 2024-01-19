@@ -66,20 +66,25 @@ class TabContainerFragment : Fragment() {
         }
 
         TabLayoutMediator(binding.tlTabs, binding.vpContainer) { tab, position ->
+
             when (position) {
                 0 -> {
+                    tab.setIcon(R.drawable.ic_home)
                     tab.text = getString(R.string.shortcut_home_short_label)
                 }
 
                 1 -> {
+                    tab.setIcon(R.drawable.ic_search)
                     tab.text = getString(R.string.shortcut_search_short_label)
                 }
 
                 2 -> {
+                    tab.setIcon(R.drawable.ic_notes)
                     tab.text = getString(R.string.shortcut_seasonal_short_label)
                 }
 
                 3 -> {
+                    tab.setIcon(R.drawable.ic_profile)
                     tab.text = getString(R.string.profile)
                 }
 

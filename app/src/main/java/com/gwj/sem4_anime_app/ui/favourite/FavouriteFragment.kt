@@ -8,6 +8,8 @@ import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.gwj.sem4_anime_app.ui.base.BaseFragment
 import com.gwj.sem4_anime_app.data.model.FavouriteAnime
 import com.gwj.sem4_anime_app.databinding.FragmentFavouriteBinding
@@ -57,9 +59,9 @@ class FavouriteFragment : BaseFragment<FragmentFavouriteBinding>() {
             }
         }
 
-        val layoutManager = GridLayoutManager(requireContext(), 2)
+        val staggeredLayoutManager = StaggeredGridLayoutManager( 2, LinearLayoutManager.VERTICAL)
         binding.rvFavourite.adapter = FavouriteAnimeAdapter
-        binding.rvFavourite.layoutManager = layoutManager
+        binding.rvFavourite.layoutManager = staggeredLayoutManager
     }
 
     override fun setupViewModelObserver() {

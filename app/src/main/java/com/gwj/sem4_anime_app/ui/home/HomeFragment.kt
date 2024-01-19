@@ -73,10 +73,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 if (it.isNotEmpty()){
                     binding.progressBar.visibility = View.GONE
                     binding.toggleGroup.visibility = View.VISIBLE
+                    binding.line001.visibility = View.VISIBLE
                     SeasonNowAnimeAdapter.baseSetSeasonNowAnimes(it)
                 }else{
                     binding.progressBar.visibility = View.VISIBLE
                     binding.toggleGroup.visibility = View.GONE
+                    binding.line001.visibility = View.GONE
                 }
             }
         }
