@@ -12,7 +12,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:focusable="false">
+        android:focusable="false" >
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/ctlAnime"
@@ -29,8 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:backgroundTint="@color/transparent" >
+                android:orientation="horizontal" >
 
                 <SearchView
                     android:id="@+id/searchView"
@@ -49,6 +48,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@drawable/ic_format_list_bulleted"
+                    android:backgroundTint="@color/dark"
                     android:contentDescription="popUpGenresBtn"
                     app:iconGravity="textStart" />
 
