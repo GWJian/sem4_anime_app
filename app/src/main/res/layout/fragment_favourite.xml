@@ -4,11 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/purple"
     tools:context=".ui.favourite.FavouriteFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:background="@color/purple">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -25,6 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Favourites"
+                android:textColor="@color/black"
                 android:textSize="26sp" />
 
         </androidx.appcompat.widget.Toolbar>

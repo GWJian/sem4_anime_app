@@ -18,7 +18,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
                 <ImageView
                     android:id="@+id/contentBackBtn"
                     android:layout_width="wrap_content"
@@ -47,14 +49,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 >
+
                 <ImageView
                     android:id="@+id/contentImage"
-                    android:layout_gravity="start"
                     android:layout_width="150dp"
-                    android:layout_height="170dp"
-                    android:src="@drawable/ic_image"
+                    android:layout_height="186dp"
+                    android:layout_gravity="start"
                     android:contentDescription="@string/content_to_be_displayed"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_image" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -158,7 +162,8 @@
                 android:id="@+id/contentScroll"
                 android:layout_width="match_parent"
                 android:scrollbars="none"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
                 <TextView
                     android:id="@+id/contentDesc"
                     android:layout_width="wrap_content"
