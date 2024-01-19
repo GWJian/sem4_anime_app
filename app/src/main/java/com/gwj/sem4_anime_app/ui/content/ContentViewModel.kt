@@ -115,7 +115,16 @@ class ContentViewModel @Inject constructor(
 
     fun deleteComment(comment: Comment) {
         viewModelScope.launch(Dispatchers.IO) {
-            commentRepo.delete(comment.id)
+            safeApiCall {
+                if (commentRepo.dbUserNameGet() == comment.addedBy) {
+                    _success.emit("Deleted")
+                    commentRepo.delete(comment.id)
+                } else {
+                    _error.emit("Not Authorized")
+                }
+            }
+
+
         }
     }
 

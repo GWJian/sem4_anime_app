@@ -23,7 +23,7 @@ class CommentRepoImpl(
         return db.collection("comments")
     }
 
-    suspend fun dbUserNameGet(): String? {
+   override suspend fun dbUserNameGet(): String? {
         return authService.getCurrentUser()?.uid?.let {
             val res = db.collection("users").document(it).get().await()
             res.data?.get("username") as String

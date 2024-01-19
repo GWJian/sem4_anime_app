@@ -14,4 +14,6 @@ interface CommentRepo {
 
     suspend fun editComment(id: String,comment: Comment)
     suspend fun delete(id:String)
+
+    suspend fun dbUserNameGet(): String?
 }

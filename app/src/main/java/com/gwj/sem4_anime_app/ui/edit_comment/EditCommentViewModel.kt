@@ -35,12 +35,21 @@ class EditCommentViewModel @Inject constructor(
     fun editComment(comment: String) {
         viewModelScope.launch(Dispatchers.IO) {
             safeApiCall {
-                commentRepo.editComment(
-                    newComment.value.id,
-                    newComment.value.copy(comment = comment)
-                )
+//                commentRepo.editComment(
+//                    newComment.value.id,
+//                    newComment.value.copy(comment = comment)
+//                )
+                if (commentRepo.dbUserNameGet() == newComment.value.addedBy) {
+                    _success.emit("Edit Successful")
+                    commentRepo.editComment(
+                        newComment.value.id,
+                        newComment.value.copy(comment = comment)
+                    )
+                } else {
+                    _error.emit("Not Authorized")
+                }
             }
-            _success.emit("Edit Successful")
+//            _success.emit("Edit Successful")
         }
     }
 
