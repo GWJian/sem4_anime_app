@@ -4,11 +4,9 @@ package com.gwj.sem4_anime_app.data.repo.comment
 import android.util.Log
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.auth.User
 import com.gwj.sem4_anime_app.core.services.AuthService
 import com.gwj.sem4_anime_app.data.model.Comment
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 

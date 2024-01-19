@@ -1,6 +1,7 @@
 package com.gwj.sem4_anime_app.ui.content
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,7 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
     override fun setupUIComponents() {
         super.setupUIComponents()
         setupCommentAdapter()
+        Log.d("animeid", args.animeId.toString())
         viewModel.getAnimeDetail(args.animeId.toInt()) //get anime by id
 
         viewModel.getAllComments(args.animeId.toInt())

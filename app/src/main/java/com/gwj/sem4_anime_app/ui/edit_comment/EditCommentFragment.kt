@@ -38,8 +38,9 @@ class EditCommentFragment : BaseFragment<FragmentEditCommentBinding>() {
         }
 
         binding.editBackBtn.setOnClickListener {
-            val action = EditCommentFragmentDirections.editToContent(args.animeId)
-            navController.navigate(action)
+//            val action = EditCommentFragmentDirections.editToContent(args.animeId)
+//            navController.navigate(action)
+            navController.popBackStack()
         }
     }
 
