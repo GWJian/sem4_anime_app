@@ -63,7 +63,7 @@ class MainActivity: AppCompatActivity() {
             }
         }
 
-        window.statusBarColor = Color.BLACK;
+        window.statusBarColor = Color.BLACK
         //====================== No Connection End =====================================
     }
 
