@@ -14,7 +14,6 @@ import com.gwj.sem4_anime_app.databinding.FragmentTabContainerBinding
 import com.gwj.sem4_anime_app.ui.adapter.FragmentAdapter
 import com.gwj.sem4_anime_app.ui.home.HomeFragment
 import com.gwj.sem4_anime_app.ui.profile.ProfileFragment
-import com.gwj.sem4_anime_app.ui.random.RandomAnimeFragment
 import com.gwj.sem4_anime_app.ui.search.SearchFragment
 import com.gwj.sem4_anime_app.ui.seasonal.SeasonalFragment
 
