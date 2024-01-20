@@ -6,10 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="15dp"
-    android:background="@drawable/left"
     android:gravity="center"
+    android:background="@drawable/right0"
     tools:context=".ui.register.RegisterFragment">
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
