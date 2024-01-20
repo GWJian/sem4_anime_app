@@ -1,113 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/right0"
+    android:gravity="center"
     android:orientation="vertical"
     android:padding="15dp"
-    android:gravity="center"
-    android:background="@drawable/right0"
     tools:context=".ui.register.RegisterFragment">
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox.Dense"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox.Dense">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/registerUsername"
-            android:layout_gravity="center"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:hint="@string/username"
-            android:inputType="textPersonName"
-            android:layout_height="wrap_content" />
+            android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox.Dense"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox.Dense">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/registerEmail"
-            android:layout_gravity="center"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:layout_height="wrap_content" />
+            android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox.Dense"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox.Dense">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/registerPass"
-            android:layout_gravity="center"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:hint="@string/password"
-            android:inputType="textPassword"
-            android:layout_height="wrap_content" />
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox.Dense"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox.Dense">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/confirmPass"
-            android:layout_gravity="center"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:hint="@string/confirm_password"
-            android:inputType="textPassword"
-            android:layout_height="wrap_content" />
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
-
 
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/registerBtn"
-        android:layout_gravity="center"
+        style="@style/ShapeAppearanceOverlay.Material3.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        style="@style/ShapeAppearanceOverlay.Material3.Button"
-        app:cornerRadius="4dp"
         android:backgroundTint="@color/black"
-        android:text="@string/register"
         android:paddingHorizontal="130dp"
-        />
+        android:text="@string/register"
+        app:cornerRadius="4dp" />
 
     <LinearLayout
+        android:layout_marginBottom="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal">
+
         <TextView
-            android:layout_gravity="center"
+            style="@style/TextAppearance.Material3.TitleMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TextAppearance.Material3.TitleMedium"
-            android:text="@string/already_a_user"
-            />
+            android:layout_gravity="center"
+            android:text="@string/already_a_user" />
 
         <TextView
             android:id="@+id/registerToLogin"
-            android:layout_width="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_height="wrap_content"
             style="@style/TextAppearance.Material3.TitleMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:text="@string/log_in_here"
-            android:textStyle="bold|italic"
-            android:textColor="@color/blue" />
+            android:textColor="@color/blue"
+            android:textStyle="bold|italic" />
     </LinearLayout>
 
 </LinearLayout>
