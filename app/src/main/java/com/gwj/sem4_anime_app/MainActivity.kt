@@ -63,10 +63,11 @@ class MainActivity: AppCompatActivity() {
             }
         }
 
-        window.statusBarColor = Color.BLACK;
+        window.statusBarColor = Color.BLACK
         //====================== No Connection End =====================================
     }
 
+    //if user quite the app,alarm start ticking
     override fun onStop() {
         super.onStop()
 
@@ -80,6 +81,7 @@ class MainActivity: AppCompatActivity() {
         alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 5000, pendingIntent)
     }
 
+    //if they back,cancel it
     override fun onResume() {
         super.onResume()
 

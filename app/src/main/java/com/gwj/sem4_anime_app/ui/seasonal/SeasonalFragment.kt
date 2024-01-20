@@ -27,6 +27,11 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
     override val viewModel: SeasonalViewModel by viewModels()
     private lateinit var seasonalAdapter: SeasonalAdapter
 
+    /**
+     * This method is called when the fragment is created.
+     * It sets up the AutoCompleteTextViews for year and season selection.
+     *
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycleScope.launch {
@@ -36,7 +41,6 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
                 setupYearForAutoCompleteTextView()
                 setupSeasonalForAutoCompleteTextView()
             }
-
         }
     }
 
@@ -118,7 +122,7 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
         //set array to AutoCompleteTextView
         /**
          * (2024 downTo 1927).map this will create a list of int from 2024 to 1927
-         * {it.toString()} this will convert int to string, toTypedArray = array containing all of the elements of this collection
+         * make it into array,number toString,then map it out
          */
         val years = (2024 downTo 1927).map { it.toString() }.toTypedArray()
         val yearAdapter =
