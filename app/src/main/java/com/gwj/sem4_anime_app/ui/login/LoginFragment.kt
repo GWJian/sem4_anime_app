@@ -31,10 +31,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             val email = binding.loginEmail.text.toString().trim()
             val password = binding.loginPass.text.toString().trim()
             viewModel.login(email, password)
+            val action = LoginFragmentDirections.actionLoginToTabContainer()
+            navController.navigate(action)
         }
 
         binding.logToReg.setOnClickListener {
-            val action = RegisterFragmentDirections.loginToRegister()
+            val action = LoginFragmentDirections.loginToRegister()
+            navController.navigate(action)
+
+
+        }
+        binding.forgotPass.setOnClickListener {
+            val action = LoginFragmentDirections.actionLoginFragmentToResetPassFragment()
             navController.navigate(action)
 
 
@@ -53,17 +61,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()
-//        lifecycleScope.launch {
-//            viewModel.user.collect {
+        lifecycleScope.launch {
+            viewModel.user.collect {
 //                val action = LoginFragmentDirections.actionLoginToTabContainer()
 //                navController.navigate(action)
-//
-//            }
-//        }
-        lifecycleScope.launch {
-            viewModel.success.collect {
-                val action = LoginFragmentDirections.actionLoginFragmentToTabContainerFragment()
-                navController.navigate(action)
                 viewModel.getCurrentUser()
             }
         }

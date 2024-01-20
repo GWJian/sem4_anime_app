@@ -1,16 +1,20 @@
 package com.gwj.sem4_anime_app.ui.content
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.gwj.sem4_anime_app.data.model.Comment
 import com.gwj.sem4_anime_app.ui.base.BaseFragment
 import com.gwj.sem4_anime_app.R
 import com.gwj.sem4_anime_app.databinding.FragmentContentBinding
+import com.gwj.sem4_anime_app.ui.adapter.CommentAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -18,6 +22,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class ContentFragment : BaseFragment<FragmentContentBinding>() {
     override val viewModel: ContentViewModel by viewModels()
+    private lateinit var CommentAdapter: CommentAdapter
     val args: ContentFragmentArgs by navArgs()
 
     private var isFavourite = false
@@ -33,10 +38,20 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
 
     override fun setupUIComponents() {
         super.setupUIComponents()
+        setupCommentAdapter()
+        Log.d("animeid", args.animeId.toString())
         viewModel.getAnimeDetail(args.animeId.toInt()) //get anime by id
 
+        viewModel.getAllComments(args.animeId.toInt())
+
         binding.contentBackBtn.setOnClickListener {
+//            val action = ContentFragmentDirections.contentToHome()
+//            navController.navigate(action)
             navController.popBackStack()
+        }
+        binding.BtnCommentTo.setOnClickListener {
+            val action = ContentFragmentDirections.actionContentFragmentToCommentFragment(args.animeId)
+            navController.navigate(action)
         }
 
         binding.favoriteBtn.setOnClickListener {
@@ -49,9 +64,32 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
 
         binding.progressBar.visibility = View.VISIBLE
     }
+    private fun setupCommentAdapter() {
+        CommentAdapter = CommentAdapter(emptyList())
+        CommentAdapter.listener = object: CommentAdapter.Listener {
+            override fun onClick(comment: Comment) {
+                val action = ContentFragmentDirections.actionContentFragmentToEditCommentFragment(comment.id)
+                navController.navigate(action)
+            }
+
+            override fun onDelete(comment: Comment) {
+                viewModel.deleteComment(comment)
+            }
+
+        }
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.rvComments.adapter = CommentAdapter
+        binding.rvComments.layoutManager = layoutManager
+    }
 
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()
+
+        lifecycleScope.launch {
+            viewModel.comment.collect() {
+                CommentAdapter.setComments(it)
+            }
+        }
 
         lifecycleScope.launch {
             viewModel.favourite.collect {

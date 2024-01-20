@@ -8,10 +8,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.gwj.sem4_anime_app.ui.base.BaseFragment
 import com.gwj.sem4_anime_app.databinding.FragmentRegisterBinding
-
-
 import dagger.hilt.android.AndroidEntryPoint
+
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class RegisterFragment  : BaseFragment<FragmentRegisterBinding>() {
@@ -39,12 +39,18 @@ class RegisterFragment  : BaseFragment<FragmentRegisterBinding>() {
                 )
             }
 
-            registerToLogin.setOnClickListener {
-                navController.popBackStack()
-            }
+
+//            registerToLogin.setOnClickListener {
+//                navController.popBackStack()
+//            }
 
         }
+        binding.registerToLogin.setOnClickListener {
+            val action = RegisterFragmentDirections.registerToLogin()
+            navController.navigate(action)
+        }
     }
+
 
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()
