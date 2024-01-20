@@ -27,6 +27,11 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
     override val viewModel: SeasonalViewModel by viewModels()
     private lateinit var seasonalAdapter: SeasonalAdapter
 
+    /**
+     * This method is called when the fragment is created.
+     * It sets up the AutoCompleteTextViews for year and season selection.
+     *
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycleScope.launch {
@@ -36,7 +41,6 @@ class SeasonalFragment : BaseFragment<FragmentSeasonalBinding>() {
                 setupYearForAutoCompleteTextView()
                 setupSeasonalForAutoCompleteTextView()
             }
-
         }
     }
 
