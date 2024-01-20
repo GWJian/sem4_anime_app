@@ -79,7 +79,7 @@ class TabContainerFragment : Fragment() {
                 }
 
                 2 -> {
-                    tab.setIcon(R.drawable.ic_notes)
+                    tab.setIcon(R.drawable.ic_manage_search)
                     tab.text = getString(R.string.shortcut_seasonal_short_label)
                 }
 
