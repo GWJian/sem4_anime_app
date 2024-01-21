@@ -85,14 +85,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/contentTitle"
-                    style="@style/TextAppearance.Material3.TitleMedium"
+                    style="@style/TextAppearance.Material3.TitleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
                     android:text="@string/placeholder_title"
                     android:textStyle="bold" />
 
@@ -101,58 +101,47 @@
                     style="@style/TextAppearance.Material3.TitleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:text="@string/placeholder_jp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/contentEpisodes"
-                    style="@style/TextAppearance.Material3.TitleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:text="@string/episodes"
                     android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/contentYear"
-                    style="@style/TextAppearance.Material3.TitleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:text="@string/year"
                     android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/contentStatus"
-                    style="@style/TextAppearance.Material3.TitleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:text="@string/status"
                     android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/contentSource"
-                    style="@style/TextAppearance.Material3.TitleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:text="@string/source"
                     android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/contentDuration"
-                    style="@style/TextAppearance.Material3.TitleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:text="@string/duration"
                     android:textSize="12sp" />
 
