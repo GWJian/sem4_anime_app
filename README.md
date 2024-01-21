@@ -2,6 +2,12 @@
 
 Welcome to AnimeApp, an ideal destination for anime enthusiasts. AnimeApp is an Android app that offers a seamless and personalised experience for anime fans. Dive into the world of your favourite anime, interact with the community, and stay up to date on the latest releases.
 
+<div style="white-space: nowrap; overflow-x: auto;">
+    <img src="./assets/home.png" alt="Home Page" style="width: 200px; height: auto; display: inline-block;">
+    <img src="./assets/search.png" alt="Categories Page" style="width: 200px; height: auto; display: inline-block;">
+    <img src="assets/seasonal.png" alt="Profile Page" style="width: 200px; height: auto; display: inline-block;">
+    <img src="./assets/profile.png" alt="Recipe Details Page" style="width: 200px; height: auto; display: inline-block;">
+</div>
 
 ## Features.
 
