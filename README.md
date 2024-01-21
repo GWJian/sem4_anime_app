@@ -61,7 +61,21 @@ AnimeApp uses the following technologies to provide a seamless experience:
 - Glide for smooth image loading and caching
 - Dagger Hilt for dependency injection
 - YouTube Player Library for personalised YouTube viewing experience
-- - Retrofit to access the [Jikan API](https://jikan.moe/), which provides comprehensive data about anime series, including details, images, and user ratings.
+- Retrofit to access the [Jikan API](https://jikan.moe/), which provides comprehensive data about anime series, including details, images, and user ratings.
+
+## Libraries Used
+
+This project uses the following third-party libraries:
+
+- [Android Jetpack's Navigation and Lifecycle](https://developer.android.com/jetpack/androidx/releases/navigation)
+- [Firebase](https://firebase.google.com/)
+- [Retrofit](https://square.github.io/retrofit/)
+- [Glide](https://github.com/bumptech/glide)
+- [Dagger Hilt](https://dagger.dev/hilt/)
+- [YouTube Player Library](https://developers.google.com/youtube/android/player)
+- [android-youtube-player](https://github.com/PierfrancescoSoffritti/android-youtube-player)
+
+For more information on these libraries, please visit their respective links.
 
 ## Installation
 
