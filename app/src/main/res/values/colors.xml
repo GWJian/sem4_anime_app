@@ -12,4 +12,5 @@
     <color name="taro">#9A75CF</color>
     <color name="dark">#363D80</color>
     <color name="dim">#0E6B77</color>
+    <color name="bgColor">#F7F6F2</color>
 </resources>

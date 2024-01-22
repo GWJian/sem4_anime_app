@@ -1,5 +1,6 @@
 package com.gwj.sem4_anime_app.ui.content
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -82,6 +83,7 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
         binding.rvComments.layoutManager = layoutManager
     }
 
+    @SuppressLint("SetTextI18n")
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()
 
@@ -110,7 +112,7 @@ class ContentFragment : BaseFragment<FragmentContentBinding>() {
                 binding.run {
                     contentTitle.text = animeDetail?.title ?: "N/A"
                     contentTitleJP.text = animeDetail?.title_japanese ?: "N/A"
-                    contentEpisodes.text = animeDetail?.episodes.toString()
+                    contentEpisodes.text = "Episode ${animeDetail?.episodes}"
                     contentYear.text = animeDetail?.aired?.string ?: "N/A"
                     contentStatus.text = animeDetail?.status ?: "N/A"
                     contentSource.text = animeDetail?.source ?: "N/A"
