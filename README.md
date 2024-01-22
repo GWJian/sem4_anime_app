@@ -43,6 +43,9 @@ Welcome to AnimeApp, an ideal destination for anime enthusiasts. AnimeApp is an 
 
 We have exciting plans for upcoming updates, including:
 
+## Improved Comment System: - Direct replies to comments.
+- Respond to other users directly.
+
 ## Enhanced User Profiles: - Customise your profile to reflect your anime preferences.
 - Connect with other users who have similar interests.
 
@@ -111,8 +114,20 @@ We are grateful to the creators and contributors of the technologies used in Ani
 
 ## Contact Information.
 
-For any questions or feedback, please contact us at [waijian22g@forward.edu.my].
+For any questions or feedback, please contact us at: 
+
+[waijian22g@forward.edu.my].
+
+[zhisean22w@forward.edu.my].
+
+[tzehernbryan22w@forward.edu.my].
 
 ## Frequently Asked Questions & Troubleshooting
 
-If you encounter any problems or have questions, please see the FAQs or report them in the repository's Issues section.
+**Q: The app saying there are too many HTTP requests. What can I do?**
+A: As we are using a free api there are a limit to how many requests that can be made, please wait and try and.
+
+**Q: The app is crashing. What can I do?**
+A: Restart the app and try again.
+
+If you encounter any more problems or have questions, please see the FAQs or report them in the repository's Issues section.
