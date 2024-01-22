@@ -59,6 +59,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     }
 
+    // for git push
+
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()
         lifecycleScope.launch {
