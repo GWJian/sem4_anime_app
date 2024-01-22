@@ -7,34 +7,27 @@
     android:gravity="center"
     android:padding="22dp"
     android:orientation="vertical"
-    android:background="@drawable/profile_bg"
     tools:context=".ui.profile.ProfileFragment">
-
-    <androidx.legacy.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
 
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" >
+        android:layout_gravity="center">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="100dp"
-            android:backgroundTint="@color/transparent">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="100dp">
 
             <ImageView
                 android:id="@+id/ivProfile"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:src="@drawable/ic_profile"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:contentDescription="Profile"
-                android:scaleType="centerCrop" />
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_profile" />
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
 
         <ImageView
@@ -44,7 +37,7 @@
             android:layout_gravity="bottom|end"
             android:contentDescription="Edit Profile Pic"
             android:src="@drawable/ic_add"
-            app:tint="@color/gray" />
+            app:tint="@color/dim" />
 
     </FrameLayout>
 
@@ -52,43 +45,37 @@
         android:id="@+id/tvUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Username"
-        android:textSize="26dp"
         android:layout_marginBottom="36dp"
-        android:textColor="@color/dark"/>
+        android:text="Username"
+        android:textSize="26dp" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="26dp"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnFavourite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:icon="@drawable/ic_bookmark_favourite"
             android:layout_marginBottom="20dp"
-            android:textAlignment="textStart"
             android:backgroundTint="@color/dark"
-            android:text="Favourites" />
+            android:text="Favourites"
+            android:textAlignment="textStart"
+            app:icon="@drawable/ic_bookmark_favourite" />
 
-<!--        <com.google.android.material.button.MaterialButton-->
-<!--            android:id="@+id/btnComments"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:icon="@drawable/ic_comment"-->
-<!--            android:textAlignment="textStart"-->
-<!--            android:text="Comments" />-->
+        <!--        <com.google.android.material.button.MaterialButton-->
+        <!--            android:id="@+id/btnComments"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:icon="@drawable/ic_comment"-->
+        <!--            android:textAlignment="textStart"-->
+        <!--            android:text="Comments" />-->
 
 
     </LinearLayout>
-
-    <androidx.legacy.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -96,17 +83,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        app:icon="@drawable/ic_logout"
-        app:iconTint="@color/red"
         android:backgroundTint="@color/gray"
+        android:text="Logout"
         android:textAlignment="textStart"
         android:textColor="@color/red"
-        android:text="Logout" />
-
-    <androidx.legacy.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        app:icon="@drawable/ic_logout"
+        app:iconTint="@color/red" />
 
 
 </LinearLayout>

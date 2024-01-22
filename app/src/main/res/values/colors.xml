@@ -14,5 +14,5 @@
     <color name="purple">#5C6BC0</color>
     <color name="dark">#363D80</color>
     <color name="dim">#0E6B77</color>
-    <color name="transparent">#00000000</color>
+    <color name="bgColor">#F7F6F2</color>
 </resources>

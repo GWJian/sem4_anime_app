@@ -1,5 +1,6 @@
 package com.gwj.sem4_anime_app.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -38,15 +39,16 @@ class SearchAnimeAdapter(
     inner class SearchAnimeViewHolder(
         private val binding: LayoutSearchItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(data: Data) {
             binding.run {
                 Glide.with(binding.root)
                     .load(data.images.jpg.image_url)
                     .into(ivAnimeImg)
 
-                tvAnimeName.text = data.title
-                tvAnimeEpisodes.text = "Episode: ${data.episodes}" //put this in String file
-                tvAnimeType.text = data.type
+                tvAnimeName.text = "Title: ${data.title}"
+                tvAnimeEpisodes.text = "Episode ${data.episodes}"
+                tvAnimeType.text = "Type ${data.type}"
                 tvAnimeYear.text = "Year: ${data.year}"
 
                 searchCV.setOnClickListener {

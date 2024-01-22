@@ -11,6 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.gwj.sem4_anime_app.core.services.AuthService
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.gwj.sem4_anime_app.core.util.NetworkManager
 import com.gwj.sem4_anime_app.ui.notifications.NotificationBroadcastReceiver
@@ -29,6 +30,9 @@ class MainActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val backgroundColor = ResourcesCompat.getColor(resources, R.color.bgColor, null)
+        window.decorView.setBackgroundColor(backgroundColor)
 
         navController = findNavController(R.id.navHostFragment)
 
@@ -63,10 +67,11 @@ class MainActivity: AppCompatActivity() {
             }
         }
 
-        window.statusBarColor = Color.BLACK;
+        window.statusBarColor = Color.BLACK
         //====================== No Connection End =====================================
     }
 
+    //if user quite the app,alarm start ticking
     override fun onStop() {
         super.onStop()
 
@@ -80,6 +85,7 @@ class MainActivity: AppCompatActivity() {
         alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 5000, pendingIntent)
     }
 
+    //if they back,cancel it
     override fun onResume() {
         super.onResume()
 

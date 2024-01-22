@@ -26,6 +26,7 @@
                 app:layout_collapseMode="pin" />
 
             <LinearLayout
+                android:background="@color/bgColor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
@@ -69,7 +70,7 @@
             android:id="@+id/searchAnimeRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginHorizontal="10dp"
+            android:layout_marginHorizontal="5dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:scrollbars="none" />

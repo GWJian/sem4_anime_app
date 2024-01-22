@@ -14,7 +14,6 @@ import com.gwj.sem4_anime_app.databinding.FragmentTabContainerBinding
 import com.gwj.sem4_anime_app.ui.adapter.FragmentAdapter
 import com.gwj.sem4_anime_app.ui.home.HomeFragment
 import com.gwj.sem4_anime_app.ui.profile.ProfileFragment
-import com.gwj.sem4_anime_app.ui.random.RandomAnimeFragment
 import com.gwj.sem4_anime_app.ui.search.SearchFragment
 import com.gwj.sem4_anime_app.ui.seasonal.SeasonalFragment
 
@@ -58,7 +57,7 @@ class TabContainerFragment : Fragment() {
 
         binding.vpContainer.adapter = FragmentAdapter(
             this,
-            listOf(HomeFragment(), SearchFragment(), SeasonalFragment(), ProfileFragment() )
+            listOf(HomeFragment(), SearchFragment(), SeasonalFragment(), ProfileFragment())
         )
 
         setFragmentResultListener("profile") { _, result ->
@@ -66,27 +65,24 @@ class TabContainerFragment : Fragment() {
         }
 
         TabLayoutMediator(binding.tlTabs, binding.vpContainer) { tab, position ->
+
             when (position) {
                 0 -> {
-
                     tab.setIcon(R.drawable.ic_home)
                     tab.text = getString(R.string.shortcut_home_short_label)
                 }
 
                 1 -> {
-
                     tab.setIcon(R.drawable.ic_search)
                     tab.text = getString(R.string.shortcut_search_short_label)
                 }
 
                 2 -> {
-
-                    tab.setIcon(R.drawable.ic_season_list)
+                    tab.setIcon(R.drawable.ic_manage_search)
                     tab.text = getString(R.string.shortcut_seasonal_short_label)
                 }
 
                 3 -> {
-
                     tab.setIcon(R.drawable.ic_profile)
                     tab.text = getString(R.string.profile)
                 }

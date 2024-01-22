@@ -1,7 +1,6 @@
 package com.gwj.sem4_anime_app.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -73,10 +72,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 if (it.isNotEmpty()){
                     binding.progressBar.visibility = View.GONE
                     binding.toggleGroup.visibility = View.VISIBLE
+                    binding.line001.visibility = View.VISIBLE
                     SeasonNowAnimeAdapter.baseSetSeasonNowAnimes(it)
                 }else{
                     binding.progressBar.visibility = View.VISIBLE
                     binding.toggleGroup.visibility = View.GONE
+                    binding.line001.visibility = View.GONE
                 }
             }
         }
@@ -146,7 +147,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
         }
 
-        //Join two list
+        /**
+         * Endless Scrolling
+         * OnScrollListener it use for recyclerview, ut are use to monitor the scroll
+         * then we only can use this to trigger the loadMoreItems function
+         * When user reach the last 2 item,will trigger loadMoreItems function
+         */
         binding.verticalAnimeRecyclerView.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
 
