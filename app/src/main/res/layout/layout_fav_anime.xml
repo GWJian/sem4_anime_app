@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:text="Anime Title"
                 android:textAlignment="center"
-                />
+                android:background="@color/gray" />
 
 
         </LinearLayout>

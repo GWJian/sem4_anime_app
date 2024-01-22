@@ -145,9 +145,9 @@
                     android:text="@string/duration"
                     android:textSize="12sp" />
 
-            </LinearLayout>
+                </LinearLayout>
 
-        </LinearLayout>
+            </LinearLayout>
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"

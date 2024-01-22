@@ -8,7 +8,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
             android:background="@color/bgColor"
@@ -26,6 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Favourites"
+                android:textColor="@color/black"
                 android:textSize="26sp" />
 
         </androidx.appcompat.widget.Toolbar>
