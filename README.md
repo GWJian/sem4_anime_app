@@ -6,7 +6,7 @@ Welcome to AnimeApp, an ideal destination for anime enthusiasts. AnimeApp is an 
     <img src="./assets/home.png" alt="Home Page" style="width: 200px; height: auto; display: inline-block;">
     <img src="./assets/search.png" alt="Categories Page" style="width: 200px; height: auto; display: inline-block;">
     <img src="assets/seasonal.png" alt="Profile Page" style="width: 200px; height: auto; display: inline-block;">
-    <img src="./assets/profile.png" alt="Recipe Details Page" style="width: 200px; height: auto; display: inline-block;">
+    <img src="./assets/profile.png" alt="Details Page" style="width: 200px; height: auto; display: inline-block;">
 </div>
 
 ## Features.
