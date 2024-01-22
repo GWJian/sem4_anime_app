@@ -31,8 +31,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             val email = binding.loginEmail.text.toString().trim()
             val password = binding.loginPass.text.toString().trim()
             viewModel.login(email, password)
-            val action = LoginFragmentDirections.actionLoginToTabContainer()
-            navController.navigate(action)
+//            val action = LoginFragmentDirections.actionLoginToTabContainer()
+//            navController.navigate(action)
         }
 
         binding.logToReg.setOnClickListener {
@@ -62,9 +62,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()
         lifecycleScope.launch {
-            viewModel.user.collect {
-//                val action = LoginFragmentDirections.actionLoginToTabContainer()
-//                navController.navigate(action)
+            viewModel.success.collect {
+                val action = LoginFragmentDirections.actionLoginToTabContainer()
+                navController.navigate(action)
                 viewModel.getCurrentUser()
             }
         }

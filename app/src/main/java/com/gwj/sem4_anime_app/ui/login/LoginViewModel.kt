@@ -34,7 +34,9 @@ class LoginViewModel @Inject constructor(
             val res = safeApiCall {
                 authService.login(email,password)
             }
-            if(res != null) {
+            if(res == null) {
+                _error.emit("Incorrect Credentials")
+            } else {
                 _success.emit("Login Success")
             }
         }
