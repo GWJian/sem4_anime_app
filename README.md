@@ -80,6 +80,7 @@ For more information on these libraries, please visit their respective links.
 ## Installation
 
 1. Clone the repository using 'git clone [https://github.com/GWJian/sem4_anime_app.git]'.
+2. Paste this into local.properties in your gradle folder(baseUrl="https://api.jikan.moe/v4/") without parentheses.
 2. Set up Firebase: Create a Firebase project and configure it in accordance with the Firebase documentation.
 3. Add API Keys: Obtain API keys for services such as Jikan and YouTube and enter them into the relevant configuration files.
 4. Build and Run: Create and run the project in Android Studio.
