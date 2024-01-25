@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <action
+        android:id="@+id/login_to_register"
+        app:popUpTo="@id/loginFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/registerFragment" />
+
+    <action
+        android:id="@+id/register_to_login"
+        app:popUpTo="@id/registerFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/loginFragment" />
+
+    <action
+        android:id="@+id/edit_to_content"
+        app:popUpTo="@id/editCommentFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/contentFragment" />
+
+    <action
+        android:id="@+id/add_to_content"
+        app:popUpTo="@id/commentFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/contentFragment" />
+
+    <action
+        android:id="@+id/action_login_to_tabContainer"
+        app:popUpTo="@id/loginFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/tabContainerFragment" />
+
+    <action
+        android:id="@+id/reset_to_login"
+        app:popUpTo="@id/resetPassFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/loginFragment" />
+
+    <action
+        android:id="@+id/content_to_home"
+        app:popUpTo="@id/contentFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/tabContainerFragment" />
+
+    <action
+        android:id="@+id/tabContainer_to_login"
+        app:popUpTo="@id/tabContainerFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/loginFragment" />
+
+    <action
+        android:id="@+id/tabContainer_to_fave"
+        app:popUpTo="@id/tabContainerFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/favouriteFragment" />
+
+    <action
+        android:id="@+id/fave_to_tabContainer"
+        app:popUpTo="@id/favouriteFragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/tabContainerFragment" />
+
+
+    <fragment
+        android:id="@+id/contentFragment"
+        android:name="com.gwj.sem4_anime_app.ui.content.ContentFragment"
+        android:label="fragment_content"
+        tools:layout="@layout/fragment_content">
+        <argument
+            android:name="animeId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_contentFragment_to_videoFragment"
+            app:destination="@id/videoFragment" />
+        <action
+            android:id="@+id/action_contentFragment_to_commentFragment"
+            app:destination="@id/commentFragment" />
+        <action
+            android:id="@+id/action_contentFragment_to_editCommentFragment"
+            app:destination="@id/editCommentFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.gwj.sem4_anime_app.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_tabContainerFragment"
+            app:destination="@id/tabContainerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_resetPassFragment"
+            app:destination="@id/resetPassFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.gwj.sem4_anime_app.ui.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register">
+    </fragment>
+
+    <fragment
+        android:id="@+id/tabContainerFragment"
+        tools:layout="@layout/fragment_tab_container"
+        android:name="com.gwj.sem4_anime_app.ui.tabContainer.TabContainerFragment"
+        android:label="TabContainerFragment" >
+        <action
+            android:id="@+id/action_tabContainerFragment_to_contentFragment"
+            app:destination="@id/contentFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.gwj.sem4_anime_app.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="com.gwj.sem4_anime_app.ui.favourite.FavouriteFragment"
+        android:label="fragment_favourite"
+        tools:layout="@layout/fragment_favourite" >
+        <action
+            android:id="@+id/favouriteFragment_to_contentFragment"
+            app:destination="@id/contentFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/videoFragment"
+        tools:layout="@layout/fragment_video"
+        android:name="com.gwj.sem4_anime_app.ui.vidview.VideoFragment"
+        android:label="VideoFragment">
+        <argument
+            android:name="animeId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/commentFragment"
+        android:name="com.gwj.sem4_anime_app.ui.add_comment.CommentFragment"
+        android:label="fragment_comment"
+        tools:layout="@layout/fragment_comment">
+
+        <argument
+            android:name="animeId"
+            app:argType="string" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/editCommentFragment"
+        android:name="com.gwj.sem4_anime_app.ui.edit_comment.EditCommentFragment"
+        android:label="fragment_edit_comment"
+        tools:layout="@layout/fragment_edit_comment">
+        <argument
+            android:name="animeId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/resetPassFragment"
+        android:name="com.gwj.sem4_anime_app.ui.reset_password.ResetPassFragment"
+        android:label="fragment_reset_pass"
+        tools:layout="@layout/fragment_reset_pass" />
+
+</navigation>

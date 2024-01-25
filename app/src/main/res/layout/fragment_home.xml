@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarCollapse"
+        android:backgroundTint="@color/bgColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/ctlAnime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="6dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/top_anime" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/horizontalTopAnimeRecycleView"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:orientation="horizontal" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/line001"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="1dp" />
+
+                <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
+                    android:id="@+id/toggleGroup"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:justifyContent="flex_end">
+
+                    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                        android:id="@+id/toggleBtnGrid"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:toggle_backgroundColor="@android:color/white"
+                        app:toggle_borderColor="#C6C6C6"
+                        app:toggle_borderWidth="5dp"
+                        app:toggle_btnCornerRadius="50dp"
+                        app:toggle_icon="@drawable/ic_grid_view"
+                        app:toggle_iconPadding="30dp"
+                        app:toggle_selectedBorderColor="#5e6fed" />
+
+                    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                        android:id="@+id/toggleBtnLinear"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:toggle_backgroundColor="@android:color/white"
+                        app:toggle_borderColor="#C6C6C6"
+                        app:toggle_borderWidth="5dp"
+                        app:toggle_btnCornerRadius="50dp"
+                        app:toggle_icon="@drawable/ic_view_headline"
+                        app:toggle_iconPadding="30dp"
+                        app:toggle_selectedBorderColor="#5e6fed" />
+
+                </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.example.loadinganimation.LoadingAnimation
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="10dp"
+        app:barType="@drawable/gear_duo"
+        app:boldText="false"
+        app:enlarge="5"
+        app:textSize="15sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/verticalAnimeRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <com.barryzeha.dotsloadingview.components.DotsLoadingComponent
+            android:id="@+id/myDotLoading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:animationDuration="1000"
+            app:dotColor="?attr/colorAccent"
+            app:dotSize="10"
+            app:dotType="dot"
+            app:numberOfDots="5"
+            app:startAnimation="true" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
